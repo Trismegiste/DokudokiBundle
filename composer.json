@@ -1,0 +1,26 @@
+{
+    "name": "trismegiste/dokudoki",
+    "description": "Agnostic schemaless database layer for MongoDB",
+    "type": "symfony-bundle",
+    "keywords": ["dbal", "mongodb", "symfony2"],
+    "authors": [
+    {
+        "name": "Trismegiste",
+        "email": "florent.g@allopneus.com"
+    }
+    ],
+   "require": {
+        "php": ">=5.3.8"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": ">=2.1,<2.2-dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "Trismegiste\\DokudokiBundle": ""
+        }
+    },
+    "target-dir": "Trismegiste/DokudokiBundle",
+    "licence": "CC-BY-SA-3.0",
+    "version": "0.5.7-alpha"
+}
