@@ -4,7 +4,7 @@
  * DokudokiBundle ◕ ‿‿﻿ ◕
  */
 
-namespace Trismegiste\DokudokiBundle;
+namespace Trismegiste\DokudokiBundle\Transform;
 
 /**
  * Factory is a transformer/factory to go from object to array and vice versa

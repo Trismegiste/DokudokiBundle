@@ -4,9 +4,9 @@
  * Dokudoki
  */
 
-namespace Trismegiste\DokudokiBundle\Tests;
+namespace Trismegiste\DokudokiBundle\Transform\Tests;
 
-use Trismegiste\DokudokiBundle\Factory;
+use Trismegiste\DokudokiBundle\Transform\Factory;
 
 /**
  * FactoryTest test for Factory
@@ -36,14 +36,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $obj->addItem(1, new Product('Bike', 650));
 
         $dump = array(
-            '_class' => 'Trismegiste\DokudokiBundle\Tests\Cart',
+            '_class' => __NAMESPACE__ . '\Cart',
             'address' => '86 fdfg de fdf',
             'info' => 'nothing to say',
             'row' => array(
                 0 => array(
                     'qt' => 3,
                     'item' => array(
-                        '_class' => 'Trismegiste\DokudokiBundle\Tests\Product',
+                        '_class' => __NAMESPACE__ . '\Product',
                         'title' => 'EF85L',
                         'price' => 1999
                     )
@@ -51,7 +51,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
                 1 => array(
                     'qt' => 1,
                     'item' => array(
-                        '_class' => 'Trismegiste\DokudokiBundle\Tests\Product',
+                        '_class' => __NAMESPACE__ . '\Product',
                         'title' => 'Bike',
                         'price' => 650,
                     )
