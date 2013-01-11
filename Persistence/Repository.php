@@ -27,12 +27,6 @@ class Repository implements RepositoryInterface
     public function persist($doc)
     {
         $struc = $this->factory->desegregation($doc);
-        if (array_key_exists('id', $struc)) {
-            $struc['_id'] = $struc['id'];
-            unset($struc['id']);
-        }
-        $struc['_timestamp'] = time();
-
         $this->collection->save($struc);
         $doc->setId($struc['_id']);
     }
@@ -47,8 +41,6 @@ class Repository implements RepositoryInterface
         if (is_null($struc)) {
             throw new NotFoundException($pk);
         }
-        $struc['id'] = $struc['_id'];
-        unset($struc['_id'], $struc['_timestamp']);
         $obj = $this->factory->create($struc);
 
         return $obj;
