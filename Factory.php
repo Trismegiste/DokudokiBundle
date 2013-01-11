@@ -1,7 +1,7 @@
 <?php
 
 /*
- * DokudokiBundle
+ * DokudokiBundle ◕ ‿‿﻿ ◕
  */
 
 namespace Trismegiste\DokudokiBundle;
@@ -30,7 +30,7 @@ class Factory
         }
 
         $result = var_export($obj, true);
-        $result = preg_replace('#([_A-Za-z0-9\\\\]+)::__set_state\(array\(#', '((array) array("' . self::FQCN_KEY . '" => "$1", ', $result);
+        $result = preg_replace('#([A-Z][_A-Za-z0-9\\\\]+)::__set_state\(array\(#', '((array) array("' . self::FQCN_KEY . '" => "$1", ', $result);
         eval('$dump = ' . $result . ';');
 
         return $dump;
@@ -93,10 +93,7 @@ class Factory
     }
 
     /**
-     * For PHP version < 5.4
-     *
-     * Copy/Paste from http://fr2.php.net/manual/en/reflectionclass.newinstancewithoutconstructor.php
-     *
+     * Fix for PHP version < 5.4
      * @param type $class
      * @return type
      */
@@ -106,25 +103,7 @@ class Factory
             return $reflector->newInstanceWithoutConstructor();
         } else {
             $class = $reflector->getName();
-            $properties = $reflector->getProperties();
-            $defaults = $reflector->getDefaultProperties();
-
-            $serealized = "O:" . strlen($class) . ":\"$class\":" . count($properties) . ':{';
-            foreach ($properties as $property) {
-                $name = $property->getName();
-                if ($property->isProtected()) {
-                    $name = chr(0) . '*' . chr(0) . $name;
-                } elseif ($property->isPrivate()) {
-                    $name = chr(0) . $class . chr(0) . $name;
-                }
-                $serealized .= serialize($name);
-                if (array_key_exists($property->getName(), $defaults)) {
-                    $serealized .= serialize($defaults[$property->getName()]);
-                } else {
-                    $serealized .= serialize(null);
-                }
-            }
-            $serealized .="}";
+            $serealized = "O:" . strlen($class) . ":\"$class\":" . '0:{}';
             return unserialize($serealized);
         }
     }
