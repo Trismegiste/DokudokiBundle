@@ -16,15 +16,17 @@ interface RepositoryInterface
 
     /**
      * Transforms an object tree into a tree/array and persists it into
-     * @param type $doc
+     * @param Persistable $doc
      */
-    function persist($doc);
+    function persist(Persistable $doc);
 
     /**
      * Creates an instance and maps this object with data retrieved from the
      * database for the primary key
      *
      * @param string $name the primary key
+     * 
+     * @return Persistable
      *
      * @throws NotFoundException When no object found for this pk
      */

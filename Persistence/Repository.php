@@ -24,7 +24,7 @@ class Repository implements RepositoryInterface
     /**
      * {@inheritDoc}
      */
-    public function persist($doc)
+    public function persist(Persistable $doc)
     {
         $struc = $this->factory->desegregation($doc);
         $this->collection->save($struc);
