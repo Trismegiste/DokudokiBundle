@@ -9,6 +9,7 @@ namespace Trismegiste\DokudokiBundle\Tests\Persistence;
 use Trismegiste\DokudokiBundle\Persistence\Connector;
 use Trismegiste\DokudokiBundle\Transform\Factory;
 use Trismegiste\DokudokiBundle\Persistence\Repository;
+use Trismegiste\DokudokiBundle\Persistence\Persistable;
 
 /**
  * Description of ConnectorTest
@@ -46,12 +47,13 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function testRestore($pk)
     {
         $obj = $this->repo->findByPk($pk);
+        $this->assertInstanceOf(__NAMESPACE__ . '\Simple', $obj);
         $this->assertEquals(42, $obj->answer);
     }
 
 }
 
-class Simple implements \Trismegiste\DokudokiBundle\Persistence\Persistable
+class Simple implements Persistable
 {
 
     protected $id;
