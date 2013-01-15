@@ -49,6 +49,30 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $obj = $this->repo->findByPk($pk);
         $this->assertInstanceOf(__NAMESPACE__ . '\Simple', $obj);
         $this->assertEquals(42, $obj->answer);
+
+        return $obj;
+    }
+
+    /**
+     * @depends testRestore
+     */
+    public function testUpdate($obj)
+    {
+        $pk = $obj->getId();
+        $obj->answer = 73;  // the best number as you know
+        $this->repo->persist($obj);
+        $this->assertEquals($pk, $obj->getId());
+
+        return (string) $obj->getId();
+    }
+
+    /**
+     * @depends testUpdate
+     */
+    public function testUpdated($pk)
+    {
+        $obj = $this->repo->findByPk($pk);
+        $this->assertEquals(73, $obj->answer);
     }
 
 }
