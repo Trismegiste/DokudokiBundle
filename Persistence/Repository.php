@@ -41,7 +41,13 @@ class Repository implements RepositoryInterface
         if (is_null($struc)) {
             throw new NotFoundException($pk);
         }
+        unset($struc['_id']);
         $obj = $this->factory->create($struc);
+        if ($obj instanceof Persistable) {
+            $obj->setId($id);
+        } else {
+            throw new \DomainException(get_class($obj) . ' is not Persistable');
+        }
 
         return $obj;
     }

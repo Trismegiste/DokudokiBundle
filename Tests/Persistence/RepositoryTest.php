@@ -36,6 +36,17 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $simple->answer = 42;
         $this->repo->persist($simple);
         $this->assertInstanceOf('\MongoId', $simple->getId());
+
+        return (string) $simple->getId();
+    }
+
+    /**
+     * @depends testPersistence
+     */
+    public function testRestore($pk)
+    {
+        $obj = $this->repo->findByPk($pk);
+        $this->assertEquals(42, $obj->answer);
     }
 
 }
