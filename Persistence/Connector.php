@@ -23,7 +23,7 @@ class Connector
 
     public function getCollection()
     {
-        $classCnx = (version_compare(phpversion('mongo'), '1.3') > 0) ? 'MongoClient' : 'Mongo';
+        $classCnx = (version_compare(phpversion('mongo'), '1.3') > 0) ? '\MongoClient' : '\Mongo';
 
         $cnx = new $classCnx('mongodb://' . $this->paramValid['server']);
 
