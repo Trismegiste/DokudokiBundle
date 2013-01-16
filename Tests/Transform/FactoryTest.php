@@ -92,6 +92,8 @@ class Cart
     protected $address;
     private $row = array();
 
+    static public $transientProp = 123;
+
     public function __construct($addr)
     {
         $this->address = $addr;

@@ -37,9 +37,11 @@ class Factory
             $dump = array();
             $reflector = new \ReflectionObject($obj);
             $dump['_class'] = $reflector->getName();
-            foreach ($reflector->getProperties(~\ReflectionProperty::IS_STATIC) as $prop) {
-                $prop->setAccessible(true);
-                $dump[$prop->name] = $this->recursivDesegregate($prop->getValue($obj));
+            foreach ($reflector->getProperties() as $prop) {
+                if (!$prop->isStatic()) {
+                    $prop->setAccessible(true);
+                    $dump[$prop->name] = $this->recursivDesegregate($prop->getValue($obj));
+                }
             }
         } else {
             if (is_array($obj)) {
@@ -104,6 +106,7 @@ class Factory
                     $prop->setAccessible(true);
                     $prop->setValue($vectorOrObject, $mapped);
                 } else {
+                    // injecting schemaless property
                     $vectorOrObject->$key = $val;
                 }
             } else {
