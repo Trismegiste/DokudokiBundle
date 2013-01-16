@@ -30,12 +30,16 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function getSampleTree()
     {
-        $obj = new Cart("86 fdfg de fdf");
-        $obj->info = 'nothing to say';
-        $obj->addItem(3, new Product('EF85L', 1999));
-        $obj->addItem(1, new Product('Bike', 650));
+        $obj = new \stdClass();
+        $obj->answer = 42;
+        $dump = array('_class' => 'stdClass', 'answer'=>42);
+        
+        $obj2 = new Cart("86 fdfg de fdf");
+        $obj2->info = 'nothing to say';
+        $obj2->addItem(3, new Product('EF85L', 1999));
+        $obj2->addItem(1, new Product('Bike', 650));
 
-        $dump = array(
+        $dump2 = array(
             '_class' => __NAMESPACE__ . '\Cart',
             'address' => '86 fdfg de fdf',
             'info' => 'nothing to say',
@@ -58,7 +62,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
                 )
             )
         );
-        return array(array($obj, $dump));
+        return array(array($obj, $dump), array($obj2, $dump2) );
     }
 
     /**

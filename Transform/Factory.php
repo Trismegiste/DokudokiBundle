@@ -35,9 +35,9 @@ class Factory
     {
         if (is_object($obj)) {
             $dump = array();
-            $reflector = new \ReflectionClass($obj);
+            $reflector = new \ReflectionObject($obj);
             $dump['_class'] = $reflector->getName();
-            foreach ($reflector->getProperties() as $prop) {
+            foreach ($reflector->getProperties(~\ReflectionProperty::IS_STATIC) as $prop) {
                 $prop->setAccessible(true);
                 $dump[$prop->name] = $this->recursivDesegregate($prop->getValue($obj));
             }
@@ -99,9 +99,13 @@ class Factory
 
             // set the value
             if ($modeObj) {
-                $prop = $reflector->getProperty($key);
-                $prop->setAccessible(true);
-                $prop->setValue($vectorOrObject, $mapped);
+                if ($reflector->hasProperty($key)) {
+                    $prop = $reflector->getProperty($key);
+                    $prop->setAccessible(true);
+                    $prop->setValue($vectorOrObject, $mapped);
+                } else {
+                    $vectorOrObject->$key = $val;
+                }
             } else {
                 $vectorOrObject[$key] = $mapped;
             }
