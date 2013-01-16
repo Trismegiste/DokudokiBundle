@@ -46,6 +46,7 @@ class Factory
         } else {
             if (is_array($obj)) {
                 foreach ($obj as $key => $val) {
+                    // go depper
                     $dump[$key] = $this->recursivDesegregate($val);
                 }
             } else {

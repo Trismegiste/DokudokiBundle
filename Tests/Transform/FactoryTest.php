@@ -32,8 +32,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $obj = new \stdClass();
         $obj->answer = 42;
-        $dump = array('_class' => 'stdClass', 'answer'=>42);
-        
+        $dump = array('_class' => 'stdClass', 'answer' => 42);
+
         $obj2 = new Cart("86 fdfg de fdf");
         $obj2->info = 'nothing to say';
         $obj2->addItem(3, new Product('EF85L', 1999));
@@ -43,6 +43,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             '_class' => __NAMESPACE__ . '\Cart',
             'address' => '86 fdfg de fdf',
             'info' => 'nothing to say',
+            'notInitialized' => null,
             'row' => array(
                 0 => array(
                     'qt' => 3,
@@ -62,7 +63,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
                 )
             )
         );
-        return array(array($obj, $dump), array($obj2, $dump2) );
+        return array(array($obj, $dump), array($obj2, $dump2));
     }
 
     /**
@@ -83,6 +84,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($obj, $restore);
     }
 
+    public function testMongoType()
+    {
+        $obj = $this->service->create(array('_class' => 'stdClass', 'ts' => new \MongoDate()));
+        $this->assertInstanceOf('MongoDate', $obj->ts);
+        $dump = $this->service->desegregate($obj);
+        $this->assertInstanceOf('MongoDate', $dump['ts']);
+    }
+
 }
 
 class Cart
@@ -91,7 +100,7 @@ class Cart
     public $info = '';
     protected $address;
     private $row = array();
-
+    protected $notInitialized;
     static public $transientProp = 123;
 
     public function __construct($addr)
