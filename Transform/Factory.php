@@ -36,6 +36,34 @@ class Factory
         return $dump;
     }
 
+    public function desegregate($obj)
+    {
+        if (!is_object($obj)) {
+            throw new \LogicException('Only object can be transformed into tree');
+        }
+
+        return $this->recursivDesegregate($obj);
+    }
+
+    private function recursivDesegregate($obj)
+    {
+        $dump = array();
+        if (is_object($obj)) {
+            $reflector = new \ReflectionClass($obj);
+            $dump['_class'] = $reflector->getName();
+            foreach ($reflector->getProperties() as $prop) {
+                $prop->setAccessible(true);
+                $dump[$prop->name] = $this->recursivDesegregate($prop->getValue($obj));
+            }
+        } else {
+            if (is_array($obj)) {
+                $dump = $this->recursivDesegregate($obj);
+            } else {
+                $flat[$key] = $val;
+            }
+        }
+    }
+
     /**
      * Restore the full tree of a rich document with the desegregated dump
      *
