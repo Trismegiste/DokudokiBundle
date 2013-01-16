@@ -66,7 +66,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testDesegregate($obj, $dumpEqv)
     {
-        $dump = $this->service->desegregation($obj);
+        $dump = $this->service->desegregate($obj);
         $this->assertEquals($dumpEqv, $dump);
     }
 

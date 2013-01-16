@@ -13,7 +13,6 @@ namespace Trismegiste\DokudokiBundle\Transform;
  */
 class Factory
 {
-
     const FQCN_KEY = '_class';
 
     /**
@@ -23,19 +22,6 @@ class Factory
      * @return array the dumped tree
      * @throws \LogicException If $obj is not an object
      */
-    public function desegregation($obj)
-    {
-        if (!is_object($obj)) {
-            throw new \LogicException('Only object can be transformed into tree');
-        }
-
-        $result = var_export($obj, true);
-        $result = preg_replace('#([A-Z][_A-Za-z0-9\\\\]+)::__set_state\(array\(#', '((array) array("' . self::FQCN_KEY . '" => "$1", ', $result);
-        eval('$dump = ' . $result . ';');
-
-        return $dump;
-    }
-
     public function desegregate($obj)
     {
         if (!is_object($obj)) {
@@ -47,8 +33,8 @@ class Factory
 
     private function recursivDesegregate($obj)
     {
-        $dump = array();
         if (is_object($obj)) {
+            $dump = array();
             $reflector = new \ReflectionClass($obj);
             $dump['_class'] = $reflector->getName();
             foreach ($reflector->getProperties() as $prop) {
@@ -57,11 +43,15 @@ class Factory
             }
         } else {
             if (is_array($obj)) {
-                $dump = $this->recursivDesegregate($obj);
+                foreach ($obj as $key => $val) {
+                    $dump[$key] = $this->recursivDesegregate($val);
+                }
             } else {
-                $flat[$key] = $val;
+                $dump = $obj;
             }
         }
+
+        return $dump;
     }
 
     /**

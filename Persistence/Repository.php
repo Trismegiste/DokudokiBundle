@@ -26,7 +26,7 @@ class Repository implements RepositoryInterface
      */
     public function persist(Persistable $doc)
     {
-        $struc = $this->factory->desegregation($doc);
+        $struc = $this->factory->desegregate($doc);
         if (!array_key_exists('id', $struc)) {
             throw new \LogicException(get_class($doc) . " does not have an 'id' property");
         }
