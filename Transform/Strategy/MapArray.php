@@ -11,7 +11,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Strategy;
  *
  * @author florent
  */
-class MapArray implements Mapping
+class MapArray extends AbstractMapper
 {
 
     public function mapFromDb($var)
@@ -24,7 +24,7 @@ class MapArray implements Mapping
         $dump = array();
         foreach ($arr as $key => $val) {
             // go depper
-            $dump[$key] = $this->recursivDesegregate($val);
+            $dump[$key] = $this->context->recursivDesegregate($val);
         }
 
         return $dump;

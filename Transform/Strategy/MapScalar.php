@@ -11,7 +11,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Strategy;
  *
  * @author florent
  */
-class MapScalar implements Mapping
+class MapScalar extends AbstractMapper
 {
 
     public function mapFromDb($var)

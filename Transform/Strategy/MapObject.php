@@ -11,8 +11,10 @@ namespace Trismegiste\DokudokiBundle\Transform\Strategy;
  *
  * @author florent
  */
-class MapObject implements Mapping
+class MapObject extends AbstractMapper
 {
+
+    const FQCN_KEY = '_class';
 
     public function mapFromDb($var)
     {
@@ -29,7 +31,7 @@ class MapObject implements Mapping
             if (!$prop->isStatic()) {
                 $prop->setAccessible(true);
                 // go depper
-                $dump[$prop->name] = $this->recursivDesegregate($prop->getValue($obj));
+                $dump[$prop->name] = $this->context->recursivDesegregate($prop->getValue($obj));
             }
         }
 

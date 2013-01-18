@@ -11,7 +11,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Strategy;
  *
  * @author florent
  */
-class MapNullable implements Mapping
+class MapNullable extends AbstractMapper
 {
 
     public function mapFromDb($var)
