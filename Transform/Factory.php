@@ -34,9 +34,10 @@ class Factory
     private function recursivDesegregate($obj)
     {
         if (is_object($obj)) {
-            $dump = array();
             $reflector = new \ReflectionObject($obj);
-            $dump['_class'] = $reflector->getName();
+            $className = $reflector->getName();
+            $dump = array();
+            $dump[self::FQCN_KEY] = $className;
             foreach ($reflector->getProperties() as $prop) {
                 if (!$prop->isStatic()) {
                     $prop->setAccessible(true);
