@@ -13,6 +13,7 @@ namespace Trismegiste\DokudokiBundle\Transform;
  */
 class Factory
 {
+
     const FQCN_KEY = '_class';
 
     /**
@@ -33,26 +34,44 @@ class Factory
 
     private function recursivDesegregate($obj)
     {
-        if (is_object($obj)) {
-            $reflector = new \ReflectionObject($obj);
-            $className = $reflector->getName();
-            $dump = array();
-            $dump[self::FQCN_KEY] = $className;
-            foreach ($reflector->getProperties() as $prop) {
-                if (!$prop->isStatic()) {
-                    $prop->setAccessible(true);
-                    $dump[$prop->name] = $this->recursivDesegregate($prop->getValue($obj));
-                }
-            }
-        } else {
-            if (is_array($obj)) {
+        switch (gettype($obj)) {
+
+            case 'NULL':
+            case 'resource':
+                $dump = null;
+                break;
+
+            case 'boolean':
+            case 'integer':
+            case 'double':
+            case 'string' :
+                $dump = $obj;
+                break;
+
+            case 'array':
+                $dump = array();
                 foreach ($obj as $key => $val) {
                     // go depper
                     $dump[$key] = $this->recursivDesegregate($val);
                 }
-            } else {
-                $dump = $obj;
-            }
+                break;
+
+            case 'object':
+                $reflector = new \ReflectionObject($obj);
+                $className = $reflector->getName();
+                $dump = array();
+                $dump[self::FQCN_KEY] = $className;
+                foreach ($reflector->getProperties() as $prop) {
+                    if (!$prop->isStatic()) {
+                        $prop->setAccessible(true);
+                        // go depper
+                        $dump[$prop->name] = $this->recursivDesegregate($prop->getValue($obj));
+                    }
+                }
+                break;
+
+            default:
+                throw new \DomainException('Non supported type');
         }
 
         return $dump;
@@ -61,7 +80,7 @@ class Factory
     /**
      * Restore the full tree of a rich document with the desegregated dump
      *
-     * @param array $dump the tree represtenting a full structured object & array
+     * @param array $dump the tree representing a full structured object & array
      * @return object the created object(s)
      * @throws \LogicException
      */
