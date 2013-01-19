@@ -18,7 +18,7 @@ abstract class AbstractMapper implements Mapping
 
     protected $mediator;
 
-    public function __construct(Mediator $ctx)
+    public function __construct(TypeRegistry $ctx)
     {
         $this->mediator = $ctx;
         foreach ($this->getResponsibleType() as $name) {
