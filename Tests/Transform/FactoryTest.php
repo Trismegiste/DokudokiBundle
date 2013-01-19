@@ -104,12 +104,23 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($now->getTimestamp(), $restore->example->getTimestamp());
     }
 
-    public function testMongoType()
+    public function testDate()
     {
         $obj = $this->service->create(array('_class' => 'stdClass', 'ts' => new \MongoDate()));
-        $this->assertInstanceOf('MongoDate', $obj->ts);
+        $this->assertInstanceOf('DateTime', $obj->ts);
         $dump = $this->service->desegregate($obj);
         $this->assertInstanceOf('MongoDate', $dump['ts']);
+        $this->assertEquals($obj->ts->getTimestamp(), $dump['ts']->sec);
+    }
+
+    public function testBinData()
+    {
+        $content = "something new";        
+        $obj = $this->service->create(array('_class' => 'stdClass', 'file' => new \MongoBinData($content, 2)));
+        $this->assertInstanceOf('MongoBinData', $obj->file);
+        $dump = $this->service->desegregate($obj);
+        $this->assertInstanceOf('MongoBinData', $dump['file']);
+        $this->assertEquals($content, $dump['file']->bin);
     }
 
 }
