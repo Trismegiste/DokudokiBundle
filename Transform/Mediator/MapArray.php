@@ -28,7 +28,7 @@ class MapArray extends AbstractMapper
         $fqcn = $param[MapObject::FQCN_KEY];
         unset($param[MapObject::FQCN_KEY]);
         $reflector = new ReflectionClassBC($fqcn);
-        $vectorOrObject = $reflector->newInstanceWithoutConstructor();
+        $obj = $reflector->newInstanceWithoutConstructor();
 
         foreach ($param as $key => $val) {
             // go deeper
@@ -37,14 +37,14 @@ class MapArray extends AbstractMapper
             if ($reflector->hasProperty($key)) {
                 $prop = $reflector->getProperty($key);
                 $prop->setAccessible(true);
-                $prop->setValue($vectorOrObject, $mapped);
+                $prop->setValue($obj, $mapped);
             } else {
                 // injecting schemaless property
-                $vectorOrObject->$key = $mapped;
+                $obj->$key = $mapped;
             }
         }
 
-        return $vectorOrObject;
+        return unserialize(serialize($obj));
     }
 
     /**

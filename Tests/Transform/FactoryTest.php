@@ -93,7 +93,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(119.6, $restore->getTotal());
     }
 
-    public function notestInternalTypeRestore()
+    public function testInternalTypeRestore()
     {
         $now = new \DateTime();
         $obj = new \stdClass();
