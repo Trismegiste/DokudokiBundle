@@ -26,7 +26,7 @@ class Factory
         new Mediator\MapScalar($algo);
         new Mediator\MapArray($algo);
         new Mediator\MapObject($algo);
-        new Mediator\Cast\MongoDate($algo);        
+        new Mediator\Cast\DateObject($algo);        
         new Mediator\Cast\MongoBinData($algo);        
         $this->delegation = $algo;
     }
