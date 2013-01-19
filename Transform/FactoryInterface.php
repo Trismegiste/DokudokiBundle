@@ -32,7 +32,7 @@ interface FactoryInterface
      * 
      * @return object the created object(s)
      * 
-     * @throws \LogicException If the tree does not contains a key for its classname
+     * @throws \LogicException If the tree does not contains a key for its FQCN
      */
     function create(array $dump);
 }

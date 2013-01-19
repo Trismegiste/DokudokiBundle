@@ -1,7 +1,7 @@
 <?php
 
 /*
- * DokudokiBundle ◕ ‿‿﻿ ◕
+ * DokudokiBundle ◕ ‿‿ ◕
  */
 
 namespace Trismegiste\DokudokiBundle\Transform;
