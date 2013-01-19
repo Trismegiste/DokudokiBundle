@@ -8,6 +8,7 @@ namespace Trismegiste\DokudokiBundle\Transform;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator;
 use Trismegiste\DokudokiBundle\Transform\Mediator\MapObject;
+use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
 
 /**
  * Factory is a transformer/factory to go from object to array and vice versa
@@ -81,8 +82,8 @@ class Factory
         if ($modeObj) {
             $fqcn = $param[MapObject::FQCN_KEY];
             unset($param[MapObject::FQCN_KEY]);
-            $reflector = new \ReflectionClass($fqcn);
-            $vectorOrObject = self::createInstanceWithoutConstructor($reflector);
+            $reflector = new ReflectionClassBC($fqcn);
+            $vectorOrObject = $reflector->newInstanceWithoutConstructor();
         } else {
             $vectorOrObject = array();
         }
@@ -111,22 +112,6 @@ class Factory
         }
 
         return $vectorOrObject;
-    }
-
-    /**
-     * Fix for PHP version < 5.4
-     * @param type $class
-     * @return type
-     */
-    static protected function createInstanceWithoutConstructor(\ReflectionClass $reflector)
-    {
-        if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
-            return $reflector->newInstanceWithoutConstructor();
-        } else {
-            $class = $reflector->getName();
-            $serealized = "O:" . strlen($class) . ":\"$class\":" . '0:{}';
-            return unserialize($serealized);
-        }
     }
 
 }
