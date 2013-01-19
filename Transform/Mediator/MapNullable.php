@@ -16,7 +16,7 @@ class MapNullable extends AbstractMapper
 
     public function mapFromDb($var)
     {
-
+        return null;
     }
 
     public function mapToDb($var)

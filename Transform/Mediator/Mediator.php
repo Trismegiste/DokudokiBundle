@@ -28,6 +28,12 @@ class Mediator
         }
     }
 
+    /**
+     * Recursion for desegregation (or untyping/casting to array)
+     *
+     * @param mixed $obj
+     * @return mixed
+     */
     public function recursivDesegregate($obj)
     {
         $stratKey = gettype($obj);
@@ -42,46 +48,18 @@ class Mediator
     /**
      * Recursion for restoration
      *
-     * @param array $param
-     * @return array
+     * @param mixed $param
+     * @return mixed
      */
-    public function recursivCreate(array $param)
+    public function recursivCreate($param)
     {
-        $modeObj = isset($param[MapObject::FQCN_KEY]);
+        $stratKey = gettype($param);
 
-        if ($modeObj) {
-            $fqcn = $param[MapObject::FQCN_KEY];
-            unset($param[MapObject::FQCN_KEY]);
-            $reflector = new ReflectionClassBC($fqcn);
-            $vectorOrObject = $reflector->newInstanceWithoutConstructor();
+        if (array_key_exists($stratKey, $this->mappingColleague)) {
+            return $this->mappingColleague[$stratKey]->mapFromDb($param);
         } else {
-            $vectorOrObject = array();
+            throw new \DomainException("Unsupported type $stratKey");
         }
-
-        foreach ($param as $key => $val) {
-            if (is_array($val)) {
-                // go deeper
-                $mapped = $this->recursivCreate($val);
-            } else {
-                $mapped = $val;
-            }
-
-            // set the value
-            if ($modeObj) {
-                if ($reflector->hasProperty($key)) {
-                    $prop = $reflector->getProperty($key);
-                    $prop->setAccessible(true);
-                    $prop->setValue($vectorOrObject, $mapped);
-                } else {
-                    // injecting schemaless property
-                    $vectorOrObject->$key = $val;
-                }
-            } else {
-                $vectorOrObject[$key] = $mapped;
-            }
-        }
-
-        return $vectorOrObject;
     }
 
 }

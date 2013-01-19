@@ -16,7 +16,7 @@ class MapScalar extends AbstractMapper
 
     public function mapFromDb($var)
     {
-
+        return $var;
     }
 
     public function mapToDb($var)

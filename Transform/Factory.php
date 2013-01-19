@@ -24,12 +24,7 @@ class Factory
         $algo = new Mediator\Mediator();
         $algo->registerType(array('NULL', 'resource'), new Mediator\MapNullable($algo));
         $algo->registerType(
-                array(
-            'boolean',
-            'integer',
-            'double',
-            'string'
-                ), new Mediator\MapScalar($algo)
+                array('boolean', 'integer', 'double', 'string'), new Mediator\MapScalar($algo)
         );
         $algo->registerType('array', new Mediator\MapArray($algo));
         $algo->registerType('object', new Mediator\MapObject($algo));
