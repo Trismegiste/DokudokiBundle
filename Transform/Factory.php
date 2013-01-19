@@ -6,8 +6,9 @@
 
 namespace Trismegiste\DokudokiBundle\Transform;
 
-use Trismegiste\DokudokiBundle\Transform\Strategy;
-use Trismegiste\DokudokiBundle\Transform\Strategy\MapObject;
+use Trismegiste\DokudokiBundle\Transform\Mediator;
+use Trismegiste\DokudokiBundle\Transform\Mediator\MapObject;
+
 /**
  * Factory is a transformer/factory to go from object to array and vice versa
  *
@@ -16,22 +17,23 @@ use Trismegiste\DokudokiBundle\Transform\Strategy\MapObject;
 class Factory
 {
 
-    protected $mappingStrategy;
+    protected $desegregateAlgo;
 
     public function __construct()
     {
-        $stratNull = new Strategy\MapNullable($this);
-        $stratScalar = new Strategy\MapScalar($this);
-        $this->mappingStrategy = array(
-            'NULL' => $stratNull,
-            'resource' => $stratNull,
-            'boolean' => $stratScalar,
-            'integer' => $stratScalar,
-            'double' => $stratScalar,
-            'string' => $stratScalar,
-            'array' => new Strategy\MapArray($this),
-            'object' => new Strategy\MapObject($this)
+        $algo = new Mediator\Mediator();
+        $algo->registerType(array('NULL', 'resource'), new Mediator\MapNullable($algo));
+        $algo->registerType(
+                array(
+            'boolean',
+            'integer',
+            'double',
+            'string'
+                ), new Mediator\MapScalar($algo)
         );
+        $algo->registerType('array', new Mediator\MapArray($algo));
+        $algo->registerType('object', new Mediator\MapObject($algo));
+        $this->desegregateAlgo = $algo;
     }
 
     /**
@@ -47,18 +49,7 @@ class Factory
             throw new \LogicException('Only object can be transformed into tree');
         }
 
-        return $this->recursivDesegregate($obj);
-    }
-
-    public function recursivDesegregate($obj)
-    {
-        $stratKey = gettype($obj);
-
-        if (array_key_exists($stratKey, $this->mappingStrategy)) {
-            return $this->mappingStrategy[$stratKey]->mapToDb($obj);
-        } else {
-            throw new \DomainException('Non supported type');
-        }
+        return $this->desegregateAlgo->recursivDesegregate($obj);
     }
 
     /**

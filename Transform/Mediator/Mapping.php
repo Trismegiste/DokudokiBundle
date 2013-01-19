@@ -4,7 +4,7 @@
  * Dokudokibundle
  */
 
-namespace Trismegiste\DokudokiBundle\Transform\Strategy;
+namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
 /**
  *

@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Transform\Strategy;
+namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
 /**
  * MapArray is a ...
@@ -24,7 +24,7 @@ class MapArray extends AbstractMapper
         $dump = array();
         foreach ($arr as $key => $val) {
             // go depper
-            $dump[$key] = $this->context->recursivDesegregate($val);
+            $dump[$key] = $this->mediator->recursivDesegregate($val);
         }
 
         return $dump;

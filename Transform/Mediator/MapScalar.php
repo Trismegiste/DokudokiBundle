@@ -4,14 +4,14 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Transform\Strategy;
+namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
 /**
- * Nullable is a ...
+ * MapScalar is a ...
  *
  * @author florent
  */
-class MapNullable extends AbstractMapper
+class MapScalar extends AbstractMapper
 {
 
     public function mapFromDb($var)
@@ -21,7 +21,7 @@ class MapNullable extends AbstractMapper
 
     public function mapToDb($var)
     {
-        return null;
+        return $var;
     }
 
 }

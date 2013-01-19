@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Transform\Strategy;
+namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
 /**
  * MapObject is a ...
@@ -31,7 +31,7 @@ class MapObject extends AbstractMapper
             if (!$prop->isStatic()) {
                 $prop->setAccessible(true);
                 // go depper
-                $dump[$prop->name] = $this->context->recursivDesegregate($prop->getValue($obj));
+                $dump[$prop->name] = $this->mediator->recursivDesegregate($prop->getValue($obj));
             }
         }
 
