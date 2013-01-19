@@ -17,7 +17,7 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\MapObject;
 class Factory
 {
 
-    protected $desegregateAlgo;
+    protected $delegation;
 
     public function __construct()
     {
@@ -33,7 +33,7 @@ class Factory
         );
         $algo->registerType('array', new Mediator\MapArray($algo));
         $algo->registerType('object', new Mediator\MapObject($algo));
-        $this->desegregateAlgo = $algo;
+        $this->delegation = $algo;
     }
 
     /**
@@ -49,7 +49,7 @@ class Factory
             throw new \LogicException('Only object can be transformed into tree');
         }
 
-        return $this->desegregateAlgo->recursivDesegregate($obj);
+        return $this->delegation->recursivDesegregate($obj);
     }
 
     /**
@@ -65,7 +65,7 @@ class Factory
             throw new \LogicException('There is no key for the FQCN of the root entity');
         }
 
-        return $this->desegregateAlgo->recursivCreate($dump);
+        return $this->delegation->recursivCreate($dump);
     }
 
 }
