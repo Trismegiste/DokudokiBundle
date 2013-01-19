@@ -20,6 +20,7 @@ class MapObject extends AbstractMapper
      */
     public function mapFromDb($var)
     {
+        // fallback for objects (Mongo types for example)
         return $var;
     }
 

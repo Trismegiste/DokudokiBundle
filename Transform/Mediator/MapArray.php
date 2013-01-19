@@ -9,7 +9,10 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
 
 /**
- * MapArray is a mapper to and from an array
+ * Design Pattern : Mediator
+ * Component : Colleague (concrete)
+ * 
+ * MapArray deals the mapping with arrays
  *
  * @author florent
  */
@@ -39,7 +42,7 @@ class MapArray extends AbstractMapper
                 $prop->setAccessible(true);
                 $prop->setValue($obj, $mapped);
             } else {
-                // injecting schemaless property
+                // If no property in the class, injecting the property in the object anyway
                 $obj->$key = $mapped;
             }
         }

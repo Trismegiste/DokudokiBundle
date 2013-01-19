@@ -9,8 +9,13 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
 
 /**
- * Description of Mediator
- *
+ * Design Pattern : Mediator
+ * Component : Mediator
+ * 
+ * Mediator is the delegation of Factory to recursively traverse
+ * objects and arrays. Responsible for maintaining a list of Colleague (the
+ * mappers converting object, array, scalar, MongoDate, etc. )
+ * 
  * @author flo
  */
 class Mediator implements RecursiveMapper, TypeRegistry

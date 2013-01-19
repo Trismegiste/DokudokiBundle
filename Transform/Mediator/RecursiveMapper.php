@@ -23,7 +23,8 @@ interface RecursiveMapper
     function recursivDesegregate($obj);
 
     /**
-     * Recursion for restoration
+     * Recursion for restoration. It is a factory of objects (at least the root
+     * is an object). FQCN are stored in a key (@see MapObject)
      *
      * @param mixed $param
      * @return mixed
