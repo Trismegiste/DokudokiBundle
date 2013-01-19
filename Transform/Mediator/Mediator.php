@@ -33,7 +33,7 @@ class Mediator
         if (array_key_exists($stratKey, $this->mappingColleague)) {
             return $this->mappingColleague[$stratKey]->mapToDb($obj);
         } else {
-            throw new \DomainException('Non supported type');
+            throw new \DomainException("Unsupported type $stratKey");
         }
     }
 
