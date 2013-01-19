@@ -84,6 +84,26 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($obj, $restore);
     }
 
+    public function testCallingRestore()
+    {
+        $obj = new VerifMethod(100);
+        $dump = $this->service->desegregate($obj);
+        $restore = $this->service->create($dump);
+        $this->assertInstanceOf(__NAMESPACE__ . '\VerifMethod', $restore);
+        $this->assertEquals(119.6, $restore->getTotal());
+    }
+
+    public function notestInternalTypeRestore()
+    {
+        $now = new \DateTime();
+        $obj = new \stdClass();
+        $obj->example = clone $now;
+        $dump = $this->service->desegregate($obj);
+        $restore = $this->service->create($dump);
+        $this->assertInstanceOf('DateTime', $restore->example);
+        $this->assertEquals($now->getTimestamp(), $restore->example->getTimestamp());
+    }
+
     public function notestMongoType()
     {
         $obj = $this->service->create(array('_class' => 'stdClass', 'ts' => new \MongoDate()));
@@ -125,6 +145,24 @@ class Product
     {
         $this->title = $tit;
         $this->price = $pri;
+    }
+
+}
+
+class VerifMethod
+{
+
+    protected $vat = 19.6;
+    protected $price;
+
+    public function __construct($x)
+    {
+        $this->price = $x;
+    }
+
+    public function getTotal()
+    {
+        return $this->price * (1 + $this->vat / 100);
     }
 
 }

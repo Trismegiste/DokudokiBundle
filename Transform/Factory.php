@@ -10,7 +10,7 @@ use Trismegiste\DokudokiBundle\Transform\Mediator;
 use Trismegiste\DokudokiBundle\Transform\Mediator\MapObject;
 
 /**
- * Factory is a transformer/factory to go from object to array and vice versa
+ * Factory is a transformer/factory to move from object to array and vice versa
  *
  * @author florent
  */
