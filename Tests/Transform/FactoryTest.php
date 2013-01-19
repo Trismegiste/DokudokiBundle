@@ -104,7 +104,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($now->getTimestamp(), $restore->example->getTimestamp());
     }
 
-    public function notestMongoType()
+    public function testMongoType()
     {
         $obj = $this->service->create(array('_class' => 'stdClass', 'ts' => new \MongoDate()));
         $this->assertInstanceOf('MongoDate', $obj->ts);

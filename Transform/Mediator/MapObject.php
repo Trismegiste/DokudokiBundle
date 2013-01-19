@@ -20,7 +20,8 @@ class MapObject extends AbstractMapper
      */
     public function mapFromDb($var)
     {
-        
+        // @todo some transtyping for some classes : MongoDate, MongoBinData
+        return $var;
     }
 
     /**
@@ -30,12 +31,13 @@ class MapObject extends AbstractMapper
     {
         $reflector = new \ReflectionObject($obj);
         $className = $reflector->getName();
+        // @todo some transtyping for some classes, example : if ($className == 'MongoDate') return $obj;
         $dump = array();
         $dump[self::FQCN_KEY] = $className;
         foreach ($reflector->getProperties() as $prop) {
             if (!$prop->isStatic()) {
                 $prop->setAccessible(true);
-                // go depper
+                // go deeper
                 $dump[$prop->name] = $this->mediator->recursivDesegregate($prop->getValue($obj));
             }
         }

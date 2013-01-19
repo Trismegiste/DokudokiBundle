@@ -43,7 +43,7 @@ class MapArray extends AbstractMapper
                 $obj->$key = $mapped;
             }
         }
-
+        // @todo Is it necessary for PHP 5.4 ?
         return unserialize(serialize($obj));
     }
 
