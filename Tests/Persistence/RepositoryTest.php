@@ -31,6 +31,15 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->repo = new Repository($this->collection, $this->factory);
     }
 
+    public function testInit()
+    {
+        $this->collection->drop();
+    }
+
+    /**
+     *
+     * @depends testInit
+     */
     public function testPersistence()
     {
         $simple = new Simple();
@@ -118,12 +127,14 @@ class Stress extends Simple
 
     public function __construct()
     {
+        $this->answer = 42;
         $this->binaryVar = new \MongoBinData("299792458", 2);
         $this->floatVar = 3.14159265; // don't know after that
         $this->dateVar = new \DateTime();
         $this->intVar = 73; // the best number
-        $this->stringVar = "H Psi = E . Psi";
+        $this->stringVar = 'H Psi = E . Psi';
         $this->objVar = new Simple();
+        $this->objVar->answer = 'eureka';
     }
 
 }
