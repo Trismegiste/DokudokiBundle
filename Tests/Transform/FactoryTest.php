@@ -116,11 +116,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testBinData()
     {
         $content = "something new";        
-        $obj = $this->service->create(array('_class' => 'stdClass', 'file' => new \MongoBinData($content)));
+        $obj = $this->service->create(array('_class' => 'stdClass', 'file' => new \MongoBinData($content, 2)));
         $this->assertInstanceOf('MongoBinData', $obj->file);
         $dump = $this->service->desegregate($obj);
-        $this->assertInstanceOf('MongoBinData', $dump['file']);        
-        //$this->assertEquals($obj->file->getTimestamp(), $dump['ts']->sec);
+        $this->assertInstanceOf('MongoBinData', $dump['file']);
+        $this->assertEquals($content, $dump['file']->bin);
     }
 
 }
