@@ -16,6 +16,7 @@ interface FactoryInterface
 
     /**
      * Transform objects into array by adding a key for the FQCN
+     * Goal : storing into a NoSQL database
      *
      * @param object $obj the object to dump
      * 
@@ -26,7 +27,8 @@ interface FactoryInterface
     function desegregate($obj);
 
     /**
-     * Restore the full tree of a rich document with the desegregated dump
+     * Restore a complex object of a rich document with its desegregated dump
+     * Goal : restoring from a NoSQL database
      *
      * @param array $dump the tree representing a full structured object & array
      * 

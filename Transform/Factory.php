@@ -7,7 +7,6 @@
 namespace Trismegiste\DokudokiBundle\Transform;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator;
-use Trismegiste\DokudokiBundle\Transform\Mediator\MapObject;
 
 /**
  * Factory is a transformer/factory to move from object to array and vice versa
@@ -48,7 +47,7 @@ class Factory implements FactoryInterface
      */
     public function create(array $dump)
     {
-        if (!array_key_exists(MapObject::FQCN_KEY, $dump)) {
+        if (!array_key_exists(Mediator\MapObject::FQCN_KEY, $dump)) {
             throw new \LogicException('There is no key for the FQCN of the root entity');
         }
 
