@@ -13,12 +13,11 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
  */
 class MapObject extends AbstractMapper
 {
-
     const FQCN_KEY = '_class';
 
     public function mapFromDb($var)
     {
-
+        
     }
 
     public function mapToDb($obj)
@@ -36,6 +35,11 @@ class MapObject extends AbstractMapper
         }
 
         return $dump;
+    }
+
+    protected function getResponsibleType()
+    {
+        return array('object');
     }
 
 }

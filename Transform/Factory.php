@@ -8,7 +8,6 @@ namespace Trismegiste\DokudokiBundle\Transform;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator;
 use Trismegiste\DokudokiBundle\Transform\Mediator\MapObject;
-use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
 
 /**
  * Factory is a transformer/factory to go from object to array and vice versa
@@ -18,23 +17,16 @@ use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
 class Factory
 {
 
-    protected $desegregateAlgo;
+    protected $delegation;
 
     public function __construct()
     {
         $algo = new Mediator\Mediator();
-        $algo->registerType(array('NULL', 'resource'), new Mediator\MapNullable($algo));
-        $algo->registerType(
-                array(
-            'boolean',
-            'integer',
-            'double',
-            'string'
-                ), new Mediator\MapScalar($algo)
-        );
-        $algo->registerType('array', new Mediator\MapArray($algo));
-        $algo->registerType('object', new Mediator\MapObject($algo));
-        $this->desegregateAlgo = $algo;
+        new Mediator\MapNullable($algo);
+        new Mediator\MapScalar($algo);
+        new Mediator\MapArray($algo);
+        new Mediator\MapObject($algo);
+        $this->delegation = $algo;
     }
 
     /**
@@ -50,7 +42,7 @@ class Factory
             throw new \LogicException('Only object can be transformed into tree');
         }
 
-        return $this->desegregateAlgo->recursivDesegregate($obj);
+        return $this->delegation->recursivDesegregate($obj);
     }
 
     /**
@@ -66,52 +58,7 @@ class Factory
             throw new \LogicException('There is no key for the FQCN of the root entity');
         }
 
-        return $this->recursivCreate($dump);
-    }
-
-    /**
-     * Recursion for restoration
-     *
-     * @param array $param
-     * @return array
-     */
-    private function recursivCreate(array $param)
-    {
-        $modeObj = isset($param[MapObject::FQCN_KEY]);
-
-        if ($modeObj) {
-            $fqcn = $param[MapObject::FQCN_KEY];
-            unset($param[MapObject::FQCN_KEY]);
-            $reflector = new ReflectionClassBC($fqcn);
-            $vectorOrObject = $reflector->newInstanceWithoutConstructor();
-        } else {
-            $vectorOrObject = array();
-        }
-
-        foreach ($param as $key => $val) {
-            if (is_array($val)) {
-                // go deeper
-                $mapped = $this->recursivCreate($val);
-            } else {
-                $mapped = $val;
-            }
-
-            // set the value
-            if ($modeObj) {
-                if ($reflector->hasProperty($key)) {
-                    $prop = $reflector->getProperty($key);
-                    $prop->setAccessible(true);
-                    $prop->setValue($vectorOrObject, $mapped);
-                } else {
-                    // injecting schemaless property
-                    $vectorOrObject->$key = $val;
-                }
-            } else {
-                $vectorOrObject[$key] = $mapped;
-            }
-        }
-
-        return $vectorOrObject;
+        return $this->delegation->recursivCreate($dump);
     }
 
 }
