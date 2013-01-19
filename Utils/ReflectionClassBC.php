@@ -25,8 +25,7 @@ class ReflectionClassBC extends \ReflectionClass
             return parent::newInstanceWithoutConstructor();
         } else {
             $class = $this->getName();
-            $serialized = "O:" . strlen($class) . ":\"$class\":" . '0:{}';
-            return unserialize($serialized);
+            return unserialize(sprintf('O:%d:"%s":0:{}', strlen($class), $class));
         }
     }
 
