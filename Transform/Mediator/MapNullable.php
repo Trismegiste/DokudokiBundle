@@ -24,4 +24,9 @@ class MapNullable extends AbstractMapper
         return null;
     }
 
+    protected function getResponsibleType()
+    {
+        return array('NULL', 'resource');
+    }
+
 }

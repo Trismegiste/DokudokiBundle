@@ -62,4 +62,9 @@ class MapArray extends AbstractMapper
         return $dump;
     }
 
+    protected function getResponsibleType()
+    {
+        return array('array');
+    }
+
 }

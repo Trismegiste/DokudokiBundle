@@ -20,12 +20,11 @@ class Mediator
 
     public function registerType($name, Mapping $colleague)
     {
-        if (is_string($name)) {
-            $name = array($name);
+        if (!is_string($name)) {
+            throw new \InvalidArgumentException('The key type is not a string');
         }
-        foreach ($name as $key) {
-            $this->mappingColleague[$key] = $colleague;
-        }
+
+        $this->mappingColleague[$name] = $colleague;
     }
 
     /**

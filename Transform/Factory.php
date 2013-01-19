@@ -22,12 +22,10 @@ class Factory
     public function __construct()
     {
         $algo = new Mediator\Mediator();
-        $algo->registerType(array('NULL', 'resource'), new Mediator\MapNullable($algo));
-        $algo->registerType(
-                array('boolean', 'integer', 'double', 'string'), new Mediator\MapScalar($algo)
-        );
-        $algo->registerType('array', new Mediator\MapArray($algo));
-        $algo->registerType('object', new Mediator\MapObject($algo));
+        new Mediator\MapNullable($algo);
+        new Mediator\MapScalar($algo);
+        new Mediator\MapArray($algo);
+        new Mediator\MapObject($algo);
         $this->delegation = $algo;
     }
 

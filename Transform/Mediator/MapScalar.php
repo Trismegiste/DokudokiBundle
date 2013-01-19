@@ -24,4 +24,9 @@ class MapScalar extends AbstractMapper
         return $var;
     }
 
+    protected function getResponsibleType()
+    {
+        return array('boolean', 'integer', 'double', 'string');
+    }
+
 }
