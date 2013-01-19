@@ -16,39 +16,53 @@ use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
 class MapArray extends AbstractMapper
 {
 
-    public function mapFromDb($param)
+    /**
+     * Map an array from the db to an object
+     * 
+     * @param array $param
+     * 
+     * @return object 
+     */
+    protected function mapFromDbToObject($param)
     {
-        $modeObj = isset($param[MapObject::FQCN_KEY]);
-
-        if ($modeObj) {
-            $fqcn = $param[MapObject::FQCN_KEY];
-            unset($param[MapObject::FQCN_KEY]);
-            $reflector = new ReflectionClassBC($fqcn);
-            $vectorOrObject = $reflector->newInstanceWithoutConstructor();
-        } else {
-            $vectorOrObject = array();
-        }
+        $fqcn = $param[MapObject::FQCN_KEY];
+        unset($param[MapObject::FQCN_KEY]);
+        $reflector = new ReflectionClassBC($fqcn);
+        $vectorOrObject = $reflector->newInstanceWithoutConstructor();
 
         foreach ($param as $key => $val) {
             // go deeper
             $mapped = $this->mediator->recursivCreate($val);
-
             // set the value
-            if ($modeObj) {
-                if ($reflector->hasProperty($key)) {
-                    $prop = $reflector->getProperty($key);
-                    $prop->setAccessible(true);
-                    $prop->setValue($vectorOrObject, $mapped);
-                } else {
-                    // injecting schemaless property
-                    $vectorOrObject->$key = $mapped;
-                }
+            if ($reflector->hasProperty($key)) {
+                $prop = $reflector->getProperty($key);
+                $prop->setAccessible(true);
+                $prop->setValue($vectorOrObject, $mapped);
             } else {
-                $vectorOrObject[$key] = $mapped;
+                // injecting schemaless property
+                $vectorOrObject->$key = $mapped;
             }
         }
 
         return $vectorOrObject;
+    }
+
+    /**
+     * Map an array from the db to an array (with recursion)
+     * 
+     * @param array $param
+     * 
+     * @return array
+     */
+    protected function mapFromDbToArray($param)
+    {
+        return array_map(array($this->mediator, 'recursivCreate'), $param);
+    }
+
+    public function mapFromDb($param)
+    {
+        $modeObj = isset($param[MapObject::FQCN_KEY]);
+        return ($modeObj) ? $this->mapFromDbToObject($param) : $this->mapFromDbToArray($param);
     }
 
     public function mapToDb($arr)
