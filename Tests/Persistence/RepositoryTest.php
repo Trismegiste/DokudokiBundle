@@ -75,6 +75,14 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(73, $obj->answer);
     }
 
+    public function testFull()
+    {
+        $obj = new Stress();
+        $this->repo->persist($obj);
+        $found = $this->repo->findByPk($obj->getId());
+        $this->assertEquals($obj, $found);
+    }
+
 }
 
 class Simple implements Persistable
@@ -93,5 +101,29 @@ class Simple implements Persistable
     }
 
     public $answer;
+
+}
+
+class Stress extends Simple
+{
+
+    // silly names to track bug
+    protected $floatVar;
+    protected $binaryVar;
+    protected $dateVar;
+    protected $stringVar;
+    protected $intVar;
+    protected $objVar;
+    static public $iDontLikeStatic = "dark matter";
+
+    public function __construct()
+    {
+        $this->binaryVar = new \MongoBinData("299792458", 2);
+        $this->floatVar = 3.14159265; // don't know after that
+        $this->dateVar = new \DateTime();
+        $this->intVar = 73; // the best number
+        $this->stringVar = "H Psi = E . Psi";
+        $this->objVar = new Simple();
+    }
 
 }
