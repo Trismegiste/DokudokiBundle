@@ -6,6 +6,9 @@
 
 namespace Trismegiste\DokudokiBundle\Transform;
 
+use Trismegiste\DokudokiBundle\Transform\Mediator;
+use Trismegiste\DokudokiBundle\Transform\Mediator\MapObject;
+
 /**
  * Factory is a transformer/factory to go from object to array and vice versa
  *
@@ -14,7 +17,24 @@ namespace Trismegiste\DokudokiBundle\Transform;
 class Factory
 {
 
-    const FQCN_KEY = '_class';
+    protected $desegregateAlgo;
+
+    public function __construct()
+    {
+        $algo = new Mediator\Mediator();
+        $algo->registerType(array('NULL', 'resource'), new Mediator\MapNullable($algo));
+        $algo->registerType(
+                array(
+            'boolean',
+            'integer',
+            'double',
+            'string'
+                ), new Mediator\MapScalar($algo)
+        );
+        $algo->registerType('array', new Mediator\MapArray($algo));
+        $algo->registerType('object', new Mediator\MapObject($algo));
+        $this->desegregateAlgo = $algo;
+    }
 
     /**
      * Transform objects into array by adding a key for the FQCN
@@ -29,52 +49,7 @@ class Factory
             throw new \LogicException('Only object can be transformed into tree');
         }
 
-        return $this->recursivDesegregate($obj);
-    }
-
-    private function recursivDesegregate($obj)
-    {
-        switch (gettype($obj)) {
-
-            case 'NULL':
-            case 'resource':
-                $dump = null;
-                break;
-
-            case 'boolean':
-            case 'integer':
-            case 'double':
-            case 'string' :
-                $dump = $obj;
-                break;
-
-            case 'array':
-                $dump = array();
-                foreach ($obj as $key => $val) {
-                    // go depper
-                    $dump[$key] = $this->recursivDesegregate($val);
-                }
-                break;
-
-            case 'object':
-                $reflector = new \ReflectionObject($obj);
-                $className = $reflector->getName();
-                $dump = array();
-                $dump[self::FQCN_KEY] = $className;
-                foreach ($reflector->getProperties() as $prop) {
-                    if (!$prop->isStatic()) {
-                        $prop->setAccessible(true);
-                        // go depper
-                        $dump[$prop->name] = $this->recursivDesegregate($prop->getValue($obj));
-                    }
-                }
-                break;
-
-            default:
-                throw new \DomainException('Non supported type');
-        }
-
-        return $dump;
+        return $this->desegregateAlgo->recursivDesegregate($obj);
     }
 
     /**
@@ -86,7 +61,7 @@ class Factory
      */
     public function create(array $dump)
     {
-        if (!array_key_exists(self::FQCN_KEY, $dump)) {
+        if (!array_key_exists(MapObject::FQCN_KEY, $dump)) {
             throw new \LogicException('There is no key for the FQCN of the root entity');
         }
 
@@ -101,11 +76,11 @@ class Factory
      */
     private function recursivCreate(array $param)
     {
-        $modeObj = isset($param[self::FQCN_KEY]);
+        $modeObj = isset($param[MapObject::FQCN_KEY]);
 
         if ($modeObj) {
-            $fqcn = $param[self::FQCN_KEY];
-            unset($param[self::FQCN_KEY]);
+            $fqcn = $param[MapObject::FQCN_KEY];
+            unset($param[MapObject::FQCN_KEY]);
             $reflector = new \ReflectionClass($fqcn);
             $vectorOrObject = self::createInstanceWithoutConstructor($reflector);
         } else {
