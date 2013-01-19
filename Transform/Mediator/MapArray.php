@@ -43,23 +43,12 @@ class MapArray extends AbstractMapper
 
     protected function mapFromDbToArray($param)
     {
-        $vectorOrObject = array();
-
-        foreach ($param as $key => $val) {
-            // go deeper
-            $mapped = $this->mediator->recursivCreate($val);
-
-            // set the value
-            $vectorOrObject[$key] = $mapped;
-        }
-
-        return $vectorOrObject;
+        return array_map(array($this->mediator, 'recursivCreate'), $param);
     }
 
     public function mapFromDb($param)
     {
         $modeObj = isset($param[MapObject::FQCN_KEY]);
-
         return ($modeObj) ? $this->mapFromDbToObject($param) : $this->mapFromDbToArray($param);
     }
 
