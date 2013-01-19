@@ -60,7 +60,14 @@ class Mediator implements RecursiveMapper, TypeRegistry
 
     protected function getType($param)
     {
-        return gettype($param);
+        $default = gettype($param);
+        if ('object' == $default) {
+            if (array_key_exists(get_class($param), $this->mappingColleague)) {
+                $default = get_class($param);
+            }
+        }
+
+        return $default;
     }
 
 }
