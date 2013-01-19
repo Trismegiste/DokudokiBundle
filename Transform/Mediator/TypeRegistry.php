@@ -1,14 +1,14 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * DokudokiBundle
  */
 
 namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
 /**
- * Contract for regitering a type namme with a mapper object
+ * Contract for registering a type name with a mapper object
+ * 
  * @author flo
  */
 interface TypeRegistry

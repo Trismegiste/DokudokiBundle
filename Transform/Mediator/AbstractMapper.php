@@ -8,9 +8,9 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
 /**
  * AbstractMapper is an abstract Colleague for the Mediator Pattern
+ * Responsible : registering against the Mediator
+ * It is also a Template Method Pattern
  * 
- * It is also a Template Method
- *
  * @author florent
  */
 abstract class AbstractMapper implements Mapping

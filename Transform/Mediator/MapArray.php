@@ -9,7 +9,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
 
 /**
- * MapArray is a ...
+ * MapArray is a mapper to and from an array
  *
  * @author florent
  */
