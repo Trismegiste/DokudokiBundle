@@ -13,11 +13,14 @@ use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
  *
  * @author flo
  */
-class Mediator implements RecursiveMapper
+class Mediator implements RecursiveMapper, TypeRegistry
 {
 
     protected $mappingColleague = array();
 
+    /**
+     * {@inheritDoc}
+     */
     public function registerType($name, Mapping $colleague)
     {
         if (!is_string($name)) {
