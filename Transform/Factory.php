@@ -14,7 +14,7 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\MapObject;
  *
  * @author florent
  */
-class Factory
+class Factory implements FactoryInterface
 {
 
     protected $delegation;
@@ -26,17 +26,13 @@ class Factory
         new Mediator\MapScalar($algo);
         new Mediator\MapArray($algo);
         new Mediator\MapObject($algo);
-        new Mediator\Cast\DateObject($algo);        
-        new Mediator\Cast\MongoBinData($algo);        
+        new Mediator\Cast\DateObject($algo);
+        new Mediator\Cast\MongoBinData($algo);
         $this->delegation = $algo;
     }
 
     /**
-     * Transform objects into array by adding a key for the FQCN
-     *
-     * @param object $obj the object to dump
-     * @return array the dumped tree
-     * @throws \LogicException If $obj is not an object
+     * {@inheritDoc}
      */
     public function desegregate($obj)
     {
@@ -48,11 +44,7 @@ class Factory
     }
 
     /**
-     * Restore the full tree of a rich document with the desegregated dump
-     *
-     * @param array $dump the tree representing a full structured object & array
-     * @return object the created object(s)
-     * @throws \LogicException
+     * {@inheritDoc}
      */
     public function create(array $dump)
     {
