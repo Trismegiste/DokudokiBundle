@@ -53,13 +53,7 @@ class MapArray extends AbstractMapper
 
     public function mapToDb($arr)
     {
-        $dump = array();
-        foreach ($arr as $key => $val) {
-            // go depper
-            $dump[$key] = $this->mediator->recursivDesegregate($val);
-        }
-
-        return $dump;
+        return array_map(array($this->mediator, 'recursivDesegregate'), $arr);
     }
 
     protected function getResponsibleType()
