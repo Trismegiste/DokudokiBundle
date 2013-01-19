@@ -13,7 +13,7 @@ use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
  *
  * @author flo
  */
-class Mediator
+class Mediator implements RecursiveMapper
 {
 
     protected $mappingColleague = array();
@@ -28,10 +28,7 @@ class Mediator
     }
 
     /**
-     * Recursion for desegregation (or untyping/casting to array)
-     *
-     * @param mixed $obj
-     * @return mixed
+     * {@inheritDoc}
      */
     public function recursivDesegregate($obj)
     {
@@ -45,10 +42,7 @@ class Mediator
     }
 
     /**
-     * Recursion for restoration
-     *
-     * @param mixed $param
-     * @return mixed
+     * {@inheritDoc}
      */
     public function recursivCreate($param)
     {
