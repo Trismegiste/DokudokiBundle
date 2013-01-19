@@ -59,17 +59,26 @@ class MapArray extends AbstractMapper
         return array_map(array($this->mediator, 'recursivCreate'), $param);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function mapFromDb($param)
     {
         $modeObj = isset($param[MapObject::FQCN_KEY]);
         return ($modeObj) ? $this->mapFromDbToObject($param) : $this->mapFromDbToArray($param);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function mapToDb($arr)
     {
         return array_map(array($this->mediator, 'recursivDesegregate'), $arr);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function getResponsibleType()
     {
         return array('array');

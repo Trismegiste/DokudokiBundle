@@ -7,7 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
 /**
- * MapObject is a ...
+ * MapObject is a mapper to and from an object
  *
  * @author florent
  */
@@ -15,11 +15,17 @@ class MapObject extends AbstractMapper
 {
     const FQCN_KEY = '_class';
 
+    /**
+     * {@inheritDoc}
+     */
     public function mapFromDb($var)
     {
         
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function mapToDb($obj)
     {
         $reflector = new \ReflectionObject($obj);
@@ -37,6 +43,9 @@ class MapObject extends AbstractMapper
         return $dump;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function getResponsibleType()
     {
         return array('object');
