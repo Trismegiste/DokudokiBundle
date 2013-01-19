@@ -16,39 +16,51 @@ use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
 class MapArray extends AbstractMapper
 {
 
-    public function mapFromDb($param)
+    protected function mapFromDbToObject($param)
     {
-        $modeObj = isset($param[MapObject::FQCN_KEY]);
-
-        if ($modeObj) {
-            $fqcn = $param[MapObject::FQCN_KEY];
-            unset($param[MapObject::FQCN_KEY]);
-            $reflector = new ReflectionClassBC($fqcn);
-            $vectorOrObject = $reflector->newInstanceWithoutConstructor();
-        } else {
-            $vectorOrObject = array();
-        }
+        $fqcn = $param[MapObject::FQCN_KEY];
+        unset($param[MapObject::FQCN_KEY]);
+        $reflector = new ReflectionClassBC($fqcn);
+        $vectorOrObject = $reflector->newInstanceWithoutConstructor();
 
         foreach ($param as $key => $val) {
             // go deeper
             $mapped = $this->mediator->recursivCreate($val);
 
             // set the value
-            if ($modeObj) {
-                if ($reflector->hasProperty($key)) {
-                    $prop = $reflector->getProperty($key);
-                    $prop->setAccessible(true);
-                    $prop->setValue($vectorOrObject, $mapped);
-                } else {
-                    // injecting schemaless property
-                    $vectorOrObject->$key = $mapped;
-                }
+            if ($reflector->hasProperty($key)) {
+                $prop = $reflector->getProperty($key);
+                $prop->setAccessible(true);
+                $prop->setValue($vectorOrObject, $mapped);
             } else {
-                $vectorOrObject[$key] = $mapped;
+                // injecting schemaless property
+                $vectorOrObject->$key = $mapped;
             }
         }
 
         return $vectorOrObject;
+    }
+
+    protected function mapFromDbToArray($param)
+    {
+        $vectorOrObject = array();
+
+        foreach ($param as $key => $val) {
+            // go deeper
+            $mapped = $this->mediator->recursivCreate($val);
+
+            // set the value
+            $vectorOrObject[$key] = $mapped;
+        }
+
+        return $vectorOrObject;
+    }
+
+    public function mapFromDb($param)
+    {
+        $modeObj = isset($param[MapObject::FQCN_KEY]);
+
+        return ($modeObj) ? $this->mapFromDbToObject($param) : $this->mapFromDbToArray($param);
     }
 
     public function mapToDb($arr)
