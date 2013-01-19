@@ -8,7 +8,6 @@ namespace Trismegiste\DokudokiBundle\Transform;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator;
 use Trismegiste\DokudokiBundle\Transform\Mediator\MapObject;
-use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
 
 /**
  * Factory is a transformer/factory to go from object to array and vice versa
@@ -66,52 +65,7 @@ class Factory
             throw new \LogicException('There is no key for the FQCN of the root entity');
         }
 
-        return $this->recursivCreate($dump);
-    }
-
-    /**
-     * Recursion for restoration
-     *
-     * @param array $param
-     * @return array
-     */
-    private function recursivCreate(array $param)
-    {
-        $modeObj = isset($param[MapObject::FQCN_KEY]);
-
-        if ($modeObj) {
-            $fqcn = $param[MapObject::FQCN_KEY];
-            unset($param[MapObject::FQCN_KEY]);
-            $reflector = new ReflectionClassBC($fqcn);
-            $vectorOrObject = $reflector->newInstanceWithoutConstructor();
-        } else {
-            $vectorOrObject = array();
-        }
-
-        foreach ($param as $key => $val) {
-            if (is_array($val)) {
-                // go deeper
-                $mapped = $this->recursivCreate($val);
-            } else {
-                $mapped = $val;
-            }
-
-            // set the value
-            if ($modeObj) {
-                if ($reflector->hasProperty($key)) {
-                    $prop = $reflector->getProperty($key);
-                    $prop->setAccessible(true);
-                    $prop->setValue($vectorOrObject, $mapped);
-                } else {
-                    // injecting schemaless property
-                    $vectorOrObject->$key = $val;
-                }
-            } else {
-                $vectorOrObject[$key] = $mapped;
-            }
-        }
-
-        return $vectorOrObject;
+        return $this->desegregateAlgo->recursivCreate($dump);
     }
 
 }

@@ -7,7 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
 /**
- * AbstractMapper is a ...
+ * AbstractMapper is an abstract Colleague for the Mediator Pattern
  *
  * @author florent
  */
