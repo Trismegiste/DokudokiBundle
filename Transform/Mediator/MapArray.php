@@ -16,6 +16,13 @@ use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
 class MapArray extends AbstractMapper
 {
 
+    /**
+     * Map an array from the db to an object
+     * 
+     * @param array $param
+     * 
+     * @return object 
+     */
     protected function mapFromDbToObject($param)
     {
         $fqcn = $param[MapObject::FQCN_KEY];
@@ -26,7 +33,6 @@ class MapArray extends AbstractMapper
         foreach ($param as $key => $val) {
             // go deeper
             $mapped = $this->mediator->recursivCreate($val);
-
             // set the value
             if ($reflector->hasProperty($key)) {
                 $prop = $reflector->getProperty($key);
@@ -41,6 +47,13 @@ class MapArray extends AbstractMapper
         return $vectorOrObject;
     }
 
+    /**
+     * Map an array from the db to an array (with recursion)
+     * 
+     * @param array $param
+     * 
+     * @return array
+     */
     protected function mapFromDbToArray($param)
     {
         return array_map(array($this->mediator, 'recursivCreate'), $param);
