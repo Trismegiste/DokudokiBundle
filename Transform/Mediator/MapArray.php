@@ -46,9 +46,8 @@ class MapArray extends AbstractMapper
                 $obj->$key = $mapped;
             }
         }
-        // @todo Is it necessary with PHP 5.4 ?
-        // Because DateTime does not like this hack
-        return unserialize(serialize($obj));
+
+        return $obj;
     }
 
     /**

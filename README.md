@@ -6,19 +6,19 @@ Yet another MongoDB database layer
 What
 ----
 
-It's a simple database layer with automatic mapping. 
+It's a minimalistic database layer with automatic mapping. 
 It is intended for **advanced user** of MongoDB
 who know and understand the growth of a model on a schemaless database.
 
-Without constrains, you can do anything and if you are not cautious, your 
-collections will turn into CHAOS.
+When I mean minimalistic, I mean the longest method takes about 20 lines. I think all
+the NCLOC are shorter than the method UnitOfWork::createEntity in Doctrine 2.
 
 Why
 ---
 
-Because ODM is a fraud. Turning MongoDB into an ORM-like abstraction is the worst
+Because "ODM is a lie". Turning MongoDB into an ORM-like abstraction is the worst
 thing you can do on a NoSQL database. I have a good opinion about ORM
-because of the speed in the development process of the model, despite some pitfalls.
+because of speed in the model development process, despite some pitfalls.
 But when it comes to ODM, you loose the features of NoSQL and you don't have
 the features of a RDBMS, here are some : 
 
@@ -54,7 +54,7 @@ and you store it. It's like serialization but in MongoDB.
 All non static properties are stored in a way you can query easily with the
 powerfull (but very strange I admit) language of MongoDB.
 
-See the PHPUnit test for example.
+See the PHPUnit tests for examples.
 
 FAQ
 ---
@@ -64,13 +64,13 @@ All *object's* properties are stored. You have only one thing to do :
 implementing the Persistable interface.
 
 ### How can I remove some transient properties ?
-You can't. Use decorator pattern if you really want to.
+You can't. Use decorator pattern if you really want to. Your model can do that.
 
-### How can I query for listing
+### How can I query for listing ?
 Use the MongoCollection, you can't do more efficient than this low level layer
 
 ### How can I store pictures or PDF ?
-Use a MongoBinData, it is stored as is
+Use a MongoBinData in your model, it is stored as is
 
 ### Can I use something else than MongoId for primary key ?
 No
@@ -82,16 +82,20 @@ TODO
 ----
 
  * Storing DBRef properly but no automagic or whatsoever
- * Using aliasing instead of FQCN
+ * Using aliasing instead of FQCN (I'm not sure if it is a good idea)
  * Interfacing with MongoSapinBundle
  * Make a Trait for a "PersistableImpl"
+ * With the Trait, adding a "cleaning" method like the __sleep() for serialize()
 
 MongoSapinBundle
 ----------------
 
 I have made this another db layer for MongoDB. Why two layers ? Because they
 are complementary. MongoSapinBundle is for "Form Driven Development" i.e
-it is not only schema-less but also it is model-less : you don't need
+it is not only schema-less but also it is model-less : There are "fake" classes
+for starting to code. 
+
+You don't need
 model classes to store datas, but you can map entities on data later in the 
 process of development. Warning it is full of magic methods, it is only for
 prototyping.
