@@ -46,6 +46,7 @@ class MapArray extends AbstractMapper
                 $obj->$key = $mapped;
             }
         }
+        $reflector->fixHackBC($obj);
 
         return $obj;
     }
