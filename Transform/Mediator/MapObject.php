@@ -6,8 +6,6 @@
 
 namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
-use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
-
 /**
  * MapObject is a mapper to and from an object
  *
