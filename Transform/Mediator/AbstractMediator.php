@@ -6,8 +6,6 @@
 
 namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
-use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
-
 /**
  * Design Pattern : Mediator
  * Component : Mediator (abstract)
