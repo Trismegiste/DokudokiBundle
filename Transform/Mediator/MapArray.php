@@ -6,7 +6,7 @@
 
 namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
-use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
+use Trismegiste\DokudokiBundle\Utils\InjectionClass;
 
 /**
  * Design Pattern : Mediator
@@ -29,21 +29,14 @@ class MapArray extends AbstractMapper
      */
     protected function mapFromDbToObject($fqcn, $param)
     {
-        $reflector = new ReflectionClassBC($fqcn);
+        $reflector = new InjectionClass($fqcn);
         $obj = $reflector->newInstanceWithoutConstructor();
 
         foreach ($param as $key => $val) {
             // go deeper
             $mapped = $this->mediator->recursivCreate($val);
             // set the value
-            if ($reflector->hasProperty($key)) {
-                $prop = $reflector->getProperty($key);
-                $prop->setAccessible(true);
-                $prop->setValue($obj, $mapped);
-            } else {
-                // If no property in the class, injecting the property in the object anyway
-                $obj->$key = $mapped;
-            }
+            $reflector->injectProperty($obj, $key, $mapped);
         }
         $reflector->fixHackBC($obj);
 
