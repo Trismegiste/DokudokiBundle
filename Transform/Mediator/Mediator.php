@@ -18,23 +18,9 @@ use Trismegiste\DokudokiBundle\Utils\ReflectionClassBC;
  * 
  * @author flo
  */
-class Mediator implements RecursiveMapper, TypeRegistry
+class Mediator extends AbstractMediator
 {
     const FQCN_KEY = '-class';
-
-    protected $mappingColleague = array();
-
-    /**
-     * {@inheritDoc}
-     */
-    public function registerType($name, Mapping $colleague)
-    {
-        if (!is_string($name)) {
-            throw new \InvalidArgumentException('The key type is not a string');
-        }
-
-        $this->mappingColleague[$name] = $colleague;
-    }
 
     /**
      * {@inheritDoc}
