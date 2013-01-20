@@ -29,6 +29,13 @@ class ReflectionClassBC extends \ReflectionClass
         }
     }
 
+    /**
+     * Because unserialized DateTime with the hack above are buggy
+     * when default properties are not really initialized in
+     * the contructor
+     *   
+     * @param object $obj 
+     */
     public function fixHackBC($obj)
     {
         if (version_compare(PHP_VERSION, '5.4.0') < 0) {
