@@ -29,4 +29,13 @@ class ReflectionClassBC extends \ReflectionClass
         }
     }
 
+    public function fixHackBC($obj)
+    {
+        if (version_compare(PHP_VERSION, '5.4.0') < 0) {
+            if ($this->hasMethod('__wakeup')) {
+                $obj->__wakeup();
+            }
+        }
+    }
+
 }
