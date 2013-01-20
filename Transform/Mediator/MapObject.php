@@ -34,9 +34,8 @@ class MapObject extends AbstractMapper
             $dump = null;
         } else {
             $reflector = new \ReflectionObject($obj);
-            $className = $reflector->getName();
             $dump = array();
-            $dump[Mediator::FQCN_KEY] = $className;
+            $dump[Mediator::FQCN_KEY] = $reflector->getName();
             foreach ($reflector->getProperties() as $prop) {
                 if (!$prop->isStatic()) {
                     $prop->setAccessible(true);
