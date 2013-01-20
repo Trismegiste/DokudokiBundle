@@ -7,6 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
 use Trismegiste\DokudokiBundle\Transform\Skippable;
+use Trismegiste\DokudokiBundle\Transform\Cleanable;
 
 /**
  * MapObject is a mapper to and from an object
@@ -33,6 +34,9 @@ class MapObject extends AbstractMapper
         if ($obj instanceof Skippable) {
             $dump = null;
         } else {
+            if ($obj instanceof Cleanable) {
+                $obj->sleep();
+            }
             $reflector = new \ReflectionObject($obj);
             $dump = array();
             $dump[Mediator::FQCN_KEY] = $reflector->getName();

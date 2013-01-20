@@ -7,6 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
 use Trismegiste\DokudokiBundle\Utils\InjectionClass;
+use Trismegiste\DokudokiBundle\Transform\Cleanable;
 
 /**
  * Design Pattern : Mediator
@@ -39,6 +40,10 @@ class MapArray extends AbstractMapper
             $reflector->injectProperty($obj, $key, $mapped);
         }
         $reflector->fixHackBC($obj);
+        // wakeup the object
+        if ($obj instanceof Cleanable) {
+            $obj->wakeup();
+        }
 
         return $obj;
     }
