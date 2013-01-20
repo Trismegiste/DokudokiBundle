@@ -77,16 +77,3 @@ class Mediator implements RecursiveMapper, TypeRegistry
     }
 
 }
-
-/*
-
-II] Avec interface
-+ Transient permet de zapper une classe
-+ Cleanable permet de faire le menage
-
-III] Managing class not found
-exception
-stdClass
-Automagic
-
-*/
