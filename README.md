@@ -22,11 +22,13 @@ because of speed in the model development process, despite some pitfalls.
 But when it comes to ODM, you loose the features of NoSQL and you don't have
 the features of a RDBMS, here are some : 
 
- * rich document of MongoDB because the query generator sux
- * schemaless of MongoDB because you freeze the model in classes
- * speed of JOIN of RDBMS because you rely only on lazy loading
- * constraints of RDBMS (references and types) because there is none
- * atomicity : the only atomicity in MongoDB is on one document
+ * No rich document of MongoDB because the query generator sux
+ * No schemaless of MongoDB because you freeze the model in classes
+ * No JOIN then you must rely on slow lazy loading
+ * No constraints of RDBMS (references and types) because there is none
+ * No atomicity : the only atomicity in MongoDB is on one document
+
+In fact ODM is slow ORM without ACID : what is the point ?
 
 Remember, ORM is an emulation of an Object database (ODBMS) onto a RDBMS.
 The impedance is good because there is almost a bijection between table and a class
@@ -37,7 +39,7 @@ to be used in this way.
 How
 ---
 
-Key features :
+Guidances :
  * **Rich documents** by Hell ! You have atomicity.
  * Stop to think 1 entity <=> 1 table
  * Only a few root entities : 2, 3 or 4, 10 max for a full e-commerce app !
@@ -46,7 +48,7 @@ Key features :
    MongoDB than to too many LEFT JOIN in MySQL
  * Thought like serialize/unserialize
  * Don't try to reproduce a search engine with your database : use Elastic Search
- * Don't try to store everything in collections : for dumb entities, use XML file
+ * Don't try to store everything in collections : use XML files
 
 It is simple : you make a model divided in few parts without circular reference, 
 and you store it. It's like serialization but in MongoDB.
@@ -61,13 +63,22 @@ FAQ
 
 ### How to map properties ?
 All *object's* properties are stored. You have only one thing to do : 
-implementing the Persistable interface.
+The root classes must implement the Persistable interface.
+
+### What is a "root class"
+It is a class stored in the collection, which contains the MongoId in the key '_id'.
+All children in this class don't need to implement Persistable, they are
+recursively stored.
 
 ### How can I remove some transient properties ?
-You can't. Use decorator pattern if you really want to. Your model can do that.
+You can't. But you can have a transient class with the interface Transient.
+Use Decorator pattern or a State Pattern. Your model can do that.
+
+### Can I make some cleaning before persistence ?
+Like serialization, you can implement Cleanable with 2 methods : wakeup and sleep
 
 ### How can I query for listing ?
-Use the MongoCollection, you can't do more efficient than this low level layer
+Use the MongoCollection, you can't be more efficient than this low level layer
 
 ### How can I store pictures or PDF ?
 Use a MongoBinData in your model, it is stored as is
@@ -85,7 +96,6 @@ TODO
  * Using aliasing instead of FQCN (I'm not sure if it is a good idea)
  * Interfacing with MongoSapinBundle
  * Make a Trait for a "PersistableImpl"
- * With the Trait, adding a "cleaning" method like the __sleep() for serialize()
 
 MongoSapinBundle
 ----------------
@@ -93,11 +103,9 @@ MongoSapinBundle
 I have made this another db layer for MongoDB. Why two layers ? Because they
 are complementary. MongoSapinBundle is for "Form Driven Development" i.e
 it is not only schema-less but also it is model-less : There are "fake" classes
-for starting to code. 
+for rapid development but you can map entities on data later. 
 
-You don't need
-model classes to store datas, but you can map entities on data later in the 
-process of development. Warning it is full of magic methods, it is only for
+Warning it is full of magic methods, it is only for
 prototyping.
 
 When your model has evolve and grown, you can switch almost seamlessly 
