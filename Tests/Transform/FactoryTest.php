@@ -9,6 +9,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Tests;
 use Trismegiste\DokudokiBundle\Transform\Factory;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
 use Trismegiste\DokudokiBundle\Transform\Skippable;
+use Trismegiste\DokudokiBundle\Transform\Cleanable;
 
 /**
  * FactoryTest test for Factory
@@ -151,6 +152,16 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($dump['product']);
     }
 
+    public function testCleanable()
+    {
+        $obj = new Bear();
+        $dump = $this->service->desegregate($obj);
+        $this->assertNull($dump['transient']);
+        $this->assertEquals(42, $dump['answer']);
+        $restore = $this->service->create($dump);
+        $this->assertEquals(range(1, 100), $restore->getTransient());
+    }
+
 }
 
 class Cart
@@ -209,4 +220,32 @@ class VerifMethod
 class IntoVoid implements Skippable
 {
     
+}
+
+class Bear implements Cleanable
+{
+
+    protected $answer = 42;
+    protected $transient;
+
+    public function __construct()
+    {
+        $this->transient = range(1, 100);
+    }
+
+    public function getTransient()
+    {
+        return $this->transient;
+    }
+
+    public function wakeup()
+    {
+        $this->__construct();
+    }
+
+    public function sleep()
+    {
+        unset($this->transient);
+    }
+
 }
