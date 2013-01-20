@@ -38,6 +38,9 @@ class Factory implements FactoryInterface
         if (!is_object($obj)) {
             throw new \LogicException('Only object can be transformed into tree');
         }
+        if ($obj instanceof Skippable) {
+            throw new \LogicException('A root entity cannot be Skippable');
+        }
 
         return $this->delegation->recursivDesegregate($obj);
     }

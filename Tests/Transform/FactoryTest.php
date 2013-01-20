@@ -8,6 +8,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Tests;
 
 use Trismegiste\DokudokiBundle\Transform\Factory;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
+use Trismegiste\DokudokiBundle\Transform\Skippable;
 
 /**
  * FactoryTest test for Factory
@@ -140,6 +141,16 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->service->create(array(Mediator::FQCN_KEY => 'Snark', 'answer' => 42));
     }
 
+    public function testSkippable()
+    {
+        $obj = new \stdClass();
+        $obj->dummy = new IntoVoid();
+        $obj->product = new Product("aaa", 23);
+        $dump = $this->service->desegregate($obj);
+        $this->assertNull($dump['dummy']);
+        $this->assertNotNull($dump['product']);
+    }
+
 }
 
 class Cart
@@ -193,4 +204,9 @@ class VerifMethod
         return $this->price * (1 + $this->vat / 100);
     }
 
+}
+
+class IntoVoid implements Skippable
+{
+    
 }

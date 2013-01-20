@@ -71,7 +71,7 @@ All children in this class don't need to implement Persistable, they are
 recursively stored.
 
 ### How can I remove some transient properties ?
-You can't. But you can have a transient class with the interface Transient.
+You can't. But you can have a transient class with the interface Skippable.
 Use Decorator pattern or a State Pattern. Your model can do that.
 
 ### Can I make some cleaning before persistence ?
