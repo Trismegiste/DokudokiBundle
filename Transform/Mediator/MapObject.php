@@ -6,6 +6,8 @@
 
 namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
+use Trismegiste\DokudokiBundle\Transform\Skippable;
+
 /**
  * MapObject is a mapper to and from an object
  *
@@ -28,15 +30,19 @@ class MapObject extends AbstractMapper
      */
     public function mapToDb($obj)
     {
-        $reflector = new \ReflectionObject($obj);
-        $className = $reflector->getName();
-        $dump = array();
-        $dump[Mediator::FQCN_KEY] = $className;
-        foreach ($reflector->getProperties() as $prop) {
-            if (!$prop->isStatic()) {
-                $prop->setAccessible(true);
-                // go deeper
-                $dump[$prop->name] = $this->mediator->recursivDesegregate($prop->getValue($obj));
+        if ($obj instanceof Skippable) {
+            $dump = null;
+        } else {
+            $reflector = new \ReflectionObject($obj);
+            $className = $reflector->getName();
+            $dump = array();
+            $dump[Mediator::FQCN_KEY] = $className;
+            foreach ($reflector->getProperties() as $prop) {
+                if (!$prop->isStatic()) {
+                    $prop->setAccessible(true);
+                    // go deeper
+                    $dump[$prop->name] = $this->mediator->recursivDesegregate($prop->getValue($obj));
+                }
             }
         }
 
