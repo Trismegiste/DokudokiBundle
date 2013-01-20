@@ -124,6 +124,22 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($content, $dump['file']->bin);
     }
 
+    /**
+     * @expectedException \DomainException
+     */
+    public function testClassEmpty()
+    {
+        $obj = $this->service->create(array(Mediator::FQCN_KEY => null, 'answer' => 42));
+    }
+
+    /**
+     * @expectedException \DomainException
+     */
+    public function testClassNotFound()
+    {
+        $this->service->create(array(Mediator::FQCN_KEY => 'Snark', 'answer' => 42));
+    }
+
 }
 
 class Cart

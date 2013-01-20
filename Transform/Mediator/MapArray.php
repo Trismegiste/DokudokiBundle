@@ -22,14 +22,13 @@ class MapArray extends AbstractMapper
     /**
      * Map an array from the db to an object
      * 
-     * @param array $param
+     * @param string $fqcn full qualified class name
+     * @param array $param properties of object
      * 
      * @return object 
      */
-    protected function mapFromDbToObject($param)
+    protected function mapFromDbToObject($fqcn, $param)
     {
-        $fqcn = $param[Mediator::FQCN_KEY];
-        unset($param[Mediator::FQCN_KEY]);
         $reflector = new ReflectionClassBC($fqcn);
         $obj = $reflector->newInstanceWithoutConstructor();
 
@@ -68,8 +67,16 @@ class MapArray extends AbstractMapper
      */
     public function mapFromDb($param)
     {
-        $modeObj = isset($param[Mediator::FQCN_KEY]);
-        return ($modeObj) ? $this->mapFromDbToObject($param) : $this->mapFromDbToArray($param);
+        if (array_key_exists(Mediator::FQCN_KEY, $param)) {
+            $fqcn = $param[Mediator::FQCN_KEY];
+            if (!class_exists($fqcn)) {
+                throw new \DomainException("Cannot restore a '$fqcn' : class does not exist");
+            }
+            unset($param[Mediator::FQCN_KEY]);
+            return $this->mapFromDbToObject($fqcn, $param);
+        } else {
+            return $this->mapFromDbToArray($param);
+        }
     }
 
     /**
