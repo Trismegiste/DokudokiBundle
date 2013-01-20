@@ -13,7 +13,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
  */
 class MapObject extends AbstractMapper
 {
-    const FQCN_KEY = '_class';
+    const FQCN_KEY = '-class';
 
     /**
      * {@inheritDoc}
