@@ -28,8 +28,8 @@ class MapArray extends AbstractMapper
      */
     protected function mapFromDbToObject($param)
     {
-        $fqcn = $param[MapObject::FQCN_KEY];
-        unset($param[MapObject::FQCN_KEY]);
+        $fqcn = $param[Mediator::FQCN_KEY];
+        unset($param[Mediator::FQCN_KEY]);
         $reflector = new ReflectionClassBC($fqcn);
         $obj = $reflector->newInstanceWithoutConstructor();
 
@@ -68,7 +68,7 @@ class MapArray extends AbstractMapper
      */
     public function mapFromDb($param)
     {
-        $modeObj = isset($param[MapObject::FQCN_KEY]);
+        $modeObj = isset($param[Mediator::FQCN_KEY]);
         return ($modeObj) ? $this->mapFromDbToObject($param) : $this->mapFromDbToArray($param);
     }
 

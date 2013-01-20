@@ -47,7 +47,7 @@ class Factory implements FactoryInterface
      */
     public function create(array $dump)
     {
-        if (!array_key_exists(Mediator\MapObject::FQCN_KEY, $dump)) {
+        if (!array_key_exists(Mediator\Mediator::FQCN_KEY, $dump)) {
             throw new \LogicException('There is no key for the FQCN of the root entity');
         }
 

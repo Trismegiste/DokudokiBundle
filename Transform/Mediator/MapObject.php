@@ -6,6 +6,8 @@
 
 namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
+use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
+
 /**
  * MapObject is a mapper to and from an object
  *
@@ -13,7 +15,6 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
  */
 class MapObject extends AbstractMapper
 {
-    const FQCN_KEY = '-class';
 
     /**
      * {@inheritDoc}
@@ -32,7 +33,7 @@ class MapObject extends AbstractMapper
         $reflector = new \ReflectionObject($obj);
         $className = $reflector->getName();
         $dump = array();
-        $dump[self::FQCN_KEY] = $className;
+        $dump[Mediator::FQCN_KEY] = $className;
         foreach ($reflector->getProperties() as $prop) {
             if (!$prop->isStatic()) {
                 $prop->setAccessible(true);
