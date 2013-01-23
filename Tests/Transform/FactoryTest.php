@@ -8,8 +8,6 @@ namespace Trismegiste\DokudokiBundle\Transform\Tests;
 
 use Trismegiste\DokudokiBundle\Transform\Factory;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
-use Trismegiste\DokudokiBundle\Transform\Skippable;
-use Trismegiste\DokudokiBundle\Transform\Cleanable;
 
 require_once __DIR__ . '/ModelSample.php';
 
@@ -129,7 +127,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \DomainException
+     * @xpectedException \DomainException
      */
     public function testClassEmpty()
     {
@@ -137,7 +135,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \DomainException
+     * @xpectedException \DomainException
      */
     public function testClassNotFound()
     {
