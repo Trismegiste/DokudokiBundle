@@ -56,7 +56,7 @@ and you store it. It's like serialization but in MongoDB.
 All non static properties are stored in a way you can query easily with the
 powerfull (but very strange I admit) language of MongoDB.
 
-See the PHPUnit tests for examples.
+See the [PHPUnit tests][*11] for examples.
 
 FAQ
 ---
@@ -138,3 +138,4 @@ This one, I'm pretty sure it is unique ^_^
 [*7]: http://www.elasticsearch.org/
 [*8]: http://www.mongodb.org/
 [*10]: http://en.wikipedia.org/wiki/Keep_it_simple_stupid
+[*11]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/Persistence/RepositoryTest.php#L43
