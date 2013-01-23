@@ -127,7 +127,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @xpectedException \DomainException
+     * @expectedException \DomainException
      */
     public function testClassEmpty()
     {
@@ -135,7 +135,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @xpectedException \DomainException
+     * @expectedException \DomainException
      */
     public function testClassNotFound()
     {

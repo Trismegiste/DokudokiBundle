@@ -24,7 +24,11 @@ class MapObject extends AbstractMapper
     public function mapFromDb($param)
     {
         $fqcn = $param[Mediator::FQCN_KEY];
+        if (!class_exists($fqcn)) {
+            throw new \DomainException("Cannot restore a '$fqcn' : class does not exist");
+        }
         unset($param[Mediator::FQCN_KEY]);
+
         $reflector = new InjectionClass($fqcn);
         $obj = $reflector->newInstanceWithoutConstructor();
 
