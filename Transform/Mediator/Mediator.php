@@ -9,15 +9,16 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 /**
  * Design Pattern : Mediator
  * Component : Mediator
- * 
+ *
  * Mediator is the delegation of Factory to recursively traverse
  * objects and arrays. Responsible for maintaining a list of Colleague (the
  * mappers converting object, array, scalar, MongoDate, etc. )
- * 
+ *
  * @author flo
  */
 class Mediator extends AbstractMediator
 {
+
     const FQCN_KEY = '-class';
 
     /**
@@ -25,13 +26,8 @@ class Mediator extends AbstractMediator
      */
     public function recursivDesegregate($obj)
     {
-        $stratKey = $this->getType($obj);
-
-        if (array_key_exists($stratKey, $this->mappingColleague)) {
-            return $this->mappingColleague[$stratKey]->mapToDb($obj);
-        } else {
-            throw new \DomainException("Unsupported type $stratKey");
-        }
+        $stratKey = $this->getType(self::DESEGREGATE, $obj);
+        return $this->mappingColleague[self::DESEGREGATE][$stratKey]->mapToDb($obj);
     }
 
     /**
@@ -39,21 +35,31 @@ class Mediator extends AbstractMediator
      */
     public function recursivCreate($param)
     {
-        $stratKey = $this->getType($param);
-
-        if (array_key_exists($stratKey, $this->mappingColleague)) {
-            return $this->mappingColleague[$stratKey]->mapFromDb($param);
-        } else {
-            throw new \DomainException("Unsupported type $stratKey");
-        }
+        $stratKey = $this->getType(self::CREATE, $param);
+        return $this->mappingColleague[self::CREATE][$stratKey]->mapFromDb($param);
     }
 
-    protected function getType($param)
+    protected function getType($way, $param)
     {
+        $pool = $this->mappingColleague[$way];
         $default = gettype($param);
-        if ('object' == $default) {
-            if (array_key_exists(get_class($param), $this->mappingColleague)) {
-                $default = get_class($param);
+
+        if (!array_key_exists(gettype($param), $pool)) {
+            throw new \DomainException("Unsupported type $stratKey");
+        }
+
+        if ('array' == $default) {
+            if (array_key_exists(self::FQCN_KEY, $param)) {
+                $default = 'object';
+                if (array_key_exists($param[self::FQCN_KEY], $pool)) {
+                    $default = $param[self::FQCN_KEY];
+                }
+            }
+        } else {
+            if ('object' == $default) {
+                if (array_key_exists(get_class($param), $pool)) {
+                    $default = get_class($param);
+                }
             }
         }
 

@@ -33,7 +33,15 @@ class MapScalar extends AbstractMapper
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleType()
+    protected function getResponsibleFromDb()
+    {
+        return array('boolean', 'integer', 'double', 'string');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getResponsibleToDb()
     {
         return array('boolean', 'integer', 'double', 'string');
     }

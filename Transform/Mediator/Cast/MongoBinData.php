@@ -35,7 +35,15 @@ class MongoBinData extends AbstractMapper
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleType()
+    protected function getResponsibleFromDb()
+    {
+        return array('MongoBinData');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getResponsibleToDb()
     {
         return array('MongoBinData');
     }

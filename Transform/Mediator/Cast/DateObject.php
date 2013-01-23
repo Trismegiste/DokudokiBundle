@@ -40,9 +40,17 @@ class DateObject extends AbstractMapper
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleType()
+    protected function getResponsibleFromDb()
     {
-        return array('MongoDate', 'DateTime');
+        return array('MongoDate');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getResponsibleToDb()
+    {
+        return array('DateTime');
     }
 
 }

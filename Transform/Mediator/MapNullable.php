@@ -33,7 +33,15 @@ class MapNullable extends AbstractMapper
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleType()
+    protected function getResponsibleFromDb()
+    {
+        return array('NULL');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getResponsibleToDb()
     {
         return array('NULL', 'resource');
     }

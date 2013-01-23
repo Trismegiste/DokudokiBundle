@@ -8,6 +8,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 
 use Trismegiste\DokudokiBundle\Transform\Skippable;
 use Trismegiste\DokudokiBundle\Transform\Cleanable;
+use Trismegiste\DokudokiBundle\Utils\InjectionClass;
 
 /**
  * MapObject is a mapper to and from an object
@@ -20,10 +21,26 @@ class MapObject extends AbstractMapper
     /**
      * {@inheritDoc}
      */
-    public function mapFromDb($var)
+    public function mapFromDb($param)
     {
-        // fallback for objects (Mongo types for example)
-        return $var;
+        $fqcn = $param[Mediator::FQCN_KEY];
+        unset($param[Mediator::FQCN_KEY]);
+        $reflector = new InjectionClass($fqcn);
+        $obj = $reflector->newInstanceWithoutConstructor();
+
+        foreach ($param as $key => $val) {
+            // go deeper
+            $mapped = $this->mediator->recursivCreate($val);
+            // set the value
+            $reflector->injectProperty($obj, $key, $mapped);
+        }
+        $reflector->fixHackBC($obj);
+        // wakeup the object
+        if ($obj instanceof Cleanable) {
+            $obj->wakeup();
+        }
+
+        return $obj;
     }
 
     /**
@@ -55,7 +72,15 @@ class MapObject extends AbstractMapper
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleType()
+    protected function getResponsibleFromDb()
+    {
+        return array('object');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getResponsibleToDb()
     {
         return array('object');
     }
