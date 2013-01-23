@@ -39,13 +39,22 @@ class Mediator extends AbstractMediator
         return $this->mappingColleague[self::CREATE][$stratKey]->mapFromDb($param);
     }
 
+    /**
+     * Ugly method to replace by a Chain of Responsibility pattern
+     * see MapObject::mapFromDb to remove other check
+     *
+     * @param type $way
+     * @param type $param
+     * @return type
+     * @throws \DomainException
+     */
     protected function getType($way, $param)
     {
         $pool = $this->mappingColleague[$way];
         $default = gettype($param);
 
-        if (!array_key_exists(gettype($param), $pool)) {
-            throw new \DomainException("Unsupported type $stratKey");
+        if (!array_key_exists($default, $pool)) {
+            throw new \DomainException("Unsupported type $default");
         }
 
         if ('array' == $default) {
