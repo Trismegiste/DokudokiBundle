@@ -33,4 +33,25 @@ class MapNullableTest extends MapperTestTemplate
         return array(array(null, null), array($fch, null));
     }
 
+    public function getResponsibleDataToDb()
+    {
+        $fch = fopen(__FILE__, 'r');
+        return array(array(null), array($fch));
+    }
+
+    public function getResponsibleDataFromDb()
+    {
+        return array(array(null));
+    }
+
+    public function getNotResponsibleDataToDb()
+    {
+        return array(array(42), array('bazinga'), array(new \stdClass()), array(new \DateTime()));
+    }
+
+    public function getNotResponsibleDataFromDb()
+    {
+        return array(array(42), array(new \MongoDate()));
+    }
+
 }
