@@ -80,18 +80,7 @@ class MapObject extends AbstractMapper
      */
     public function isResponsibleFromDb($var)
     {
-        switch (gettype($var)) {
-
-            case 'object' :
-                return true;
-                break;
-
-            case 'array' :
-                return array_key_exists(Mediator::FQCN_KEY, $var);
-                break;
-
-            default: return false;
-        }
+        return (gettype($var) == 'array') && array_key_exists(Mediator::FQCN_KEY, $var);
     }
 
     /**

@@ -41,4 +41,24 @@ class MapArrayTest extends MapperTestTemplate
         return $this->getDataFromDb();
     }
 
+    public function getResponsibleDataToDb()
+    {
+        return array(array(array('hello')));
+    }
+
+    public function getResponsibleDataFromDb()
+    {
+        return $this->getResponsibleDataToDb();
+    }
+
+    public function getNotResponsibleDataToDb()
+    {
+        return array(array(null), array(new \stdClass()), array(new \DateTime()));
+    }
+
+    public function getNotResponsibleDataFromDb()
+    {
+        return array(array(null), array(array(Mediator::FQCN_KEY => 'hello')), array(new \MongoDate()));
+    }
+
 }

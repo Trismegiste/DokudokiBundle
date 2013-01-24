@@ -46,4 +46,24 @@ class MapObjectTest extends MapperTestTemplate
         return array(array($obj, $dump));
     }
 
+    public function getResponsibleDataToDb()
+    {
+        return array(array(new \stdClass()));
+    }
+
+    public function getResponsibleDataFromDb()
+    {
+        return array(array(array(Mediator::FQCN_KEY => 'hello')));
+    }
+
+    public function getNotResponsibleDataToDb()
+    {
+        return array(array(null), array(42), array(array('hello')));
+    }
+
+    public function getNotResponsibleDataFromDb()
+    {
+        return array(array(null), array(array('prop' => 'hello')), array(new \MongoDate()));
+    }
+
 }

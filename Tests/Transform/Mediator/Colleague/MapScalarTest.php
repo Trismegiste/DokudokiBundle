@@ -32,4 +32,24 @@ class MapScalarTest extends MapperTestTemplate
         return $this->getDataFromDb();
     }
 
+    public function getResponsibleDataToDb()
+    {
+        return array(array(42), array(false), array('bazinga'), array(6.62));
+    }
+
+    public function getResponsibleDataFromDb()
+    {
+        return $this->getResponsibleDataToDb();
+    }
+
+    public function getNotResponsibleDataToDb()
+    {
+        return array(array(null), array(array('hello')), array(new \DateTime()));
+    }
+
+    public function getNotResponsibleDataFromDb()
+    {
+        return array(array(null), array(array('hello')), array(new \MongoDate()));
+    }
+
 }
