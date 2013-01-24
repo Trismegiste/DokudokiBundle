@@ -6,7 +6,6 @@
 
 namespace Trismegiste\DokudokiBundle\Tests\Persistence;
 
-use Trismegiste\DokudokiBundle\Persistence\Connector;
 use Trismegiste\DokudokiBundle\Transform\Factory;
 use Trismegiste\DokudokiBundle\Persistence\Repository;
 use Trismegiste\DokudokiBundle\Persistence\Persistable;

@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Transform\Mediator\Cast;
+namespace Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
 

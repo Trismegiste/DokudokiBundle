@@ -4,24 +4,24 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Transform\Mediator;
+namespace Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
+
+use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
 
 /**
- * MapScalar is a mapper to and from a scalar
+ * Nullable is a mapper to and from a nullable : null and resource
  *
  * @author florent
  */
-class MapScalar extends AbstractMapper
+class MapNullable extends AbstractMapper
 {
-
-    protected $scalarType = array('boolean', 'integer', 'double', 'string');
 
     /**
      * {@inheritDoc}
      */
     public function mapFromDb($var)
     {
-        return $var;
+        return null;
     }
 
     /**
@@ -29,7 +29,7 @@ class MapScalar extends AbstractMapper
      */
     public function mapToDb($var)
     {
-        return $var;
+        return null;
     }
 
     /**
@@ -37,7 +37,7 @@ class MapScalar extends AbstractMapper
      */
     public function isResponsibleFromDb($var)
     {
-        return in_array(gettype($var), $this->scalarType);
+        return gettype($var) == 'NULL';
     }
 
     /**
@@ -45,7 +45,7 @@ class MapScalar extends AbstractMapper
      */
     public function isResponsibleToDb($var)
     {
-        return $this->isResponsibleFromDb($var);
+        return in_array(gettype($var), array('NULL', 'resource'));
     }
 
 }

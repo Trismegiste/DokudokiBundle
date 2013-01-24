@@ -4,11 +4,13 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Transform\Mediator;
+namespace Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 
 use Trismegiste\DokudokiBundle\Transform\Skippable;
 use Trismegiste\DokudokiBundle\Transform\Cleanable;
 use Trismegiste\DokudokiBundle\Utils\InjectionClass;
+use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
+use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
 
 /**
  * MapObject is a mapper to and from an object

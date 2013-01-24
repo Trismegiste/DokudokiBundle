@@ -7,7 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Transform;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator;
-
+use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 /**
  * Factory is a transformer/factory to move from object to array and vice versa
  *
@@ -21,12 +21,12 @@ class Factory implements FactoryInterface
     public function __construct()
     {
         $algo = new Mediator\Mediator();
-        new Mediator\MapNullable($algo);
-        new Mediator\MapScalar($algo);
-        new Mediator\MapArray($algo);
-        new Mediator\MapObject($algo);
-        new Mediator\Cast\DateObject($algo);
-        new Mediator\Cast\MongoBinData($algo);
+        new Colleague\MapNullable($algo);
+        new Colleague\MapScalar($algo);
+        new Colleague\MapArray($algo);
+        new Colleague\MapObject($algo);
+        new Colleague\DateObject($algo);
+        new Colleague\MongoBinData($algo);
         $this->delegation = $algo;
     }
 
