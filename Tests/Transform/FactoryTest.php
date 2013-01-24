@@ -122,6 +122,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $obj = $this->service->create(array(Mediator::FQCN_KEY => 'stdClass', 'file' => new \MongoBinData($content, 2)));
         $this->assertInstanceOf('MongoBinData', $obj->file);
         $dump = $this->service->desegregate($obj);
+        var_dump($dump);
         $this->assertInstanceOf('MongoBinData', $dump['file']);
         $this->assertEquals($content, $dump['file']->bin);
     }

@@ -14,6 +14,8 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 class MapScalar extends AbstractMapper
 {
 
+    protected $scalarType = array('boolean', 'integer', 'double', 'string');
+
     /**
      * {@inheritDoc}
      */
@@ -33,17 +35,17 @@ class MapScalar extends AbstractMapper
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleFromDb()
+    public function isResponsibleFromDb($var)
     {
-        return array('boolean', 'integer', 'double', 'string');
+        return in_array(gettype($var), $this->scalarType);
     }
 
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleToDb()
+    public function isResponsibleToDb($var)
     {
-        return array('boolean', 'integer', 'double', 'string');
+        return $this->isResponsibleFromDb($var);
     }
 
 }

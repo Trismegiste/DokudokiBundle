@@ -35,17 +35,17 @@ class MongoBinData extends AbstractMapper
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleFromDb()
+    public function isResponsibleFromDb($var)
     {
-        return array('MongoBinData');
+        return (gettype($var) == 'object' ) && (get_class($var) == 'MongoBinData');
     }
 
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleToDb()
+    public function isResponsibleToDb($var)
     {
-        return array('MongoBinData');
+        $this->isResponsibleFromDb($var);
     }
 
 }

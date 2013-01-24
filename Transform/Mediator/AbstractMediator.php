@@ -17,22 +17,14 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 abstract class AbstractMediator implements RecursiveMapper, TypeRegistry
 {
 
-    protected $mappingColleague = array(TypeRegistry::CREATE => array(), TypeRegistry::DESEGREGATE => array());
+    protected $mappingColleague = array();
 
     /**
      * {@inheritDoc}
      */
-    public function registerType($way, $name, Mapping $colleague)
+    public function registerType(Mapping $colleague)
     {
-        if (!in_array($way, array(self::CREATE, self::DESEGREGATE))) {
-            throw new \InvalidArgumentException("The direction is unknown (must be TypeRegistry::DESEGREGATE or TypeRegistry::CREATE");
-        }
-
-        if (!is_string($name)) {
-            throw new \InvalidArgumentException('The key type is not a string');
-        }
-
-        $this->mappingColleague[$way][$name] = $colleague;
+        $this->mappingColleague[] = $colleague;
     }
 
 }

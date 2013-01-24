@@ -27,12 +27,7 @@ abstract class AbstractMapper implements Mapping
     public function __construct(TypeRegistry $ctx)
     {
         $this->mediator = $ctx;
-        foreach ($this->getResponsibleFromDb() as $name) {
-            $this->mediator->registerType(TypeRegistry::CREATE, $name, $this);
-        }
-        foreach ($this->getResponsibleToDb() as $name) {
-            $this->mediator->registerType(TypeRegistry::DESEGREGATE, $name, $this);
-        }
+        $this->mediator->registerType($this);
     }
 
     /**
@@ -40,12 +35,12 @@ abstract class AbstractMapper implements Mapping
      *
      * @return array
      */
-    abstract protected function getResponsibleFromDb();
+    abstract public function isResponsibleFromDb($var);
 
     /**
      * Return an array of PHP type for which this class is responsible
      *
      * @return array
      */
-    abstract protected function getResponsibleToDb();
+    abstract public function isResponsibleToDb($var);
 }
