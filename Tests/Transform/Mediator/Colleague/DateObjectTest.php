@@ -33,4 +33,24 @@ class DateObjectTest extends MapperTestTemplate
         return array(array(new \DateTime(), new \MongoDate()));
     }
 
+    public function getResponsibleDataToDb()
+    {
+        return array(array(new \DateTime()));
+    }
+
+    public function getResponsibleDataFromDb()
+    {
+        return array(array(new \MongoDate()));
+    }
+
+    public function getNotResponsibleDataToDb()
+    {
+        return array(array(new \stdClass()), array(new \MongoDate()));
+    }
+
+    public function getNotResponsibleDataFromDb()
+    {
+        return array(array(new \DateTime()), array(array(Mediator::FQCN_KEY => 'DateTime')));
+    }
+
 }

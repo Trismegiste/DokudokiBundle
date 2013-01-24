@@ -34,4 +34,24 @@ class MongoBinDataTest extends MapperTestTemplate
         return $this->getDataFromDb();
     }
 
+    public function getResponsibleDataToDb()
+    {
+        return array(array(new \MongoBinData('mahalo', 2)));
+    }
+
+    public function getResponsibleDataFromDb()
+    {
+        return $this->getResponsibleDataToDb();
+    }
+
+    public function getNotResponsibleDataToDb()
+    {
+        return array(array(new \stdClass()), array(new \MongoDate()));
+    }
+
+    public function getNotResponsibleDataFromDb()
+    {
+        return array(array(new \MongoDate()), array(array(Mediator::FQCN_KEY => 'MongoBinData')));
+    }
+
 }
