@@ -129,7 +129,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \DomainException
      */
-    public function testClassEmpty()
+    public function testRootClassEmpty()
     {
         $obj = $this->service->create(array(Mediator::FQCN_KEY => null, 'answer' => 42));
     }
@@ -137,9 +137,35 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \DomainException
      */
-    public function testClassNotFound()
+    public function testLeafClassEmpty()
+    {
+        $obj = $this->service->create(
+                array(
+                    Mediator::FQCN_KEY => 'stdClass',
+                    'child' => array(Mediator::FQCN_KEY => null, 'answer' => 42)
+                )
+        );
+    }
+
+    /**
+     * @expectedException \DomainException
+     */
+    public function testRootClassNotFound()
     {
         $this->service->create(array(Mediator::FQCN_KEY => 'Snark', 'answer' => 42));
+    }
+
+    /**
+     * @expectedException \DomainException
+     */
+    public function testLeafClassNotFound()
+    {
+        $obj = $this->service->create(
+                array(
+                    Mediator::FQCN_KEY => 'stdClass',
+                    'child' => array(Mediator::FQCN_KEY => 'Snark', 'answer' => 42)
+                )
+        );
     }
 
     public function testSkippable()
