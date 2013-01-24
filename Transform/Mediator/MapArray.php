@@ -36,17 +36,22 @@ class MapArray extends AbstractMapper
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleFromDb()
+    public function isResponsibleFromDb($var)
     {
-        return array('array');
+        $internal = gettype($var);
+        if ($internal == 'array') {
+            return !array_key_exists(Mediator::FQCN_KEY, $var);
+        }
+
+        return false;
     }
 
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleToDb()
+    public function isResponsibleToDb($var)
     {
-        return array('array');
+        return 'array' == gettype($var);
     }
 
 }

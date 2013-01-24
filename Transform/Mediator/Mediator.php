@@ -26,8 +26,14 @@ class Mediator extends AbstractMediator
      */
     public function recursivDesegregate($obj)
     {
-        $stratKey = $this->getType(self::DESEGREGATE, $obj);
-        return $this->mappingColleague[self::DESEGREGATE][$stratKey]->mapToDb($obj);
+        $strat = null;
+        foreach ($this->mappingColleague as $map) {
+            if ($map->isResponsibleToDb($obj)) {
+                $strat = $map;
+            }
+        }
+
+        return $strat->mapToDb($obj);
     }
 
     /**
@@ -35,44 +41,14 @@ class Mediator extends AbstractMediator
      */
     public function recursivCreate($param)
     {
-        $stratKey = $this->getType(self::CREATE, $param);
-        return $this->mappingColleague[self::CREATE][$stratKey]->mapFromDb($param);
-    }
-
-    /**
-     * Ugly method to replace by a Chain of Responsibility pattern
-     * see MapObject::mapFromDb to remove other check
-     *
-     * @param type $way
-     * @param type $param
-     * @return type
-     * @throws \DomainException
-     */
-    protected function getType($way, $param)
-    {
-        $pool = $this->mappingColleague[$way];
-        $default = gettype($param);
-
-        if (!array_key_exists($default, $pool)) {
-            throw new \DomainException("Unsupported type $default");
-        }
-
-        if ('array' == $default) {
-            if (array_key_exists(self::FQCN_KEY, $param)) {
-                $default = 'object';
-                if (array_key_exists($param[self::FQCN_KEY], $pool)) {
-                    $default = $param[self::FQCN_KEY];
-                }
-            }
-        } else {
-            if ('object' == $default) {
-                if (array_key_exists(get_class($param), $pool)) {
-                    $default = get_class($param);
-                }
+        $strat = null;
+        foreach ($this->mappingColleague as $map) {
+            if ($map->isResponsibleFromDb($param)) {
+                $strat = $map;
             }
         }
 
-        return $default;
+        return $strat->mapFromDb($param);
     }
 
 }
