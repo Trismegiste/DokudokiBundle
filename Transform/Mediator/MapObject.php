@@ -76,28 +76,25 @@ class MapObject extends AbstractMapper
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleFromDb()
+    public function isResponsibleFromDb($var)
     {
-        return array('object');
+        switch (gettype($var)) {
+
+            case 'object' :
+                return true;
+                break;
+
+            case 'array' :
+                return array_key_exists(Mediator::FQCN_KEY, $var);
+                break;
+
+            default: return false;
+        }
     }
 
     /**
      * {@inheritDoc}
      */
-    protected function getResponsibleToDb()
-    {
-        return array('object');
-    }
-
-    public function isResponsibleFromDb($var)
-    {
-        if (gettype($var) == 'array') {
-            return array_key_exists(Mediator::FQCN_KEY, $var);
-        }
-
-        return false;
-    }
-
     public function isResponsibleToDb($var)
     {
         return gettype($var) == 'object';

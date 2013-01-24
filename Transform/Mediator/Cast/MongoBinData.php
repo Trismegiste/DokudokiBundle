@@ -45,7 +45,7 @@ class MongoBinData extends AbstractMapper
      */
     public function isResponsibleToDb($var)
     {
-        $this->isResponsibleFromDb($var);
+        return $this->isResponsibleFromDb($var);
     }
 
 }
