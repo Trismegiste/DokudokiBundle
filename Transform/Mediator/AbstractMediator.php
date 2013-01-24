@@ -21,6 +21,8 @@ abstract class AbstractMediator implements RecursiveMapper, TypeRegistry
 
     /**
      * {@inheritDoc}
+     *
+     * You must note that order of registering matters
      */
     public function registerType(Mapping $colleague)
     {
