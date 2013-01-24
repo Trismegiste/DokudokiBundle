@@ -30,17 +30,4 @@ abstract class AbstractMapper implements Mapping
         $this->mediator->registerType($this);
     }
 
-    /**
-     * Return an array of PHP type for which this class is responsible
-     *
-     * @return array
-     */
-    abstract public function isResponsibleFromDb($var);
-
-    /**
-     * Return an array of PHP type for which this class is responsible
-     *
-     * @return array
-     */
-    abstract public function isResponsibleToDb($var);
 }
