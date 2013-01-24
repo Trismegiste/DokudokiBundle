@@ -43,6 +43,8 @@ class MapArray extends AbstractMapper
     {
         $internal = gettype($var);
         if ($internal == 'array') {
+            // @todo this test is questionable : MapObject will override
+            // this constraint
             return !array_key_exists(Mediator::FQCN_KEY, $var);
         }
 

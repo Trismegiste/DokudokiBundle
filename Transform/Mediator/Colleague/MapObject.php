@@ -55,6 +55,8 @@ class MapObject extends AbstractMapper
     public function mapToDb($obj)
     {
         if ($obj instanceof Skippable) {
+            // @todo this test can be replaced by another Mapper which
+            // takes precedence.
             $dump = null;
         } else {
             if ($obj instanceof Cleanable) {
