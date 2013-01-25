@@ -1,4 +1,5 @@
 <?php
+
 /*
  * DokudokiBundle
  */
@@ -37,7 +38,7 @@ class Document extends InternalContent
      */
     public function __call($methodName, $arg)
     {
-        if (preg_match('#^(get|set|iter)([A-Z][A-Za-z0-9]*)$#', $methodName, $extract)) {
+        if (preg_match('#^(get|set)([A-Z][A-Za-z0-9]*)$#', $methodName, $extract)) {
             $propName = lcfirst($extract[2]);
             switch ($extract[1]) {
                 case 'set' :
@@ -45,9 +46,6 @@ class Document extends InternalContent
                     break;
                 case 'get' :
                     return $this->getter($propName, $arg);
-                    break;
-                case 'iter' :
-                    return $this->iterator($propName, $arg);
                     break;
             }
         } else {

@@ -14,15 +14,8 @@ namespace Trismegiste\DokudokiBundle\Magic;
 interface DynamicType
 {
 
-    const classKey = '_cls';
+    const classKey = '-magic';
 
-    /**
-     * Get this object in an php tree-structured array by transforming the
-     * DynamicType instances with the help of className. Recursively.
-     *
-     * @return array the tree represents this object
-     */
-    function getUnTyped();
 
     /**
      * An alias for the type of this object
