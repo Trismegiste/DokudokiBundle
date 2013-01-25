@@ -7,7 +7,6 @@
 namespace Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
-use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
 
 /**
  * Design Pattern : Mediator
