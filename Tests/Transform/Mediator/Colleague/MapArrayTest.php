@@ -48,8 +48,8 @@ class MapArrayTest extends MapperTestTemplate
 
     public function getResponsibleDataFromDb()
     {
-        // MapArray CAN map an dumped object from DB. It's just MapObject overrides this responsibilities
-        // Like BG said, it's not a bug it's a features : you can restore an object with the need of model
+        // MapArray CAN map an dumped object from DB. It's just MapObject which overrides its responsibility
+        // Like BG said, it's not a bug it's a feature : you can restore an object without the need of model
         return array(array(array('hello'), array(array(Mediator::FQCN_KEY => 'hello'))));
     }
 

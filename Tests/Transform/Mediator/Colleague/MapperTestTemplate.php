@@ -7,9 +7,8 @@
 namespace Trismegiste\DokudokiBundle\Tests\Transform\Mediator\Colleague;
 
 /**
- * Description of MapperTestTemplate
- *
- * @author flo
+ * Design pattern : Template method
+ * MapperTestTemplate is a template for testing mappers
  */
 abstract class MapperTestTemplate extends \PHPUnit_Framework_TestCase
 {
@@ -24,6 +23,19 @@ abstract class MapperTestTemplate extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         unset($this->mapper);
+    }
+
+    protected function createMediatorMockup()
+    {
+        $mediator = $this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMediator');
+        $mediator->expects($this->any())
+                ->method('recursivCreate')
+                ->will($this->returnArgument(0));
+        $mediator->expects($this->any())
+                ->method('recursivDesegregate')
+                ->will($this->returnArgument(0));
+
+        return $mediator;
     }
 
     abstract protected function createMapper();
