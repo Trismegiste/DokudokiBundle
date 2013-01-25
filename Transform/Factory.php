@@ -25,6 +25,7 @@ class Factory implements FactoryInterface
         new Colleague\MapScalar($algo);
         new Colleague\MapArray($algo);
         new Colleague\MapObject($algo);
+        new Colleague\MapSkippable($algo);
         new Colleague\DateObject($algo);
         new Colleague\MongoBinData($algo);
         $this->delegation = $algo;

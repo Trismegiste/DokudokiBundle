@@ -54,23 +54,17 @@ class MapObject extends AbstractMapper
      */
     public function mapToDb($obj)
     {
-        if ($obj instanceof Skippable) {
-            // @todo this test can be replaced by another Mapper which
-            // takes precedence.
-            $dump = null;
-        } else {
-            if ($obj instanceof Cleanable) {
-                $obj->sleep();
-            }
-            $reflector = new \ReflectionObject($obj);
-            $dump = array();
-            $dump[Mediator::FQCN_KEY] = $reflector->getName();
-            foreach ($reflector->getProperties() as $prop) {
-                if (!$prop->isStatic()) {
-                    $prop->setAccessible(true);
-                    // go deeper
-                    $dump[$prop->name] = $this->mediator->recursivDesegregate($prop->getValue($obj));
-                }
+        if ($obj instanceof Cleanable) {
+            $obj->sleep();
+        }
+        $reflector = new \ReflectionObject($obj);
+        $dump = array();
+        $dump[Mediator::FQCN_KEY] = $reflector->getName();
+        foreach ($reflector->getProperties() as $prop) {
+            if (!$prop->isStatic()) {
+                $prop->setAccessible(true);
+                // go deeper
+                $dump[$prop->name] = $this->mediator->recursivDesegregate($prop->getValue($obj));
             }
         }
 
