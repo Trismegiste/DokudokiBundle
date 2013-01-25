@@ -48,7 +48,9 @@ class MapArrayTest extends MapperTestTemplate
 
     public function getResponsibleDataFromDb()
     {
-        return $this->getResponsibleDataToDb();
+        // MapArray CAN map an dumped object from DB. It's just MapObject overrides this responsibilities
+        // Like BG said, it's not a bug it's a features : you can restore an object with the need of model
+        return array(array(array('hello'), array(array(Mediator::FQCN_KEY => 'hello'))));
     }
 
     public function getNotResponsibleDataToDb()
@@ -58,7 +60,7 @@ class MapArrayTest extends MapperTestTemplate
 
     public function getNotResponsibleDataFromDb()
     {
-        return array(array(null), array(array(Mediator::FQCN_KEY => 'hello')), array(new \MongoDate()));
+        return array(array(null), array(new \MongoDate()));
     }
 
 }

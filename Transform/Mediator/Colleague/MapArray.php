@@ -41,14 +41,7 @@ class MapArray extends AbstractMapper
      */
     public function isResponsibleFromDb($var)
     {
-        $internal = gettype($var);
-        if ($internal == 'array') {
-            // @todo this test is questionable : MapObject will override
-            // this constraint
-            return !array_key_exists(Mediator::FQCN_KEY, $var);
-        }
-
-        return false;
+        return 'array' == gettype($var);
     }
 
     /**
