@@ -25,16 +25,11 @@ class MapSkippableTest extends MapperTestTemplate
         return new MapSkippable($mediator);
     }
 
-    public function getDataFromDb()
-    {
-
-    }
-
-    public function testMapFromDb()
-    {
-
-    }
-
+    public function getDataFromDb() {}
+    public function testMapFromDb() {}
+    public function getResponsibleDataFromDb() {}
+    public function testResponsibleFromDb() {}
+    
     public function getDataToDb()
     {
         return array(array(new IntoVoid(), null));
@@ -48,16 +43,6 @@ class MapSkippableTest extends MapperTestTemplate
     public function getNotResponsibleDataToDb()
     {
         return array(array(new \stdClass()), array(42));
-    }
-
-    public function getResponsibleDataFromDb()
-    {
-
-    }
-
-    public function testResponsibleFromDb()
-    {
-
     }
 
     public function getResponsibleDataToDb()
