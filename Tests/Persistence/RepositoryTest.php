@@ -9,6 +9,7 @@ namespace Trismegiste\DokudokiBundle\Tests\Persistence;
 use Trismegiste\DokudokiBundle\Transform\Factory;
 use Trismegiste\DokudokiBundle\Persistence\Repository;
 use Trismegiste\DokudokiBundle\Persistence\Persistable;
+use Trismegiste\DokudokiBundle\Magic\Document;
 
 /**
  * Description of ConnectorTest
@@ -134,6 +135,8 @@ class Stress extends Simple
         $this->stringVar = 'H Psi = E . Psi';
         $this->objVar = new Simple();
         $this->objVar->answer = 'eureka';
+        $this->magic = new Document('person');
+        $this->magic->setName('Howard');
     }
 
 }
