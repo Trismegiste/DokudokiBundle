@@ -19,15 +19,7 @@ class MapArrayTest extends MapperTestTemplate
 
     protected function createMapper()
     {
-        $mediator = $this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMediator');
-        $mediator->expects($this->any())
-                ->method('recursivCreate')
-                ->will($this->returnArgument(0));
-        $mediator->expects($this->any())
-                ->method('recursivDesegregate')
-                ->will($this->returnArgument(0));
-
-        return new MapArray($mediator);
+        return new MapArray($this->createMediatorMockup());
     }
 
     public function getDataFromDb()
