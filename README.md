@@ -105,15 +105,12 @@ TODO
 ----
 
  * Storing DBRef properly but no automagic or whatsoever
- * Using aliasing instead of FQCN (I'm not sure if it is a good idea)
- * Interfacing with MongoSapinBundle
  * Make a Trait for Persistable
 
-MongoSapinBundle
-----------------
+Magic Model
+-----------
 
-I have made this another db layer for MongoDB. Why two layers ? Because they
-are complementary. MongoSapinBundle is for "Form Driven Development" i.e
+A model class is provided for "Form Driven Development" i.e
 it is not only schema-less but also it is model-less : There are "fake" classes
 for rapid development but you can map entities on data later.
 
