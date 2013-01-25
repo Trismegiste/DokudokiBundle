@@ -86,7 +86,38 @@ class InternalContent implements DynamicType, \IteratorAggregate
 
     public function getIterator()
     {
-        return new \ArrayIterator($this->property);
+        return new \RecursiveArrayIterator($this->property);
+    }
+
+    public function getUnTyped()
+    {
+        $iter = new \RecursiveArrayIterator($this->property);
+        return $this->recursiveUnTyping($iter);
+    }
+
+    /**
+     * Internal recursive untyping
+     *
+     * @param \RecursiveArrayIterator $iter
+     *
+     * @return array
+     */
+    protected function recursiveUnTyping(\RecursiveArrayIterator $iter)
+    {
+        $flat = array();
+        foreach ($iter as $key => $val) {
+            if ($val instanceof DynamicType) {
+                $flat[$key] = $val->getUnTyped();
+            } else {
+                if (is_array($val)) {
+                    $flat[$key] = $this->recursiveUnTyping($iter->getChildren());
+                } else {
+                    $flat[$key] = $val;
+                }
+            }
+        }
+
+        return $flat;
     }
 
 }
