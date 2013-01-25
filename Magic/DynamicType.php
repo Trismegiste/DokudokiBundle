@@ -21,4 +21,11 @@ interface DynamicType
      * An alias for the type of this object
      */
     function getClassName();
+
+    /**
+     * Get a tree without object type
+     *
+     * @return array
+     */
+    function getUnTyped();
 }
