@@ -37,6 +37,14 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException \Trismegiste\DokudokiBundle\Persistence\NotFoundException
+     */
+    public function testNotFound()
+    {
+        $obj = $this->repo->findByPk(666);
+    }
+
+    /**
      *
      * @depends testInit
      */
