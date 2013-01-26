@@ -70,6 +70,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testOnlyObject()
+    {
+        $dump = $this->service->desegregate(array('nawak'));
+    }
+
+    /**
      * @dataProvider getSampleTree
      */
     public function testDesegregate($obj, $dumpEqv)
@@ -168,7 +176,16 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @expectedException \LogicException
+     */
     public function testSkippable()
+    {
+        $obj = new IntoVoid();
+        $dump = $this->service->desegregate($obj);
+    }
+
+    public function testChildSkippable()
     {
         $obj = new \stdClass();
         $obj->dummy = new IntoVoid();

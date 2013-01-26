@@ -39,7 +39,7 @@ class Factory implements FactoryInterface
     public function desegregate($obj)
     {
         if (!is_object($obj)) {
-            throw new \LogicException('Only object can be transformed into tree');
+            throw new \InvalidArgumentException('Only object can be transformed into tree');
         }
         if ($obj instanceof Skippable) {
             throw new \LogicException('A root entity cannot be Skippable');
