@@ -7,7 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Persistence;
 
 /**
- * Description of Connector
+ * A concrete connector against MongoDB. It's a wrapper to encapsulate config
  *
  * @author flo
  */
@@ -21,6 +21,11 @@ class Connector
         $this->paramValid = $param;
     }
 
+    /**
+     * Returns the mongo collection with the parameters setted in constructor
+     * 
+     * @return \MongoCollection
+     */
     public function getCollection()
     {
         $classCnx = (version_compare(phpversion('mongo'), '1.3') > 0) ? '\MongoClient' : '\Mongo';

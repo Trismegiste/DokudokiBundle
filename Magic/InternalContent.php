@@ -37,9 +37,9 @@ class InternalContent implements DynamicType, \IteratorAggregate
      * Set a property for this object
      *
      * @param string $propName  the property's name
-     * @param mixed $arg the value of the property in a one parameter array
+     * @param mixed $arg the value of the property in a one-value array
      *
-     * @throws \InvalidArgumentException If the param is not unique
+     * @throws \InvalidArgumentException If the value is not unique
      */
     protected function setter($propName, $arg)
     {
@@ -75,20 +75,26 @@ class InternalContent implements DynamicType, \IteratorAggregate
     }
 
     /**
-     * Returns the classname for this object
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getClassName()
     {
         return $this->property[self::classKey];
     }
 
+    /**
+     * Gets a recursive iterator on properties
+     * 
+     * @return \RecursiveArrayIterator
+     */
     public function getIterator()
     {
         return new \RecursiveArrayIterator($this->property);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getUnTyped()
     {
         $iter = new \RecursiveArrayIterator($this->property);

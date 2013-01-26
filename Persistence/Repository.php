@@ -5,7 +5,7 @@ namespace Trismegiste\DokudokiBundle\Persistence;
 use Trismegiste\DokudokiBundle\Transform\FactoryInterface;
 
 /**
- * Repository of Document
+ * Repository of mongo document
  *
  * @author flo
  */

@@ -15,7 +15,9 @@ interface RepositoryInterface
 {
 
     /**
-     * Transforms an object tree into a tree/array and persists it into
+     * Transforms an object tree into a tree/array and persists it 
+     * into a database layer
+     * 
      * @param Persistable $doc
      */
     function persist(Persistable $doc);
