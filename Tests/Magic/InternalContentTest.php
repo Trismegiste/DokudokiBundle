@@ -59,13 +59,13 @@ class InternalContentTest extends \PHPUnit_Framework_TestCase
 
     public function testUntyping()
     {
-        $this->assertEquals(
-                array(
+        $this->assertEquals(array(
             InternalContent::classKey => 'hello',
             'answer' => 42,
             'recur' => array(
                 InternalContent::classKey => 'detail',
-                'data' => 123)
+                'data' => 123
+            )
                 ), $this->doc->getUnTyped()
         );
     }

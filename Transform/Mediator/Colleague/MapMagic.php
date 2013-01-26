@@ -10,7 +10,8 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
 use Trismegiste\DokudokiBundle\Magic\Document;
 
 /**
- * MapObject is a mapper to and from an object
+ * MapMagic is a mapper to and from a Magic Document
+ * Must be placed after MapObject to overcome its responsibilities
  *
  * @author florent
  */

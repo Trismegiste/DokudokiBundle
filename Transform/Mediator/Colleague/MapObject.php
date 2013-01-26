@@ -14,7 +14,8 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
 
 /**
  * MapObject is a mapper to and from an object
- *
+ * Must be placed after MapArray to overcome the responsibility of mapFromDb
+ * 
  * @author florent
  */
 class MapObject extends AbstractMapper

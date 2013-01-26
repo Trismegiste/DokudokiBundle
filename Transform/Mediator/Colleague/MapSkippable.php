@@ -10,8 +10,9 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
 use Trismegiste\DokudokiBundle\Transform\Skippable;
 
 /**
- * MapSkippable is a mapper responsible for implementation of Skippable
- *
+ * MapSkippable is a mapper responsible for implementations of Skippable.
+ * It overrides MapObject if following it
+ * 
  * @author florent
  */
 class MapSkippable extends AbstractMapper

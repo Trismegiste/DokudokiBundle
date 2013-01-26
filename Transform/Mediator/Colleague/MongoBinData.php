@@ -9,8 +9,9 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
 
 /**
- * MongoBinData is a mapper to and from an \MongoBinData
- *
+ * MongoBinData is a mapper to and from an \MongoBinData .
+ * Must be placed after MapObject
+ * 
  * @author florent
  */
 class MongoBinData extends AbstractMapper

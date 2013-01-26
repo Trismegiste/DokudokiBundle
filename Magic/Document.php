@@ -12,7 +12,7 @@ namespace Trismegiste\DokudokiBundle\Magic;
  * Here is an example:
  * <pre><code>
  * <?php
- * $doc = new Automagic();
+ * $doc = new Document();
  * $doc->setAnswser(42);
  * echo $doc->getAnswer();
  * print_r($doc->getUnTyped());
@@ -27,14 +27,14 @@ class Document extends InternalContent
     /**
      * Implements getter and setter
      *
-     * @param string $methodName
+     * @param string $methodName (get|set)MyProperty
      * @param array $arg
      *
      * @return mixed
      *
-     * @throws \InvalidArgumentException
-     * @throws \DomainException
-     * @throws \BadMethodCallException
+     * @throws \InvalidArgumentException if the nimber of parameters is not good
+     * @throws \DomainException if the property does not exists
+     * @throws \BadMethodCallException if the method name is bad (camelCase only)
      */
     public function __call($methodName, $arg)
     {

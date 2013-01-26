@@ -13,9 +13,7 @@ namespace Trismegiste\DokudokiBundle\Magic;
  */
 interface DynamicType
 {
-
     const classKey = '-magic';
-
 
     /**
      * An alias for the type of this object
