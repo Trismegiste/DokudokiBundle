@@ -6,6 +6,8 @@
 
 namespace Trismegiste\DokudokiBundle\Magic;
 
+use Trismegiste\DokudokiBundle\Persistence\Persistable;
+
 /**
  * Document is a container with automatic getters & setters
  *
@@ -21,7 +23,7 @@ namespace Trismegiste\DokudokiBundle\Magic;
  *
  * @author flo
  */
-class Document extends InternalContent
+class Document extends InternalContent implements Persistable
 {
 
     /**
@@ -51,6 +53,16 @@ class Document extends InternalContent
         } else {
             throw new \BadMethodCallException("Method $methodName is unknown");
         }
+    }
+
+    public function setId(\MongoId $pk)
+    {
+        $this->setter('id', array($pk));
+    }
+
+    public function getId()
+    {
+        return $this->has('id') ? $this->getter('id', array()) : null;
     }
 
 }
