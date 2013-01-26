@@ -188,4 +188,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(range(1, 100), $restore->getTransient());
     }
 
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testEDxceptionForBadCreation()
+    {
+        $this->service->create(array('bazinga' => 73));
+    }
+
 }

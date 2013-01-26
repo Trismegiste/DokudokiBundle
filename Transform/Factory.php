@@ -55,7 +55,7 @@ class Factory implements FactoryInterface
     {
         $obj = $this->delegation->recursivCreate($dump);
         if (gettype($obj) != 'object') {
-            throw new \LogicException('The root entity is not an object');
+            throw new \RuntimeException('The root entity is not an object');
             // SRP : only Mediator knows if $dump will be an object or not
         }
 
