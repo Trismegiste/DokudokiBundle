@@ -55,7 +55,8 @@ class Factory implements FactoryInterface
     {
         $obj = $this->delegation->recursivCreate($dump);
         if (gettype($obj) != 'object') {
-            throw new \LogicException('There is no key for the FQCN of the root entity');
+            throw new \LogicException('The root entity is not an object');
+            // SRP : only Mediator knows if $dump will be an object or not
         }
 
         return $obj;
