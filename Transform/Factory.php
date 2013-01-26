@@ -8,6 +8,7 @@ namespace Trismegiste\DokudokiBundle\Transform;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
+
 /**
  * Factory is a transformer/factory to move from object to array and vice versa
  *
@@ -52,11 +53,13 @@ class Factory implements FactoryInterface
      */
     public function create(array $dump)
     {
-        if (!array_key_exists(Mediator\Mediator::FQCN_KEY, $dump)) {
-            throw new \LogicException('There is no key for the FQCN of the root entity');
+        $obj = $this->delegation->recursivCreate($dump);
+        if (gettype($obj) != 'object') {
+            throw new \RuntimeException('The root entity is not an object');
+            // SRP : only Mediator knows if $dump will be an object or not
         }
 
-        return $this->delegation->recursivCreate($dump);
+        return $obj;
     }
 
 }

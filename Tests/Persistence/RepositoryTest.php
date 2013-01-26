@@ -92,6 +92,25 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($obj, $found);
     }
 
+    public function testPersistMagicDoc()
+    {
+        $obj = new Document('doku');
+        $obj->setAnswer(42);
+        $this->repo->persist($obj);
+        $this->assertInstanceOf('\MongoId', $obj->getId());
+        return (string) $obj->getId();
+    }
+
+    /**
+     * @depends testPersistMagicDoc
+     */
+    public function testRestoreMagicDoc($pk)
+    {
+        $obj = $this->repo->findByPk($pk);
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $obj);
+        $this->assertEquals(42, $obj->getAnswer());
+    }
+
 }
 
 class Simple implements Persistable

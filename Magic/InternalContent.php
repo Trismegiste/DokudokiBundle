@@ -74,6 +74,11 @@ class InternalContent implements DynamicType, \IteratorAggregate
         return $this->property[$propName];
     }
 
+    protected function has($propName)
+    {
+        return array_key_exists($propName, $this->property);
+    }
+
     /**
      * {@inheritDoc}
      */
