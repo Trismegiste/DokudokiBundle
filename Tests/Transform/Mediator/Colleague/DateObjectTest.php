@@ -53,4 +53,12 @@ class DateObjectTest extends MapperTestTemplate
         return array(array(new \DateTime()), array(array(Mediator::FQCN_KEY => 'DateTime')));
     }
 
+    /**
+     * @expectedException LogicException
+     */
+    public function testMapMongoDateToDb()
+    {
+        $dump = $this->mapper->mapToDb(new \MongoDate());
+    }
+
 }

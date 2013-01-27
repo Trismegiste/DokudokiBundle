@@ -119,6 +119,29 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(42, $obj->getAnswer());
     }
 
+    /**
+     * @expectedException \DomainException
+     * @expectedExceptionMessage stdClass is not Persistable
+     */
+    public function testNotRestoringNonPersistable()
+    {
+        $collection = $this->getMockBuilder('MongoCollection')
+                ->disableOriginalConstructor()
+                ->getMock();
+        $collection->expects($this->once())
+                ->method('findOne')
+                ->will($this->returnValue(array()));
+
+        $factory = $this->getMockBuilder('Trismegiste\DokudokiBundle\Transform\Factory')
+                ->disableOriginalConstructor()
+                ->getMock();
+        $factory->expects($this->once())
+                ->method('create')
+                ->will($this->returnValue(new \stdClass()));
+        $repo = new Repository($collection, $factory);
+        $repo->findByPk(123);
+    }
+
 }
 
 class Simple implements Persistable
