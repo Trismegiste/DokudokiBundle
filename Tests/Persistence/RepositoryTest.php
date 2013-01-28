@@ -127,6 +127,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $collection = $this->getMockBuilder('MongoCollection')
                 ->disableOriginalConstructor()
+                ->setMethods(array('findOne'))
                 ->getMock();
         $collection->expects($this->once())
                 ->method('findOne')
