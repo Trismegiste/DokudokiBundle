@@ -14,7 +14,7 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
  *
  * @author flo
  */
-class MapObjectTest extends MapperTestTemplate
+class MapAliasTest extends MapperTestTemplate
 {
 
     protected function createMapper()
