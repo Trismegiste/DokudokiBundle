@@ -8,6 +8,8 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
 use Trismegiste\DokudokiBundle\Transform\Mediator\TypeRegistry;
+use Trismegiste\DokudokiBundle\Transform\Cleanable;
+use Trismegiste\DokudokiBundle\Utils\InjectionClass;
 
 /**
  * MapAlias is a mapper for FQCN alias
@@ -62,7 +64,7 @@ class MapAlias extends AbstractMapper
         return $obj;
     }
 
-    public function mapToDb($var)
+    public function mapToDb($obj)
     {
         if ($obj instanceof Cleanable) {
             $obj->sleep();
