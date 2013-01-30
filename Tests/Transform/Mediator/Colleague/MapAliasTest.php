@@ -10,7 +10,7 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapAlias;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
 
 /**
- * Test for MapObject
+ * Test for MapAlias
  *
  * @author flo
  */
