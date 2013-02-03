@@ -6,8 +6,7 @@
 
 namespace Trismegiste\DokudokiBundle\Transform;
 
-use Trismegiste\DokudokiBundle\Transform\Mediator;
-use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
+use Trismegiste\DokudokiBundle\Transform\Mediator\RecursiveMapper;
 
 /**
  * Factory is a transformer to move from object to array and vice versa
@@ -19,17 +18,8 @@ class Transformer implements TransformerInterface
 
     protected $delegation;
 
-    public function __construct()
+    public function __construct(RecursiveMapper $algo)
     {
-        $algo = new Mediator\Mediator();
-        new Colleague\MapNullable($algo);
-        new Colleague\MapScalar($algo);
-        new Colleague\MapArray($algo);
-        new Colleague\MapObject($algo);
-        new Colleague\MapSkippable($algo);
-        new Colleague\MapMagic($algo);
-        new Colleague\DateObject($algo);
-        new Colleague\MongoBinData($algo);
         $this->delegation = $algo;
     }
 

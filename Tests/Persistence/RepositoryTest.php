@@ -10,6 +10,7 @@ use Trismegiste\DokudokiBundle\Transform\Transformer;
 use Trismegiste\DokudokiBundle\Persistence\Repository;
 use Trismegiste\DokudokiBundle\Persistence\Persistable;
 use Trismegiste\DokudokiBundle\Magic\Document;
+use Trismegiste\DokudokiBundle\Transform\Delegation\MappingDirector;
 
 /**
  * Description of ConnectorTest
@@ -27,7 +28,8 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $test = new ConnectorTest();
         $this->collection = $test->testCollection();
-        $this->factory = new Transformer();
+        $director = new MappingDirector();
+        $this->factory = new Transformer($director->create());
         $this->repo = new Repository($this->collection, $this->factory);
     }
 
