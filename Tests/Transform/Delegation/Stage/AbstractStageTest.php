@@ -31,4 +31,10 @@ abstract class AbstractStageTest extends \PHPUnit_Framework_TestCase
     }
 
     abstract protected function createBuilder();
+
+    public function testMediator()
+    {
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Transform\Mediator\Mediator', $this->mediator);
+    }
+
 }
