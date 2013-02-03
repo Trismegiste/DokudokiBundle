@@ -20,7 +20,7 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 class MappingDirector
 {
 
-    public function create()
+    public function create(/* builder */)
     {
         $builder = new Stage\First();
         $algo = $builder->createChain();

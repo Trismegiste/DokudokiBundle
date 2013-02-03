@@ -21,6 +21,11 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 class First extends MappingBuilder
 {
 
+    /* 
+     * this is where you need to inject specific configuration in the 
+     * constructor
+     */
+    
     public function createObject(Mediator $algo)
     {
         new Colleague\MapObject($algo);
