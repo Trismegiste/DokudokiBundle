@@ -2,7 +2,7 @@
 
 namespace Trismegiste\DokudokiBundle\Persistence;
 
-use Trismegiste\DokudokiBundle\Transform\FactoryInterface;
+use Trismegiste\DokudokiBundle\Transform\TransformerInterface;
 
 /**
  * Repository of mongo document
@@ -15,7 +15,7 @@ class Repository implements RepositoryInterface
     protected $collection;
     protected $factory;
 
-    public function __construct(\MongoCollection $coll, FactoryInterface $fac)
+    public function __construct(\MongoCollection $coll, TransformerInterface $fac)
     {
         $this->collection = $coll;
         $this->factory = $fac;

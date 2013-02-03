@@ -6,7 +6,7 @@
 
 namespace Trismegiste\DokudokiBundle\Tests\Persistence;
 
-use Trismegiste\DokudokiBundle\Transform\Factory;
+use Trismegiste\DokudokiBundle\Transform\Transformer;
 use Trismegiste\DokudokiBundle\Persistence\Repository;
 use Trismegiste\DokudokiBundle\Persistence\Persistable;
 use Trismegiste\DokudokiBundle\Magic\Document;
@@ -27,7 +27,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $test = new ConnectorTest();
         $this->collection = $test->testCollection();
-        $this->factory = new Factory();
+        $this->factory = new Transformer();
         $this->repo = new Repository($this->collection, $this->factory);
     }
 
@@ -133,7 +133,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
                 ->method('findOne')
                 ->will($this->returnValue(array()));
 
-        $factory = $this->getMockBuilder('Trismegiste\DokudokiBundle\Transform\Factory')
+        $factory = $this->getMockBuilder('Trismegiste\DokudokiBundle\Transform\Transformer')
                 ->disableOriginalConstructor()
                 ->getMock();
         $factory->expects($this->once())

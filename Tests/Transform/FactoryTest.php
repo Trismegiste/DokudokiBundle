@@ -6,7 +6,7 @@
 
 namespace Trismegiste\DokudokiBundle\Transform\Tests;
 
-use Trismegiste\DokudokiBundle\Transform\Factory;
+use Trismegiste\DokudokiBundle\Transform\Transformer;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapObject;
 
 require_once __DIR__ . '/ModelSample.php';
@@ -23,7 +23,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->service = new Factory();
+        $this->service = new Transformer();
     }
 
     protected function tearDown()
