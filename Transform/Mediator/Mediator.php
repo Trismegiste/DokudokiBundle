@@ -19,8 +19,6 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator;
 class Mediator extends AbstractMediator
 {
 
-    const FQCN_KEY = '-class';
-
     /**
      * {@inheritDoc}
      */

@@ -26,7 +26,7 @@ class MapObjectTest extends MapperTestTemplate
     {
         $obj = new \stdClass();
         $obj->answer = 42;
-        $dump = array(Mediator::FQCN_KEY => 'stdClass', 'answer' => 42);
+        $dump = array(MapObject::FQCN_KEY => 'stdClass', 'answer' => 42);
         return array(array($dump, $obj));
     }
 
@@ -34,7 +34,7 @@ class MapObjectTest extends MapperTestTemplate
     {
         $obj = new \stdClass();
         $obj->answer = 42;
-        $dump = array(Mediator::FQCN_KEY => 'stdClass', 'answer' => 42);
+        $dump = array(MapObject::FQCN_KEY => 'stdClass', 'answer' => 42);
         return array(array($obj, $dump));
     }
 
@@ -45,7 +45,7 @@ class MapObjectTest extends MapperTestTemplate
 
     public function getResponsibleDataFromDb()
     {
-        return array(array(array(Mediator::FQCN_KEY => 'hello')));
+        return array(array(array(MapObject::FQCN_KEY => 'hello')));
     }
 
     public function getNotResponsibleDataToDb()

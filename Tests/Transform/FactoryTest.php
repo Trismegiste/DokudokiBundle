@@ -7,7 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Transform\Tests;
 
 use Trismegiste\DokudokiBundle\Transform\Factory;
-use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
+use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapObject;
 
 require_once __DIR__ . '/ModelSample.php';
 
@@ -35,7 +35,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $obj = new \stdClass();
         $obj->answer = 42;
-        $dump = array(Mediator::FQCN_KEY => 'stdClass', 'answer' => 42);
+        $dump = array(MapObject::FQCN_KEY => 'stdClass', 'answer' => 42);
 
         $obj2 = new Cart("86 fdfg de fdf");
         $obj2->info = 'nothing to say';
@@ -43,7 +43,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $obj2->addItem(1, new Product('Bike', 650));
 
         $dump2 = array(
-            Mediator::FQCN_KEY => __NAMESPACE__ . '\Cart',
+            MapObject::FQCN_KEY => __NAMESPACE__ . '\Cart',
             'address' => '86 fdfg de fdf',
             'info' => 'nothing to say',
             'notInitialized' => null,
@@ -51,7 +51,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
                 0 => array(
                     'qt' => 3,
                     'item' => array(
-                        Mediator::FQCN_KEY => __NAMESPACE__ . '\Product',
+                        MapObject::FQCN_KEY => __NAMESPACE__ . '\Product',
                         'title' => 'EF85L',
                         'price' => 1999
                     )
@@ -59,7 +59,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
                 1 => array(
                     'qt' => 1,
                     'item' => array(
-                        Mediator::FQCN_KEY => __NAMESPACE__ . '\Product',
+                        MapObject::FQCN_KEY => __NAMESPACE__ . '\Product',
                         'title' => 'Bike',
                         'price' => 650,
                     )
@@ -117,7 +117,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testDate()
     {
-        $obj = $this->service->create(array(Mediator::FQCN_KEY => 'stdClass', 'ts' => new \MongoDate()));
+        $obj = $this->service->create(array(MapObject::FQCN_KEY => 'stdClass', 'ts' => new \MongoDate()));
         $this->assertInstanceOf('DateTime', $obj->ts);
         $dump = $this->service->desegregate($obj);
         $this->assertInstanceOf('MongoDate', $dump['ts']);
@@ -127,7 +127,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testBinData()
     {
         $content = "something new";
-        $obj = $this->service->create(array(Mediator::FQCN_KEY => 'stdClass', 'file' => new \MongoBinData($content, 2)));
+        $obj = $this->service->create(array(MapObject::FQCN_KEY => 'stdClass', 'file' => new \MongoBinData($content, 2)));
         $this->assertInstanceOf('MongoBinData', $obj->file);
         $dump = $this->service->desegregate($obj);
         $this->assertInstanceOf('MongoBinData', $dump['file']);
@@ -139,7 +139,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRootClassEmpty()
     {
-        $obj = $this->service->create(array(Mediator::FQCN_KEY => null, 'answer' => 42));
+        $obj = $this->service->create(array(MapObject::FQCN_KEY => null, 'answer' => 42));
     }
 
     /**
@@ -149,8 +149,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $obj = $this->service->create(
                 array(
-                    Mediator::FQCN_KEY => 'stdClass',
-                    'child' => array(Mediator::FQCN_KEY => null, 'answer' => 42)
+                    MapObject::FQCN_KEY => 'stdClass',
+                    'child' => array(MapObject::FQCN_KEY => null, 'answer' => 42)
                 )
         );
     }
@@ -160,7 +160,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testRootClassNotFound()
     {
-        $this->service->create(array(Mediator::FQCN_KEY => 'Snark', 'answer' => 42));
+        $this->service->create(array(MapObject::FQCN_KEY => 'Snark', 'answer' => 42));
     }
 
     /**
@@ -170,8 +170,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $obj = $this->service->create(
                 array(
-                    Mediator::FQCN_KEY => 'stdClass',
-                    'child' => array(Mediator::FQCN_KEY => 'Snark', 'answer' => 42)
+                    MapObject::FQCN_KEY => 'stdClass',
+                    'child' => array(MapObject::FQCN_KEY => 'Snark', 'answer' => 42)
                 )
         );
     }

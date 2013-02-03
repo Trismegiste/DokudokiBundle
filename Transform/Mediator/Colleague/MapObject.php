@@ -19,17 +19,18 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
  */
 class MapObject extends AbstractMapper
 {
+    const FQCN_KEY = '-class';
 
     /**
      * {@inheritDoc}
      */
     public function mapFromDb($param)
     {
-        $fqcn = $param[Mediator::FQCN_KEY];
+        $fqcn = $param[self::FQCN_KEY];
         if (!class_exists($fqcn)) {
             throw new \DomainException("Cannot restore a '$fqcn' : class does not exist");
         }
-        unset($param[Mediator::FQCN_KEY]);
+        unset($param[self::FQCN_KEY]);
 
         $reflector = new InjectionClass($fqcn);
         $obj = $reflector->newInstanceWithoutConstructor();
@@ -59,7 +60,7 @@ class MapObject extends AbstractMapper
         }
         $reflector = new \ReflectionObject($obj);
         $dump = array();
-        $dump[Mediator::FQCN_KEY] = $reflector->getName();
+        $dump[self::FQCN_KEY] = $reflector->getName();
         foreach ($reflector->getProperties() as $prop) {
             if (!$prop->isStatic()) {
                 $prop->setAccessible(true);
@@ -76,7 +77,7 @@ class MapObject extends AbstractMapper
      */
     public function isResponsibleFromDb($var)
     {
-        return (gettype($var) == 'array') && array_key_exists(Mediator::FQCN_KEY, $var);
+        return (gettype($var) == 'array') && array_key_exists(self::FQCN_KEY, $var);
     }
 
     /**

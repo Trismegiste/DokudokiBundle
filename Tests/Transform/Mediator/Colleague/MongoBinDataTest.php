@@ -7,7 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Tests\Transform\Mediator\Colleague;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MongoBinData;
-use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
+use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapObject;
 
 /**
  * Test for MongoBinData
@@ -51,7 +51,7 @@ class MongoBinDataTest extends MapperTestTemplate
 
     public function getNotResponsibleDataFromDb()
     {
-        return array(array(new \MongoDate()), array(array(Mediator::FQCN_KEY => 'MongoBinData')));
+        return array(array(new \MongoDate()), array(array(MapObject::FQCN_KEY => 'MongoBinData')));
     }
 
 }

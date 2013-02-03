@@ -7,7 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Tests\Transform\Mediator\Colleague;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\DateObject;
-use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
+use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapObject;
 
 /**
  * Test for DateObject
@@ -50,7 +50,7 @@ class DateObjectTest extends MapperTestTemplate
 
     public function getNotResponsibleDataFromDb()
     {
-        return array(array(new \DateTime()), array(array(Mediator::FQCN_KEY => 'DateTime')));
+        return array(array(new \DateTime()), array(array(MapObject::FQCN_KEY => 'DateTime')));
     }
 
     /**
