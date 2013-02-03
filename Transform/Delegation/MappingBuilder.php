@@ -6,39 +6,35 @@
 
 namespace Trismegiste\DokudokiBundle\Transform\Delegation;
 
-use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
-use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
+use Trismegiste\DokudokiBundle\Transform\Mediator\TypeRegistry;
 
 /**
  * Design Pattern : Builder
  * Component : Builder (abstract) 
  * 
- * This is a template for a builder of delegation of mapping 
- * @see Transformer 
+ * This is a contract for a builder of delegation of mapping 
+ * @see Mediator 
  *
  * @author flo
  */
-abstract class MappingBuilder
+interface MappingBuilder
 {
 
-    public function createChain()
-    {
-        return new Mediator();
-    }
+    /**
+     * Create the chain of algorithms of mapping
+     * 
+     * @return TypeRegistry 
+     */
+    function createChain();
 
-    public function createNonObject(Mediator $algo)
-    {
-        new Colleague\MapNullable($algo);
-        new Colleague\MapScalar($algo);
-        new Colleague\MapArray($algo);
-    }
+    /**
+     * Register mapping for non-object (scalar, null, array...)
+     * 
+     * @param TypeRegistry $algo 
+     */
+    function createNonObject(TypeRegistry $algo);
 
-    abstract public function createObject(Mediator $algo);
+    function createObject(TypeRegistry $algo);
 
-    public function createDbSpecific(Mediator $algo)
-    {
-        new Colleague\DateObject($algo);
-        new Colleague\MongoBinData($algo);
-    }
-
+    function createDbSpecific(TypeRegistry $algo);
 }

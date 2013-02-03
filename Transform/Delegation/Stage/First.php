@@ -6,9 +6,9 @@
 
 namespace Trismegiste\DokudokiBundle\Transform\Delegation\Stage;
 
-use Trismegiste\DokudokiBundle\Transform\Delegation\MappingBuilder;
-use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
+use Trismegiste\DokudokiBundle\Transform\Mediator\TypeRegistry;
+
 
 /**
  * Design Pattern : Builder
@@ -18,7 +18,7 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
  *
  * @author flo
  */
-class First extends MappingBuilder
+class First extends AbstractStage
 {
 
     /* 
@@ -26,7 +26,7 @@ class First extends MappingBuilder
      * constructor
      */
     
-    public function createObject(Mediator $algo)
+    public function createObject(TypeRegistry $algo)
     {
         new Colleague\MapObject($algo);
         new Colleague\MapSkippable($algo);
