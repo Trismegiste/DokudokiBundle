@@ -18,7 +18,7 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
  *
  * @author flo
  */
-class MappingBuilder
+abstract class MappingBuilder
 {
 
     public function createChain()
@@ -33,12 +33,7 @@ class MappingBuilder
         new Colleague\MapArray($algo);
     }
 
-    public function createObject(Mediator $algo)
-    {
-        new Colleague\MapObject($algo);
-        new Colleague\MapSkippable($algo);
-        new Colleague\MapMagic($algo);
-    }
+    abstract public function createObject(Mediator $algo);
 
     public function createDbSpecific(Mediator $algo)
     {
