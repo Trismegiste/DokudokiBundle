@@ -9,6 +9,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Tests;
 use Trismegiste\DokudokiBundle\Transform\Transformer;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapObject;
 use Trismegiste\DokudokiBundle\Transform\Delegation\MappingDirector;
+use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\First;
 
 require_once __DIR__ . '/ModelSample.php';
 
@@ -25,7 +26,7 @@ class TransformerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $director = new MappingDirector();
-        $this->service = new Transformer($director->create());
+        $this->service = new Transformer($director->create(new First()));
     }
 
     protected function tearDown()

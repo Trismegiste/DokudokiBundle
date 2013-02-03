@@ -22,9 +22,9 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 class MappingDirector
 {
 
-    public function create(/* MappingBuilder $builder */)
+    public function create(MappingBuilder $builder)
     {
-        $builder = new Stage\First();  // injected in parameter
+        //     $builder = new Stage\First();  // injected in parameter
         $algo = $builder->createChain();
         $builder->createDbSpecific($algo);
         $builder->createObject($algo);
