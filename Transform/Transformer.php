@@ -10,11 +10,11 @@ use Trismegiste\DokudokiBundle\Transform\Mediator;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 
 /**
- * Factory is a transformer/factory to move from object to array and vice versa
+ * Factory is a transformer to move from object to array and vice versa
  *
  * @author florent
  */
-class Factory implements FactoryInterface
+class Transformer implements TransformerInterface
 {
 
     protected $delegation;

@@ -11,7 +11,7 @@ namespace Trismegiste\DokudokiBundle\Transform;
  * 
  * @author flo
  */
-interface FactoryInterface
+interface TransformerInterface
 {
 
     /**
