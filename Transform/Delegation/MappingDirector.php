@@ -22,6 +22,12 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 class MappingDirector
 {
 
+    /**
+     * Builds the mediator for mapping with the help of builder
+     * 
+     * @param MappingBuilder $builder
+     * @return TypeRegistry
+     */
     public function create(MappingBuilder $builder)
     {
         //     $builder = new Stage\First();  // injected in parameter
