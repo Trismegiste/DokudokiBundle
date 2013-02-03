@@ -16,7 +16,7 @@ require_once __DIR__ . '/ModelSample.php';
  *
  * @author florent
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class TransformerTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $service;
