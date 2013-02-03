@@ -22,15 +22,11 @@ class MappingDirector
 
     public function create()
     {
-        $algo = new Mediator();
-        new Colleague\MapNullable($algo);
-        new Colleague\MapScalar($algo);
-        new Colleague\MapArray($algo);
-        new Colleague\MapObject($algo);
-        new Colleague\MapSkippable($algo);
-        new Colleague\MapMagic($algo);
-        new Colleague\DateObject($algo);
-        new Colleague\MongoBinData($algo);
+        $builder = new MappingBuilder();
+        $algo = $builder->createChain();
+        $builder->createNonObject($algo);
+        $builder->createObject($algo);
+        $builder->createDbSpecific($algo);
 
         return $algo;
     }
