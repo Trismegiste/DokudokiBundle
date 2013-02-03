@@ -43,6 +43,7 @@ class Mediator extends AbstractMediator
         foreach ($this->mappingColleague as $map) {
             if ($map->isResponsibleToDb($obj)) {
                 $strat = $map;
+                break;
             }
         }
 
@@ -58,6 +59,7 @@ class Mediator extends AbstractMediator
         foreach ($this->mappingColleague as $map) {
             if ($map->isResponsibleFromDb($param)) {
                 $strat = $map;
+                break;
             }
         }
 

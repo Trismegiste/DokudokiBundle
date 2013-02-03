@@ -26,9 +26,9 @@ class MappingDirector
     {
         $builder = new Stage\First();  // injected in parameter
         $algo = $builder->createChain();
-        $builder->createNonObject($algo);
-        $builder->createObject($algo);
         $builder->createDbSpecific($algo);
+        $builder->createObject($algo);
+        $builder->createNonObject($algo);
 
         return $algo;
     }

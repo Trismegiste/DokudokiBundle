@@ -22,7 +22,9 @@ abstract class AbstractMediator implements RecursiveMapper, TypeRegistry
     /**
      * {@inheritDoc}
      *
-     * You must note that order of registering matters
+     * You must note that order of registering matters :
+     * The first colleague which said "I'll do it" will be the first
+     * to work no matter others colleague.
      */
     public function registerType(Mapping $colleague)
     {

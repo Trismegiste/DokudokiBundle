@@ -28,9 +28,9 @@ class First extends AbstractStage
     
     public function createObject(TypeRegistry $algo)
     {
-        new Colleague\MapObject($algo);
-        new Colleague\MapSkippable($algo);
         new Colleague\MapMagic($algo);
+        new Colleague\MapSkippable($algo);
+        new Colleague\MapObject($algo);
     }
 
 }

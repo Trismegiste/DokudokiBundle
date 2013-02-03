@@ -36,9 +36,9 @@ abstract class AbstractStage implements MappingBuilder
      */
     public function createNonObject(TypeRegistry $algo)
     {
-        new Colleague\MapNullable($algo);
-        new Colleague\MapScalar($algo);
         new Colleague\MapArray($algo);
+        new Colleague\MapScalar($algo);
+        new Colleague\MapNullable($algo);
     }
 
     /**
