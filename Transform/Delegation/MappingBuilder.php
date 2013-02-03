@@ -28,13 +28,23 @@ interface MappingBuilder
     function createChain();
 
     /**
-     * Register mapping for non-object (scalar, null, array...)
+     * Register mappers for non-object (scalar, null, array...)
      * 
      * @param TypeRegistry $algo 
      */
     function createNonObject(TypeRegistry $algo);
 
+    /**
+     * Register mappers for object
+     * 
+     * @param TypeRegistry $algo 
+     */
     function createObject(TypeRegistry $algo);
 
+    /**
+     * Register mappers for database conversion (date, blob...)
+     * 
+     * @param TypeRegistry $algo 
+     */
     function createDbSpecific(TypeRegistry $algo);
 }

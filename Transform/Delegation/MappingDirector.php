@@ -22,7 +22,7 @@ class MappingDirector
 
     public function create(/* builder */)
     {
-        $builder = new Stage\First();
+        $builder = new Stage\First();  // injected in parameter
         $algo = $builder->createChain();
         $builder->createNonObject($algo);
         $builder->createObject($algo);
