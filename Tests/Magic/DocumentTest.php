@@ -129,7 +129,9 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     public function testFlatten()
     {
         $provider = new Fixture();
-        $this->assertEquals($provider->getFullTreeFlat(), $provider->getFullTreeObject()->getUnTyped());
+        $obj = $provider->getFullTreeObject();
+        $this->assertEquals($provider->getFullTreeFlat(), $obj->getUnTyped());
+        $this->assertEquals('Wayne', $obj->getCustomer()->getName());
     }
 
 }

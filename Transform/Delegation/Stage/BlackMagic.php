@@ -13,8 +13,8 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\TypeRegistry;
  * Design Pattern : Builder
  * Component : Builder (concrete) 
  * 
- * A builder for mapping full of Magic : zero configuration needed :
- * Quick and dirty.
+ * A builder for mapping full of Magic.
+ * Zero configuration needed : Quick and dirty.
  * Use case : Form driven development without model
  * CAUTION : Only for fast prototyping, that's why it's Black Magic
  *
