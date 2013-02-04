@@ -10,7 +10,7 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapSkippable;
 use Trismegiste\DokudokiBundle\Tests\Fixtures\IntoVoid;
 
 /**
- * MapSkippableTest is a ...
+ * MapSkippableTest is a test for transient class
  *
  * @author florent
  */

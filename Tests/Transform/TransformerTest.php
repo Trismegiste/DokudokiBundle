@@ -7,7 +7,6 @@
 namespace Trismegiste\DokudokiBundle\Transform\Tests;
 
 use Trismegiste\DokudokiBundle\Transform\Transformer;
-use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapObject;
 use Trismegiste\DokudokiBundle\Transform\Delegation\MappingDirector;
 use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\First;
 use Trismegiste\DokudokiBundle\Tests\Fixtures\IntoVoid;
@@ -51,9 +50,11 @@ class TransformerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * The tranformer MUST return an object
+     * 
      * @expectedException \RuntimeException
      */
-    public function testEDxceptionForBadCreation()
+    public function testExceptionForBadCreation()
     {
         $this->service->create(array('bazinga' => 73));
     }
