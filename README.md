@@ -13,7 +13,7 @@ who know and understand the growth of a model on a schemaless database.
 When I mean minimalistic, I mean the longest method takes about 20 lines. I think all
 the NCLOC are shorter than the method [UnitOfWork::createEntity][*1] of Doctrine 2.
 
-Of course, features are also minialistic. Don't expect the impossible. Nevertheless
+Of course, features are also minimalistic. Don't expect the impossible. Nevertheless
 there are features you don't find anywhere else. In my quest for rapid development
 and the "Don't repeat yourself", I try to make an agnostic DBAL which *helps*
 you in the process to build an app regardless the model is finished or not.
