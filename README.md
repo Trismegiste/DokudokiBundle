@@ -15,7 +15,7 @@ the NCLOC are shorter than the method [UnitOfWork::createEntity][*1] of Doctrine
 
 Of course, features are also minialistic. Don't expect the impossible. Nevertheless
 there are features you don't find anywhere else. In my quest for rapid development
-and the "Don't repeat yourself", I try to make an agnostic DBAL which *helps* 
+and the "Don't repeat yourself", I try to make an agnostic DBAL which *helps*
 you in the process to build an app regardless the model is finished or not.
 
 Why
@@ -66,26 +66,26 @@ When
 
 This DBAL has 4 stages, regarding the completion of the model classes.
 
-If you have none and a lot of forms to design, start with the "Demonist" stage.
+If you have none and a lot of forms to design, start with the "BlackMagic" stage.
 It is full of magic methods, magic mapping and magic documents. But be warned :
 it is for prototyping and your model and your database can turn back against you
 if you are not careful.
 
 If you have a lot of nearly complete model classes and don't want configure anything,
-use the Necromant stage. Only magic mapping and strict typing between objects
+use the "Invocation" stage. Only magic mapping and strict typing between objects
 and documents. But if you need to make complex queries or map-reduce, it can be
 very dirty. This stage is usefull for RESTful app without GUI.
 
 If you have a good model and the time to carefully alias classes in the database,
-use the Wizard stage. There is automapping but without surprise, your model cannot
+use the "WhiteMagic" stage. There is automapping but without surprise, your model cannot
 turn into chaos.
 
-If you need to evolve this model above, you can use Voodoo stage, a 
-Wizard stage mixed with some magic from Demonist stage. 
+If you need to evolve the model above, you can use "Hoodoo" stage, a
+"WhiteMagic" stage mixed with some magic from "BlackMagic" stage.
 
 The trick is you can migrate between these stages when you develop your app
 and, for example, don't need to start over after a dirty prototype. You even
-can generate a model with the data you had stored into collections 
+can generate a model with the data you had stored into collections
 when you don't have one.
 
 FAQ
