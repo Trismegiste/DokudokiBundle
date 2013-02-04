@@ -6,10 +6,8 @@
 
 namespace Trismegiste\DokudokiBundle\Tests\Transform\Mediator\Colleague;
 
-use Trismegiste\DokudokiBundle\Transform\Tests\IntoVoid;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapSkippable;
-
-require_once __DIR__ . '/../../ModelSample.php';
+use Trismegiste\DokudokiBundle\Tests\Fixtures\IntoVoid;
 
 /**
  * MapSkippableTest is a ...
