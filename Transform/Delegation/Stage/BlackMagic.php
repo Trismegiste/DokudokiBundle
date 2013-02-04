@@ -13,17 +13,19 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\TypeRegistry;
  * Design Pattern : Builder
  * Component : Builder (concrete) 
  * 
- * No magic and FQCN in database for class keys
+ * A builder for mapping full of Magic : zero configuration needed :
+ * Quick and dirty.
+ * Use case : Form driven development without model
+ * CAUTION : Only for fast prototyping, that's why it's Black Magic
  *
  * @author flo
  */
-class ZeroConfigNoMagic extends AbstractStage
+class BlackMagic extends AbstractStage
 {
 
     public function createObject(TypeRegistry $algo)
     {
-        new Colleague\MapSkippable($algo);
-        new Colleague\MapObject($algo);
+        new Colleague\MapMagic($algo);
     }
 
 }

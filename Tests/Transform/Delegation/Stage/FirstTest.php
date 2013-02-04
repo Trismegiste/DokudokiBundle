@@ -74,7 +74,7 @@ class FirstTest extends AbstractStageTest
         return new First();
     }
 
-    public function testCallingRestore()
+    public function testRestoreWithNonTrivialConstruct()
     {
         $obj = new Fixtures\VerifMethod(100);
         $dump = $this->mediator->recursivDesegregate($obj);
