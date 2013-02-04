@@ -74,4 +74,82 @@ class FirstTest extends AbstractStageTest
         return new First();
     }
 
+    public function testCallingRestore()
+    {
+        $obj = new Fixtures\VerifMethod(100);
+        $dump = $this->mediator->recursivDesegregate($obj);
+        $restore = $this->mediator->recursivCreate($dump);
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Tests\Fixtures\VerifMethod', $restore);
+        $this->assertEquals(119.6, $restore->getTotal());
+    }
+
+    /**
+     * @expectedException \DomainException
+     */
+    public function testRootClassEmpty()
+    {
+        $obj = $this->mediator->recursivCreate(array(MapObject::FQCN_KEY => null, 'answer' => 42));
+    }
+
+    /**
+     * @expectedException \DomainException
+     */
+    public function testLeafClassEmpty()
+    {
+        $obj = $this->mediator->recursivCreate(
+                array(
+                    MapObject::FQCN_KEY => 'stdClass',
+                    'child' => array(MapObject::FQCN_KEY => null, 'answer' => 42)
+                )
+        );
+    }
+
+    /**
+     * @expectedException \DomainException
+     */
+    public function testRootClassNotFound()
+    {
+        $this->mediator->recursivCreate(array(MapObject::FQCN_KEY => 'Snark', 'answer' => 42));
+    }
+
+    /**
+     * @expectedException \DomainException
+     */
+    public function testLeafClassNotFound()
+    {
+        $obj = $this->mediator->recursivCreate(
+                array(
+                    MapObject::FQCN_KEY => 'stdClass',
+                    'child' => array(MapObject::FQCN_KEY => 'Snark', 'answer' => 42)
+                )
+        );
+    }
+
+    public function testSkippable()
+    {
+        $obj = new Fixtures\IntoVoid();
+        $dump = $this->mediator->recursivDesegregate($obj);
+        $this->assertNull($dump);
+    }
+
+    public function testChildSkippable()
+    {
+        $obj = new \stdClass();
+        $obj->dummy = new Fixtures\IntoVoid();
+        $obj->product = new Fixtures\Product("aaa", 23);
+        $dump = $this->mediator->recursivDesegregate($obj);
+        $this->assertNull($dump['dummy']);
+        $this->assertNotNull($dump['product']);
+    }
+
+    public function testCleanable()
+    {
+        $obj = new Fixtures\Bear();
+        $dump = $this->mediator->recursivDesegregate($obj);
+        $this->assertNull($dump['transient']);
+        $this->assertEquals(42, $dump['answer']);
+        $restore = $this->mediator->recursivCreate($dump);
+        $this->assertEquals(range(1, 100), $restore->getTransient());
+    }
+
 }
