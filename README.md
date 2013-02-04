@@ -3,6 +3,13 @@ DokudokiBundle
 
 Yet another [MongoDB][*2] database layer
 
+ToDo
+----
+
+* Removing getUnTyped since Magic can be mixed with standard objects
+* simplifying the constructor of InternalContent : only string
+* make Document final to prevent strange inheritance
+
 What
 ----
 
