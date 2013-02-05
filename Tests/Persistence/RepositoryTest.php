@@ -11,7 +11,7 @@ use Trismegiste\DokudokiBundle\Persistence\Repository;
 use Trismegiste\DokudokiBundle\Persistence\Persistable;
 use Trismegiste\DokudokiBundle\Magic\Document;
 use Trismegiste\DokudokiBundle\Transform\Delegation\MappingDirector;
-use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\First;
+use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation;
 
 /**
  * Description of ConnectorTest
@@ -30,7 +30,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $test = new ConnectorTest();
         $this->collection = $test->testCollection();
         $director = new MappingDirector();
-        $this->factory = new Transformer($director->create(new First()));
+        $this->factory = new Transformer($director->create(new Invocation()));
         $this->repo = new Repository($this->collection, $this->factory);
     }
 
@@ -103,24 +103,24 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($obj, $found);
     }
 
-    public function testPersistMagicDoc()
-    {
-        $obj = new Document('doku');
-        $obj->setAnswer(42);
-        $this->repo->persist($obj);
-        $this->assertInstanceOf('\MongoId', $obj->getId());
-        return (string) $obj->getId();
-    }
-
-    /**
-     * @depends testPersistMagicDoc
-     */
-    public function testRestoreMagicDoc($pk)
-    {
-        $obj = $this->repo->findByPk($pk);
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $obj);
-        $this->assertEquals(42, $obj->getAnswer());
-    }
+//    public function testPersistMagicDoc()
+//    {
+//        $obj = new Document('doku');
+//        $obj->setAnswer(42);
+//        $this->repo->persist($obj);
+//        $this->assertInstanceOf('\MongoId', $obj->getId());
+//        return (string) $obj->getId();
+//    }
+//
+//    /**
+//     * @depends testPersistMagicDoc
+//     */
+//    public function testRestoreMagicDoc($pk)
+//    {
+//        $obj = $this->repo->findByPk($pk);
+//        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $obj);
+//        $this->assertEquals(42, $obj->getAnswer());
+//    }
 
     /**
      * @expectedException \DomainException
@@ -189,8 +189,8 @@ class Stress extends Simple
         $this->stringVar = 'H Psi = E . Psi';
         $this->objVar = new Simple();
         $this->objVar->answer = 'eureka';
-        $this->magic = new Document('person');
-        $this->magic->setName('Howard');
+//        $this->magic = new Document('person');
+//        $this->magic->setName('Howard');
     }
 
 }

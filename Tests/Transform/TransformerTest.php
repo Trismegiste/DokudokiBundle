@@ -8,7 +8,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Tests;
 
 use Trismegiste\DokudokiBundle\Transform\Transformer;
 use Trismegiste\DokudokiBundle\Transform\Delegation\MappingDirector;
-use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\First;
+use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation;
 use Trismegiste\DokudokiBundle\Tests\Fixtures\IntoVoid;
 
 /**
@@ -24,7 +24,7 @@ class TransformerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $director = new MappingDirector();
-        $this->service = new Transformer($director->create(new First()));
+        $this->service = new Transformer($director->create(new Invocation()));
     }
 
     protected function tearDown()
@@ -51,7 +51,7 @@ class TransformerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * The tranformer MUST return an object
-     * 
+     *
      * @expectedException \RuntimeException
      */
     public function testExceptionForBadCreation()
