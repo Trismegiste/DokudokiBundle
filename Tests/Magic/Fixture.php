@@ -41,6 +41,8 @@ class Fixture
     {
         $obj = new Document('option');
         $obj->setChoice($title);
+        
+        return $obj;
     }
 
     public function getFullTreeObject()
@@ -60,6 +62,8 @@ class Fixture
                 )
         );
         $cart->setState(array(1, 2, 3));
+
+        return $cart;
     }
 
     public function getFullTreeFlat()
