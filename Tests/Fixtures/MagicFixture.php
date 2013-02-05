@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Magic;
+namespace Trismegiste\DokudokiBundle\Tests\Fixtures;
 
 use Trismegiste\DokudokiBundle\Magic\Document;
 
@@ -14,7 +14,7 @@ use Trismegiste\DokudokiBundle\Magic\Document;
  *
  * @author florent
  */
-class Fixture
+class MagicFixture
 {
 
     public function getProduct($title, $price, $color = null)
@@ -41,7 +41,7 @@ class Fixture
     {
         $obj = new Document('option');
         $obj->setChoice($title);
-        
+
         return $obj;
     }
 

@@ -8,6 +8,7 @@ namespace Trismegiste\DokudokiBundle\Tests\Transform\Delegation\Stage;
 
 use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\BlackMagic;
 use Trismegiste\DokudokiBundle\Magic\Document;
+use Trismegiste\DokudokiBundle\Tests\Fixtures\MagicFixture;
 
 /**
  * test for Mediator created by BlackMagic builder
@@ -39,7 +40,7 @@ class BlackMagicTest extends AbstractStageTest
                 )
             )
         );
-        $provider = new \Trismegiste\DokudokiBundle\Tests\Magic\Fixture();
+        $provider = new MagicFixture();
         $couple[] = array($provider->getFullTreeObject(), $provider->getFullTreeFlat());
         $couple[] = array($obj, $db);
         return $couple;
