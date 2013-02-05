@@ -123,6 +123,14 @@ class WhiteMagicTest extends AbstractStageTest
         $this->assertInternalType('array', $obj->child);
     }
 
+    /**
+     * @expectedException \PHPUnit_Framework_Error
+     */
+    public function testClassNotAliased()
+    {
+        $this->mediator->recursivDesegregate(new \DOMDocument());
+    }
+
     public function testSkippable()
     {
         $obj = new Fixtures\IntoVoid();
