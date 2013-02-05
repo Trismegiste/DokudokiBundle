@@ -11,7 +11,7 @@ namespace Trismegiste\DokudokiBundle\Magic;
  *
  * @author florent
  */
-class InternalContent implements DynamicType, \IteratorAggregate
+class InternalContent implements DynamicType
 {
 
     private $property;
@@ -20,13 +20,11 @@ class InternalContent implements DynamicType, \IteratorAggregate
      * Construct the tree.
      *  A class type is mandatory because of database indexing
      *
-     * @param array|string $data an array of tree structure with a classKey at first level or a classKey
+     * @param string $data a class alias
      */
     public function __construct($data)
     {
-        if (is_array($data) && array_key_exists(self::classKey, $data)) {
-            $this->property = $data;
-        } elseif (is_string($data)) {
+        if (is_string($data)) {
             $this->property[self::classKey] = $data;
         } else {
             throw new \LogicException("No class type defined for DynamicType");
@@ -89,46 +87,12 @@ class InternalContent implements DynamicType, \IteratorAggregate
 
     /**
      * Gets a recursive iterator on properties
-     * 
+     *
      * @return \RecursiveArrayIterator
      */
     public function getIterator()
     {
         return new \RecursiveArrayIterator($this->property);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getUnTyped()
-    {
-        $iter = new \RecursiveArrayIterator($this->property);
-        return $this->recursiveUnTyping($iter);
-    }
-
-    /**
-     * Internal recursive untyping
-     *
-     * @param \RecursiveArrayIterator $iter
-     *
-     * @return array
-     */
-    protected function recursiveUnTyping(\RecursiveArrayIterator $iter)
-    {
-        $flat = array();
-        foreach ($iter as $key => $val) {
-            if ($val instanceof DynamicType) {
-                $flat[$key] = $val->getUnTyped();
-            } else {
-                if (is_array($val)) {
-                    $flat[$key] = $this->recursiveUnTyping($iter->getChildren());
-                } else {
-                    $flat[$key] = $val;
-                }
-            }
-        }
-
-        return $flat;
     }
 
 }

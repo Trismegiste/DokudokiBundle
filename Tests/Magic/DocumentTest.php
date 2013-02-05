@@ -16,7 +16,8 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->doc = new Document(array(Document::classKey => 'hello', 'answer' => 42));
+        $this->doc = new Document('hello');
+        $this->doc->setAnswer(42);
     }
 
     protected function tearDown()
@@ -114,45 +115,5 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $doc = new Document();
     }
 
-    public function testDefaultSubClassName()
-    {
-        $doc = new SubDocument();
-        $this->assertEquals('subdoc', $doc->getClassName());
-    }
-
-    public function testOveriddenProperty()
-    {
-        $doc = new SubDocument(array('overridden' => 111));
-        $this->assertEquals(222, $doc->getOverridden());
-    }
-
-    public function testFlatten()
-    {
-        $provider = new Fixture();
-        $obj = $provider->getFullTreeObject();
-        $this->assertEquals($provider->getFullTreeFlat(), $obj->getUnTyped());
-        $this->assertEquals('Wayne', $obj->getCustomer()->getName());
-    }
-
 }
 
-/**
- * Some classes for testing
- */
-class SubDocument extends Document
-{
-
-    protected $transientProp = 'nothing';
-
-    public function getOverridden()
-    {
-        return parent::getOverridden() << 1;
-    }
-
-    public function __construct(array $data = array())
-    {
-        $data[Document::classKey] = 'subdoc';
-        parent::__construct($data);
-    }
-
-}

@@ -16,8 +16,7 @@ class InternalContentTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $key = InternalContent::classKey;
-        $this->doc = new InternalContent(array($key => 'hello', 'answer' => 42, 'recur' => new InternalContent(array($key => 'detail', 'data' => 123))));
+        $this->doc = new InternalContent('hello');
     }
 
     protected function tearDown()
@@ -38,12 +37,6 @@ class InternalContentTest extends \PHPUnit_Framework_TestCase
         $doc = new InternalContent();
     }
 
-    public function testOnlyClassKey()
-    {
-        $doc = new InternalContent('bye');
-        $this->assertEquals('bye', $doc->getClassName());
-    }
-
     /**
      * @expectedException \LogicException
      */
@@ -54,20 +47,7 @@ class InternalContentTest extends \PHPUnit_Framework_TestCase
 
     public function testIterator()
     {
-        $this->assertContains(42, $this->doc->getIterator());
-    }
-
-    public function testUntyping()
-    {
-        $this->assertEquals(array(
-            InternalContent::classKey => 'hello',
-            'answer' => 42,
-            'recur' => array(
-                InternalContent::classKey => 'detail',
-                'data' => 123
-            )
-                ), $this->doc->getUnTyped()
-        );
+        $this->assertInstanceOf('RecursiveArrayIterator', $this->doc->getIterator());
     }
 
 }

@@ -17,35 +17,49 @@ use Trismegiste\DokudokiBundle\Magic\Document;
 class Fixture
 {
 
+    public function getProduct($title, $price, $color = null)
+    {
+        $obj = new Document('product');
+        $obj->setPrice($price);
+        $obj->setTitle($title);
+        if (!is_null($color)) {
+            $obj->setColor($color);
+        }
+
+        return $obj;
+    }
+
+    public function getPerson($name)
+    {
+        $person = new Document('person');
+        $person->setName($name);
+
+        return $person;
+    }
+
+    public function getOption($title)
+    {
+        $obj = new Document('option');
+        $obj->setChoice($title);
+    }
+
     public function getFullTreeObject()
     {
-        return new Document(array(
-                    Document::classKey => 'cart',
-                    'customer' => new Document(array(Document::classKey => 'person', 'name' => 'Wayne')),
-                    'row' => array(
-                        array(
-                            'qt' => 2,
-                            'item' => new Document(array(
-                                Document::classKey => 'product',
-                                'price' => 2000,
-                                'title' => 'EF-85L'
-                            ))
-                        ),
-                        array(
-                            'qt' => 3,
-                            'item' => new Document(array(
-                                Document::classKey => 'product',
-                                'price' => 680,
-                                'title' => 'bicycle',
-                                'color' => new Document(array(
-                                    Document::classKey => 'option',
-                                    'choice' => 'white'
-                                ))
-                            ))
-                        )
+        $cart = new Document('cart');
+        $cart->setCustomer($this->getPerson('Wayne'));
+        $cart->setRow(
+                array(
+                    array(
+                        'qt' => 2,
+                        'item' => $this->getProduct('EF-85L', 2000)
                     ),
-                    'state' => array(1, 2, 3)
-                ));
+                    array(
+                        'qt' => 3,
+                        'item' => $this->getProduct('bicycle', 680, $this->getOption('white'))
+                    )
+                )
+        );
+        $cart->setState(array(1, 2, 3));
     }
 
     public function getFullTreeFlat()

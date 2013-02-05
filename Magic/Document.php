@@ -23,7 +23,7 @@ use Trismegiste\DokudokiBundle\Persistence\Persistable;
  *
  * @author flo
  */
-class Document extends InternalContent implements Persistable
+final class Document extends InternalContent implements Persistable
 {
 
     /**
