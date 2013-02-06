@@ -124,9 +124,10 @@ class WhiteMagicTest extends AbstractStageTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_Error
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Cannot dump object to database
      */
-    public function no_testClassNotAliased()
+    public function testClassNotAliased()
     {
         $this->mediator->recursivDesegregate(new \DOMDocument());
     }

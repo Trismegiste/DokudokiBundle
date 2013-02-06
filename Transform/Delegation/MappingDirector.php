@@ -34,6 +34,7 @@ class MappingDirector
         $builder->createDbSpecific($algo);
         $builder->createObject($algo);
         $builder->createNonObject($algo);
+        $builder->createBlackHole($algo);
 
         return $algo;
     }

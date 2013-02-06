@@ -11,9 +11,9 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\TypeRegistry;
 
 /**
  * Design Pattern : Builder
- * Component : Builder (concrete) 
- * 
- * A builder to automagically store object in database by using an alias map 
+ * Component : Builder (concrete)
+ *
+ * A builder to automagically store object in database by using an alias map
  * for FQCN. You need to configure each class or it must implement Skippable
  *
  * Very strict : if a class does not exists in the alias map, it turns into
@@ -34,6 +34,12 @@ class WhiteMagic extends AbstractStage
     {
         new Colleague\MapSkippable($algo);
         new Colleague\MapAlias($algo, $this->aliasMap);
+    }
+
+    public function createBlackHole(TypeRegistry $algo)
+    {
+        parent::createBlackHole($algo);
+        new Colleague\MapFailure($algo);
     }
 
 }

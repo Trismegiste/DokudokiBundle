@@ -13,10 +13,10 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\TypeRegistry;
 
 /**
  * Design Pattern : Builder
- * Component : Builder (abstract) 
- * 
- * This is a template for a builder of delegation of mapping 
- * @see Transformer 
+ * Component : Builder (abstract)
+ *
+ * This is a template for a builder of delegation of mapping
+ * @see Transformer
  *
  * @author flo
  */
@@ -24,7 +24,7 @@ abstract class AbstractStage implements MappingBuilder
 {
 
     /**
-     * {@inheritDoc} 
+     * {@inheritDoc}
      */
     public function createChain()
     {
@@ -32,7 +32,7 @@ abstract class AbstractStage implements MappingBuilder
     }
 
     /**
-     * {@inheritDoc} 
+     * {@inheritDoc}
      */
     public function createNonObject(TypeRegistry $algo)
     {
@@ -42,12 +42,21 @@ abstract class AbstractStage implements MappingBuilder
     }
 
     /**
-     * {@inheritDoc} 
+     * {@inheritDoc}
      */
     public function createDbSpecific(TypeRegistry $algo)
     {
         new Colleague\DateObject($algo);
         new Colleague\MongoBinData($algo);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Default adapter for implementation of the interface
+     */
+    public function createBlackHole(TypeRegistry $algo)
+    {
+
     }
 
 }
