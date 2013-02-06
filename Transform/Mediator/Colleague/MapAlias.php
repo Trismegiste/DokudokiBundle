@@ -25,6 +25,9 @@ class MapAlias extends ObjectMapperTemplate
         $this->aliasMap = $map;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function isResponsibleFromDb($var)
     {
         return (gettype($var) == 'array')
@@ -32,11 +35,17 @@ class MapAlias extends ObjectMapperTemplate
                 && array_key_exists($var[self::CLASS_KEY], $this->aliasMap);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function isResponsibleToDb($var)
     {
         return (gettype($var) == 'object') && (FALSE !== array_search(get_class($var), $this->aliasMap));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function extractFqcn(array &$param)
     {
         $fqcn = $this->aliasMap[$param[self::CLASS_KEY]];
@@ -45,6 +54,9 @@ class MapAlias extends ObjectMapperTemplate
         return $fqcn;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function prepareDump(\ReflectionObject $reflector)
     {
         $dump = array();

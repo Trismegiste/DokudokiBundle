@@ -20,8 +20,23 @@ use Trismegiste\DokudokiBundle\Utils\InjectionClass;
 abstract class ObjectMapperTemplate extends AbstractMapper
 {
 
+    /**
+     * Extract the FQCN from the array (coming from database)
+     * Edge effect on the array
+     * 
+     * @param &array $param the array coming from db
+     * 
+     * @return string the FQCN extracted from the array
+     */
     abstract protected function extractFqcn(array &$param);
 
+    /**
+     * get the array for dump to the database
+     * 
+     * @param \ReflectionObject $refl the reflection object of the object to dump
+     * 
+     * @return array a new initialized array
+     */
     abstract protected function prepareDump(\ReflectionObject $refl);
 
     /**
