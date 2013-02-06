@@ -19,7 +19,7 @@ use Trismegiste\DokudokiBundle\Utils\InjectionClass;
 class MapAlias extends AbstractMapper
 {
 
-    const CLASS_KEY = '-alias';
+    const CLASS_KEY = '-class';
 
     protected $aliasMap;
 

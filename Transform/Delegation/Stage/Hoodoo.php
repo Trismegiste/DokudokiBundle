@@ -34,9 +34,9 @@ class Hoodoo extends AbstractStage
 
     public function createObject(TypeRegistry $algo)
     {
-        new Colleague\MapMagic($algo);
         new Colleague\MapSkippable($algo);
         new Colleague\MapAlias($algo, $this->aliasMap);
+        new Colleague\MapMagic($algo);  // first, the alias and after, magic
     }
 
     public function createBlackHole(TypeRegistry $algo)

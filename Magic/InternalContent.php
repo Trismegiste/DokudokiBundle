@@ -24,7 +24,7 @@ class InternalContent implements DynamicType
      */
     public function __construct($data)
     {
-        if (is_string($data)) {
+        if (is_string($data) && !empty($data)) {
             $this->property[self::classKey] = $data;
         } else {
             throw new \LogicException("No class type defined for DynamicType");

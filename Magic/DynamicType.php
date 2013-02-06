@@ -14,7 +14,7 @@ namespace Trismegiste\DokudokiBundle\Magic;
 interface DynamicType extends \IteratorAggregate
 {
 
-    const classKey = '-magic';
+    const classKey = '-class';
 
     /**
      * An alias for the type of this object

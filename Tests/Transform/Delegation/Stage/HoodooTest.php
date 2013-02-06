@@ -104,6 +104,11 @@ class HoodooTest extends AbstractStageTest
         return array_merge($data, $this->getSampleTreeStandardClass(), $this->getSampleTreeMagicDocument());
     }
 
+    public function testFusionOfBlackAndWhite()
+    {
+        $this->assertEquals(MapAlias::CLASS_KEY, Document::classKey);
+    }
+
     public function testRestoreWithNonTrivialConstruct()
     {
         $obj = new Fixtures\VerifMethod(100);
@@ -113,12 +118,19 @@ class HoodooTest extends AbstractStageTest
         $this->assertEquals(119.6, $restore->getTotal());
     }
 
+    /**
+     * @expectedException LogicException
+     * @expectedExceptionMessage No class type defined for DynamicType
+     */
     public function testRootClassEmpty()
     {
         $obj = $this->mediator->recursivCreate(array(MapAlias::CLASS_KEY => null, 'answer' => 42));
-        $this->assertInternalType('array', $obj);
     }
 
+    /**
+     * @expectedException LogicException
+     * @expectedExceptionMessage No class type defined for DynamicType
+     */
     public function testLeafClassEmpty()
     {
         $obj = $this->mediator->recursivCreate(
@@ -127,13 +139,12 @@ class HoodooTest extends AbstractStageTest
                     'child' => array(MapAlias::CLASS_KEY => null, 'answer' => 42)
                 )
         );
-        $this->assertInternalType('array', $obj->child);
     }
 
     public function testRootClassNotFound()
     {
-        $obj = $this->mediator->recursivCreate(array(MapAlias::CLASS_KEY => 'Snark', 'answer' => 42));
-        $this->assertInternalType('array', $obj);
+        $obj = $this->mediator->recursivCreate(array(Document::classKey => 'Snark', 'answer' => 42));
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $obj);
     }
 
     public function testLeafClassNotFound()
@@ -141,10 +152,10 @@ class HoodooTest extends AbstractStageTest
         $obj = $this->mediator->recursivCreate(
                 array(
                     MapAlias::CLASS_KEY => 'default',
-                    'child' => array(MapAlias::CLASS_KEY => 'Snark', 'answer' => 42)
+                    'child' => array(Document::classKey => 'Snark', 'answer' => 42)
                 )
         );
-        $this->assertInternalType('array', $obj->child);
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $obj->child);
     }
 
     /**
