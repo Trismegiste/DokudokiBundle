@@ -126,7 +126,7 @@ class WhiteMagicTest extends AbstractStageTest
     /**
      * @expectedException \PHPUnit_Framework_Error
      */
-    public function testClassNotAliased()
+    public function no_testClassNotAliased()
     {
         $this->mediator->recursivDesegregate(new \DOMDocument());
     }
