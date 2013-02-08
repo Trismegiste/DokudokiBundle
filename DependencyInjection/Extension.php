@@ -17,7 +17,7 @@ class Extension extends BaseExtension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $container->
+
         // connector
         $container->setDefinition('dokudoki.connector', new Definition(
                         'Trismegiste\DokudokiBundle\Persistence\Connector',
@@ -28,18 +28,18 @@ class Extension extends BaseExtension
         $container->setDefinition('dokudoki.collection', new Definition('MongoCollection'))
                 ->setFactoryService('dokudoki.connector')
                 ->setFactoryMethod('getCollection');
-        // factory
-        $container->setDefinition('dokudoki.factory', new Definition(
-                        'Trismegiste\DokudokiBundle\Model\Factory',
-                        array($config['alias'])
-                )
-        );
-        // repository
-        $container->setDefinition('dokudoki.repository', new Definition(
-                        'Trismegiste\DokudokiBundle\Persistence\Repository',
-                        array(new Reference('dokudoki.collection'), new Reference('dokudoki.factory'))
-                )
-        );
+//        // factory
+//        $container->setDefinition('dokudoki.factory', new Definition(
+//                        'Trismegiste\DokudokiBundle\Model\Factory',
+//                        array($config['alias'])
+//                )
+//        );
+//        // repository
+//        $container->setDefinition('dokudoki.repository', new Definition(
+//                        'Trismegiste\DokudokiBundle\Persistence\Repository',
+//                        array(new Reference('dokudoki.collection'), new Reference('dokudoki.factory'))
+//                )
+//        );
 //        // type mongobindata
 //        $def = new Definition('Trismegiste\MongoSapinBundle\Form\MongoBinDataType');
 //        $def->addTag('form.type');

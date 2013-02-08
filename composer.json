@@ -13,6 +13,7 @@
         "php": ">=5.3.8"
     },
     "require-dev": {
+        "symfony/http-kernel": "2.1.*",
         "symfony/dependency-injection": "2.1.*",
         "symfony/yaml": "2.1.*",
         "symfony/config": "2.1.*"
