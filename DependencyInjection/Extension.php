@@ -24,17 +24,7 @@ class Extension extends BaseExtension
         $container->setParameter('dokudoki.config.server', $config['server']);
         $container->setParameter('dokudoki.config.database', $config['database']);
         $container->setParameter('dokudoki.config.collection', $config['collection']);
-//        // connector
-//        $container->setDefinition('dokudoki.connector', new Definition(
-//                        'Trismegiste\DokudokiBundle\Persistence\Connector',
-//                        array($config)
-//                )
-//        );
-//
-//        // collection
-//        $container->setDefinition('dokudoki.collection', new Definition('MongoCollection'))
-//                ->setFactoryService('dokudoki.connector')
-//                ->setFactoryMethod('getCollection');
+
 //        // factory
 //        $container->setDefinition('dokudoki.factory', new Definition(
 //                        'Trismegiste\DokudokiBundle\Model\Factory',

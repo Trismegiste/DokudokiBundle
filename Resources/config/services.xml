@@ -4,19 +4,19 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="dokudoki.config.server" type="string" />
-        <parameter key="dokudoki.config.database" type="string" />
-        <parameter key="dokudoki.config.collection" type="string" />
-        <parameter key="dokudoki.config.alias_map" type="collection" />
+        <parameter key="dokudoki.config.server" />
+        <parameter key="dokudoki.config.database" />
+        <parameter key="dokudoki.config.collection" />
+        <parameter key="dokudoki.config.alias_map" />
     </parameters>
 
     <services>
 
         <service id="dokudoki.connector" class="Trismegiste\DokudokiBundle\Persistence\Connector">
             <argument type="collection">
-                <argument key="server" id="dokudoki.config.server"/>
-                <argument key="database" id="dokudoki.config.database"/>
-                <argument key="collection" id="dokudoki.config.collection"/>
+                <argument key="server">%dokudoki.config.server%</argument>
+                <argument key="database">%dokudoki.config.database%</argument>
+                <argument key="collection">%dokudoki.config.collection%</argument>
             </argument>
         </service>
 

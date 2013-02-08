@@ -23,7 +23,7 @@ class Connector
 
     /**
      * Returns the mongo collection with the parameters setted in constructor
-     * 
+     *
      * @return \MongoCollection
      */
     public function getCollection()
