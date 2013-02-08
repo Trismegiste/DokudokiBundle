@@ -24,7 +24,12 @@ class Extension extends BaseExtension
         $container->setParameter('dokudoki.config.server', $config['server']);
         $container->setParameter('dokudoki.config.database', $config['database']);
         $container->setParameter('dokudoki.config.collection', $config['collection']);
+        $container->getDefinition('dokudoki.stage.whitemagic')->addArgument($config['alias']);
+        $container->getDefinition('dokudoki.stage.hoodoo')->addArgument($config['alias']);
 
+
+//
+//
 //        // factory
 //        $container->setDefinition('dokudoki.factory', new Definition(
 //                        'Trismegiste\DokudokiBundle\Model\Factory',

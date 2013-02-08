@@ -7,7 +7,6 @@
         <parameter key="dokudoki.config.server" />
         <parameter key="dokudoki.config.database" />
         <parameter key="dokudoki.config.collection" />
-        <parameter key="dokudoki.config.alias_map" />
     </parameters>
 
     <services>
@@ -23,6 +22,11 @@
         <service id="dokudoki.collection" class="MongoCollection"
                  factory-service="dokudoki.connector"
                  factory-method="getCollection"/>
+
+        <service id="dokudoki.stage.blackmagic" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\BlackMagic" public="true"/>
+        <service id="dokudoki.stage.whitemagic" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\WhiteMagic" public="true"/>
+        <service id="dokudoki.stage.hoodoo" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Hoodoo" public="true"/>
+        <service id="dokudoki.stage.invocation" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation" public="true"/>
 
 
     </services>

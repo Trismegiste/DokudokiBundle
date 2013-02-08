@@ -53,6 +53,14 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('MongoCollection', $this->container->get('dokudoki.collection'));
     }
 
+    public function testServiceBuilder()
+    {
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Transform\Delegation\Stage\BlackMagic', $this->container->get('dokudoki.stage.blackmagic'));
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Transform\Delegation\Stage\WhiteMagic', $this->container->get('dokudoki.stage.whitemagic'));
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation', $this->container->get('dokudoki.stage.invocation'));
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Hoodoo', $this->container->get('dokudoki.stage.hoodoo'));
+    }
+
     //        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Model\Factory', $this->container->get('mongosapin.factory'));
 //        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Persistence\Repository', $this->container->get('mongosapin.repository'));
 //        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Form\MagicFormType', $this->container->get('magic_form'));
