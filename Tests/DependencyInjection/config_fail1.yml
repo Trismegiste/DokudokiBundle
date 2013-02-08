@@ -1,4 +1,5 @@
 server: localhost:27017
 database: Florent
 collection: sandbox
-fallback: NotFoundDummy
+alias:
+    default : NotFoundDummy

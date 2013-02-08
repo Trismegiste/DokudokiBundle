@@ -1,0 +1,9 @@
+server: localhost:27017
+database: Test
+collection: sandbox
+alias:
+    default : stdClass
+    cart: Trismegiste\DokudokiBundle\Tests\Fixtures\Cart
+    hybernate: Trismegiste\DokudokiBundle\Tests\Fixtures\Bear
+    product: Trismegiste\DokudokiBundle\Tests\Fixtures\Product
+    checkCall: Trismegiste\DokudokiBundle\Tests\Fixtures\VerifMethod

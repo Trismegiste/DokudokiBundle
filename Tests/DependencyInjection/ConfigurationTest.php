@@ -34,7 +34,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             'server' => 'localhost:27017',
             'database' => 'Test',
             'collection' => 'sandbox',
-            'fallback' => NULL,
             'alias' => array()
         );
         $this->assertEquals($expected, $cfg);
@@ -49,13 +48,22 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $cfg = $this->processConfig('config_fail1.yml');
     }
 
-    /**
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-     * @expectedExceptionMessage SplFixedArray does not implement DynamicType
-     */
-    public function testFailOnNonDynamicType()
+    public function testFullConfig()
     {
-        $cfg = $this->processConfig('config_fail2.yml');
+        $cfg = $this->processConfig('config_full.yml');
+        $expected = array(
+            'server' => 'localhost:27017',
+            'database' => 'Test',
+            'collection' => 'sandbox',
+            'alias' => array(
+                'default' => 'stdClass',
+                'cart' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\Cart',
+                'hybernate' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\Bear',
+                'product' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\Product',
+                'checkCall' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\VerifMethod',
+            )
+        );
+        $this->assertEquals($expected, $cfg);
     }
 
 }

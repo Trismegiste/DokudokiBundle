@@ -48,7 +48,7 @@ class Configuration implements ConfigurationInterface
 //                                    if (!($node instanceof \Trismegiste\MongoSapinBundle\Model\DynamicType)) {
 //                                        throw new InvalidConfigurationException("$node does not implement DynamicType");
 //                                    }
-//                                    return $node;                                 
+//                                    return $node;
 //                                })
 //                        ->end()
 //                    ->end()
@@ -56,6 +56,15 @@ class Configuration implements ConfigurationInterface
                         ->useAttributeAsKey('key')
                         ->prototype('scalar')
                             ->cannotBeEmpty()
+                            ->validate()
+                                ->ifTrue(function($node) { return !is_null($node);} )
+                                ->then(function($node) {
+                                        if (!class_exists($node)) {
+                                            throw new InvalidConfigurationException("FQCN $node does not exist");
+                                        }
+                                        return $node;
+                                    })
+                            ->end()
                         ->end()
                     ->end()
                 ->end();
