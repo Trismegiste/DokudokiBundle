@@ -11,10 +11,10 @@
                  factory-service="dokudoki.connector"
                  factory-method="getCollection"/>
 
-        <service id="dokudoki.stage.blackmagic" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\BlackMagic" public="true"/>
-        <service id="dokudoki.stage.whitemagic" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\WhiteMagic" public="true"/>
-        <service id="dokudoki.stage.hoodoo" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Hoodoo" public="true"/>
-        <service id="dokudoki.stage.invocation" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation" public="true"/>
+        <service id="dokudoki.stage.blackmagic" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\BlackMagic" public="false"/>
+        <service id="dokudoki.stage.whitemagic" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\WhiteMagic" public="false"/>
+        <service id="dokudoki.stage.hoodoo" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Hoodoo" public="false"/>
+        <service id="dokudoki.stage.invocation" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation" public="false"/>
 
     </services>
 </container>
