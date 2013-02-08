@@ -3,21 +3,9 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="dokudoki.config.server" />
-        <parameter key="dokudoki.config.database" />
-        <parameter key="dokudoki.config.collection" />
-    </parameters>
-
     <services>
 
-        <service id="dokudoki.connector" class="Trismegiste\DokudokiBundle\Persistence\Connector">
-            <argument type="collection">
-                <argument key="server">%dokudoki.config.server%</argument>
-                <argument key="database">%dokudoki.config.database%</argument>
-                <argument key="collection">%dokudoki.config.collection%</argument>
-            </argument>
-        </service>
+        <service id="dokudoki.connector" class="Trismegiste\DokudokiBundle\Persistence\Connector"/>
 
         <service id="dokudoki.collection" class="MongoCollection"
                  factory-service="dokudoki.connector"
@@ -27,7 +15,6 @@
         <service id="dokudoki.stage.whitemagic" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\WhiteMagic" public="true"/>
         <service id="dokudoki.stage.hoodoo" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Hoodoo" public="true"/>
         <service id="dokudoki.stage.invocation" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation" public="true"/>
-
 
     </services>
 </container>

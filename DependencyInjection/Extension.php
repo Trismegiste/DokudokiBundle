@@ -21,9 +21,7 @@ class Extension extends BaseExtension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        $container->setParameter('dokudoki.config.server', $config['server']);
-        $container->setParameter('dokudoki.config.database', $config['database']);
-        $container->setParameter('dokudoki.config.collection', $config['collection']);
+        $container->getDefinition('dokudoki.connector')->addArgument($config);
         $container->getDefinition('dokudoki.stage.whitemagic')->addArgument($config['alias']);
         $container->getDefinition('dokudoki.stage.hoodoo')->addArgument($config['alias']);
 
