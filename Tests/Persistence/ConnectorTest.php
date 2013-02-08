@@ -19,8 +19,8 @@ class ConnectorTest extends \PHPUnit_Framework_TestCase
     public function testCollection()
     {
         $param = array(
-            'server' => 'mongo-s0.dev.hevea.lan:27017,mongo-s1.dev.hevea.lan:27017/?replicaSet=allopneus-dev',
-      //      'server' => 'localhost:27017',
+      //      'server' => 'mongo-s0.dev.hevea.lan:27017,mongo-s1.dev.hevea.lan:27017/?replicaSet=allopneus-dev',
+            'server' => 'localhost:27017',
             'database' => 'dokudoki',
             'collection' => 'TestSuite'
         );

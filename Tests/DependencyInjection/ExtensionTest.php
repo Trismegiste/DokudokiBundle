@@ -43,6 +43,12 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         unset($this->container);
     }
 
+    public function testConfigRoot()
+    {
+        $extension = new Extension();
+        $this->assertEquals('dokudoki', $extension->getAlias());
+    }
+
     public function testServiceConnector()
     {
         $this->assertInstanceOf('Trismegiste\DokudokiBundle\Persistence\Connector', $this->container->get('dokudoki.connector'));
