@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="dokudoki.config.server" type="string" />
+        <parameter key="dokudoki.config.database" type="string" />
+        <parameter key="dokudoki.config.collection" type="string" />
+        <parameter key="dokudoki.config.alias_map" type="collection" />
+    </parameters>
+
+    <services>
+
+        <service id="dokudoki.connector" class="Trismegiste\DokudokiBundle\Persistence\Connector">
+            <argument type="collection">
+                <argument key="server" id="dokudoki.config.server"/>
+                <argument key="database" id="dokudoki.config.database"/>
+                <argument key="collection" id="dokudoki.config.collection"/>
+            </argument>
+        </service>
+
+        <service id="dokudoki.collection" class="MongoCollection"
+                 factory-service="dokudoki.connector"
+                 factory-method="getCollection"/>
+
+
+    </services>
+</container>
