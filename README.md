@@ -9,13 +9,13 @@ It is intended for **advanced users** of [MongoDB][*2]
 who know and understand the growth of a model on a schemaless database.
 
 When I mean minimalistic, I mean the longest method takes about 20 lines
-(that was my first constraint when I start to code this bundle). 
+(that was my first constraint when I start to code this bundle).
 In fact, if you except the mandatory classes for symfony bundle, all
-the NCLOC are shorter than the infamous method [UnitOfWork::createEntity][*1] 
+the NCLOC are shorter than the infamous method [UnitOfWork::createEntity][*1]
 of Doctrine 2 (that was my second constraint : don't code over 1k NCLOC)
 
 Of course, features are also minimalistic. Don't expect the impossible. Nevertheless
-there are some functionalities you don't find anywhere else. 
+there are some functionalities you don't find anywhere else.
 In my quest for rapid development
 and the "Don't repeat yourself", I try to make an agnostic DBAL which *helps*
 you in the process to build an app regardless the model is finished or not.
@@ -84,8 +84,8 @@ when you don't have one.
 
 ### Black Magic is black
 If you have no model and a lot of forms to design, start with the "BlackMagic" stage.
-It is full of magic methods, magic mapping and magic documents, 
-it's like working with mockup. 
+It is full of magic methods, magic mapping and magic documents,
+it's like working with mockup.
 
 But be warned :
 it is for prototyping and your database can turn back against you
@@ -94,7 +94,7 @@ if you are not careful. That's what I call "Form Driven Development".
 ### Serialization could be enough
 If you have a lot of nearly complete model classes and don't want configure anything,
 use the "Invocation" stage. Only magic mapping and strict typing between objects
-and documents. 
+and documents.
 
 But if you need to make complex queries or map-reduce, it can be
 very dirty. This stage is usefull for RESTful app without GUI.
@@ -102,12 +102,12 @@ very dirty. This stage is usefull for RESTful app without GUI.
 ### White Magic is for Lawful Good
 If you have a good model and the time to carefully alias classes in the database,
 use the "WhiteMagic" stage. There is automapping but without surprise, your model cannot
-turn into chaos. 
+turn into chaos.
 
 The magic is : another app, without the model classes, can anyway
 restore documents with the BlackMagic stage.
 
-### Shade of grays
+### Cosmic Balance
 If you need to evolve the model above, you can use "Hoodoo" stage, a
 "WhiteMagic" stage mixed with some magic from "BlackMagic" stage. There is a
 safety net to prevent some "real" classes to become "fake" classes. This lowers
