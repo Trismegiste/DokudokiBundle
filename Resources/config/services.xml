@@ -11,15 +11,15 @@
                  factory-service="dokudoki.connector"
                  factory-method="getCollection"/>
 
+        <service id="dokudoki.facade" class="Trismegiste\DokudokiBundle\Facade\Provider">
+            <argument type="service" id="dokudoki.collection" />
+        </service>
+
         <service id="dokudoki.builder.blackmagic" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\BlackMagic" public="false"/>
         <service id="dokudoki.builder.whitemagic" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\WhiteMagic" public="false"/>
         <service id="dokudoki.builder.hoodoo" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Hoodoo" public="false"/>
         <service id="dokudoki.builder.invocation" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation" public="false"/>
 
-        <service id="dokudoki.facade" class="Trismegiste\DokudokiBundle\Facade\Provider">
-            <argument type="service" id="dokudoki.collection" />
-        </service>
-        
         <service id="dokudoki.repository.blackmagic" 
                 class="Trismegiste\DokudokiBundle\Persistence\Repository"
                 factory-service="dokudoki.facade"
