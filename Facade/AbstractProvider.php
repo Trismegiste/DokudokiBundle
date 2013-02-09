@@ -8,6 +8,7 @@ namespace Trismegiste\DokudokiBundle\Facade;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\RecursiveMapper;
 use Trismegiste\DokudokiBundle\Persistence\Repository;
+use Trismegiste\DokudokiBundle\Transform\Delegation\MappingBuilder;
 
 /**
  * Design Pattern: Template Method
@@ -41,7 +42,7 @@ abstract class AbstractProvider implements ProviderInterface
     /**
      * Creates the director for builder the mapping chain
      * 
-     * @return MappingDiector
+     * @return MappingDirector
      */
     abstract protected function createDirector();
 
