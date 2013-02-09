@@ -16,7 +16,37 @@
         <service id="dokudoki.builder.hoodoo" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Hoodoo" public="false"/>
         <service id="dokudoki.builder.invocation" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation" public="false"/>
 
-        <service id="dokudoki.director" class="Trismegiste\DokudokiBundle\Transform\Delegation\MappingDirector" public="true"/>
+        <service id="dokudoki.facade" class="Trismegiste\DokudokiBundle\Facade\Provider">
+            <argument type="service" id="dokudoki.collection" />
+        </service>
+        
+        <service id="dokudoki.repository.blackmagic" 
+                class="Trismegiste\DokudokiBundle\Persistence\Repository"
+                factory-service="dokudoki.facade"
+                factory-method="createRepository">
+            <argument type="service" id="dokudoki.builder.blackmagic"/>
+        </service>
+        
+        <service id="dokudoki.repository.invocation" 
+                class="Trismegiste\DokudokiBundle\Persistence\Repository"
+                factory-service="dokudoki.facade"
+                factory-method="createRepository">
+            <argument type="service" id="dokudoki.builder.invocation"/>
+        </service>
+            
+        <service id="dokudoki.repository.hoodoo" 
+                class="Trismegiste\DokudokiBundle\Persistence\Repository"
+                factory-service="dokudoki.facade"
+                factory-method="createRepository">
+            <argument type="service" id="dokudoki.builder.hoodoo"/>
+        </service>
+            
+        <service id="dokudoki.repository.whitemagic" 
+                class="Trismegiste\DokudokiBundle\Persistence\Repository"
+                factory-service="dokudoki.facade"
+                factory-method="createRepository">
+            <argument type="service" id="dokudoki.builder.whitemagic"/>
+        </service>
         
     </services>
 </container>
