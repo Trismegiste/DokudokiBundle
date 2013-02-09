@@ -36,6 +36,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
             )
         );
         $extension->load(array($fullConfig), $this->container);
+        $this->container->compile();
     }
 
     protected function tearDown()
@@ -59,17 +60,9 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('MongoCollection', $this->container->get('dokudoki.collection'));
     }
 
-    public function testServiceBuilder()
+    public function testFacade()
     {
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Transform\Delegation\Stage\BlackMagic', $this->container->get('dokudoki.builder.blackmagic'));
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Transform\Delegation\Stage\WhiteMagic', $this->container->get('dokudoki.builder.whitemagic'));
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation', $this->container->get('dokudoki.builder.invocation'));
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Hoodoo', $this->container->get('dokudoki.builder.hoodoo'));
-    }
-
-    public function testDirector()
-    {
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Transform\Delegation\MappingDirector', $this->container->get('dokudoki.director'));
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Facade\Provider', $this->container->get('dokudoki.facade'));
     }
 
     public function getStage()
@@ -84,29 +77,8 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getStage
      */
-    public function testMediator($stage)
-    {
-        $this->assertInstanceOf(
-                'Trismegiste\DokudokiBundle\Transform\Mediator\Mediator', $this->container->get('dokudoki.mapper.' . $stage)
-        );
-    }
-
-    /**
-     * @dataProvider getStage
-     */
-    public function testTransformer($stage)
-    {
-        $this->assertInstanceOf(
-                'Trismegiste\DokudokiBundle\Transform\Transformer', $this->container->get('dokudoki.transform.' . $stage)
-        );
-    }
-
-    /**
-     * @dataProvider getStage
-     */
     public function testRepository($stage)
     {
-        $this->container->compile();
         $this->assertInstanceOf(
                 'Trismegiste\DokudokiBundle\Persistence\Repository', $this->container->get('dokudoki.repository.' . $stage)
         );

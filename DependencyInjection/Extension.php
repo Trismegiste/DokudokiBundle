@@ -27,35 +27,6 @@ class Extension extends BaseExtension
         $container->getDefinition('dokudoki.builder.whitemagic')->addArgument($config['alias']);
         $container->getDefinition('dokudoki.builder.hoodoo')->addArgument($config['alias']);
 
-        // for each magic stage
-        foreach (array('blackmagic', 'invocation', 'whitemagic', 'hoodoo') as $stage) {
-            // I build the mediator (mapper)
-            $container->setDefinition('dokudoki.mapper.' . $stage, new Definition(
-                                    'Trismegiste\DokudokiBundle\Transform\Mediator\TypeRegistry',
-                                    array(new Reference('dokudoki.builder.' . $stage))
-                            )
-                    )
-                    ->setFactoryService('dokudoki.director')
-                    ->setFactoryMethod('create')
-                    ->setPublic(false);
-            // then I build the Transformer which delegates to the builder Mediator
-            $container->setDefinition('dokudoki.transform.' . $stage, new Definition(
-                                    'Trismegiste\DokudokiBundle\Transform\Transformer',
-                                    array(new Reference('dokudoki.mapper.' . $stage))
-                            )
-                    )
-                    ->setPublic(false);
-            // and then I build the repository thereafter
-            $container->setDefinition('dokudoki.repository.' . $stage, new Definition(
-                            'Trismegiste\DokudokiBundle\Persistence\Repository',
-                            array(
-                                new Reference('dokudoki.collection'),
-                                new Reference('dokudoki.transform.' . $stage)
-                            )
-                    )
-            );
-        }
-
 //
 //
 //        // factory
