@@ -7,28 +7,27 @@
 namespace Trismegiste\DokudokiBundle\Tests\Persistence;
 
 use Trismegiste\DokudokiBundle\Persistence\Repository;
-use Trismegiste\DokudokiBundle\Persistence\Persistable;
-use Trismegiste\DokudokiBundle\Magic\Document;
-use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation;
 use Trismegiste\DokudokiBundle\Facade\Provider;
 
 /**
- * Test fro repo
+ * Test Template for repository
  *
  * @author flo
  */
-class RepositoryTest extends \PHPUnit_Framework_TestCase
+abstract class RepositoryTestTemplate extends \PHPUnit_Framework_TestCase
 {
 
     protected $collection;
     protected $repo;
+
+    abstract protected function createBuilder();
 
     protected function setUp()
     {
         $test = new ConnectorTest();
         $this->collection = $test->testCollection();
         $facade = new Provider($this->collection);
-        $this->repo = $facade->createRepository(new Invocation());
+        $this->repo = $facade->createRepository($this->createBuilder());
     }
 
     public function testInit()
@@ -44,14 +43,16 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $obj = $this->repo->findByPk(666);
     }
 
+    abstract protected function getSimpleObject();
+
     /**
      *
      * @depends testInit
      */
-    public function testPersistence()
+    public function testCreation()
     {
-        $simple = new Simple();
-        $simple->answer = 42;
+        $simple = $this->getSimpleObject();
+        $this->assertNull($simple->getId());
         $this->repo->persist($simple);
         $this->assertInstanceOf('\MongoId', $simple->getId());
 
@@ -59,16 +60,31 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @depends testPersistence
+     * @depends testCreation
+     */
+    public function testInsert($pk)
+    {
+        $found = $this->collection->findOne(array('_id' => new \MongoId($pk)));
+        $this->assertNotNull($found);
+        $this->assertInternalType('array', $found);
+
+        return $pk;
+    }
+
+    /**
+     * @depends testInsert
      */
     public function testRestore($pk)
     {
-        $obj = $this->repo->findByPk($pk);
-        $this->assertInstanceOf(__NAMESPACE__ . '\Simple', $obj);
-        $this->assertEquals(42, $obj->answer);
+        $obj = $this->getSimpleObject();
+        $obj->setId(new \MongoId($pk));
+        $found = $this->repo->findByPk($pk);
+        $this->assertEquals($obj, $found);
 
         return $obj;
     }
+
+    abstract protected function editSimpleObject($obj);
 
     /**
      * @depends testRestore
@@ -76,12 +92,14 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function testUpdate($obj)
     {
         $pk = $obj->getId();
-        $obj->answer = 73;  // the best number as you know
+        $this->editSimpleObject($obj);
         $this->repo->persist($obj);
         $this->assertEquals($pk, $obj->getId());
 
         return (string) $obj->getId();
     }
+
+    abstract protected function assertEditedObject($obj);
 
     /**
      * @depends testUpdate
@@ -89,35 +107,19 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function testUpdated($pk)
     {
         $obj = $this->repo->findByPk($pk);
-        $this->assertEquals(73, $obj->answer);
+        $this->assertEditedObject($obj);
     }
 
-    public function testFull()
+    abstract protected function getComplexObject();
+
+    public function testCycle()
     {
-        $obj = new Stress();
+        $obj = $this->getComplexObject();
+        $this->assertNull($obj->getId());
         $this->repo->persist($obj);
         $found = $this->repo->findByPk($obj->getId());
         $this->assertEquals($obj, $found);
     }
-
-//    public function testPersistMagicDoc()
-//    {
-//        $obj = new Document('doku');
-//        $obj->setAnswer(42);
-//        $this->repo->persist($obj);
-//        $this->assertInstanceOf('\MongoId', $obj->getId());
-//        return (string) $obj->getId();
-//    }
-//
-//    /**
-//     * @depends testPersistMagicDoc
-//     */
-//    public function testRestoreMagicDoc($pk)
-//    {
-//        $obj = $this->repo->findByPk($pk);
-//        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $obj);
-//        $this->assertEquals(42, $obj->getAnswer());
-//    }
 
     /**
      * @expectedException \DomainException
@@ -141,53 +143,6 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
                 ->will($this->returnValue(new \stdClass()));
         $repo = new Repository($collection, $factory);
         $repo->findByPk(123);
-    }
-
-}
-
-class Simple implements Persistable
-{
-
-    protected $id;
-
-    public function setId(\MongoId $pk)
-    {
-        $this->id = $pk;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public $answer;
-
-}
-
-class Stress extends Simple
-{
-
-    // silly names to track bug
-    protected $floatVar;
-    protected $binaryVar;
-    protected $dateVar;
-    protected $stringVar;
-    protected $intVar;
-    protected $objVar;
-    static public $iDontLikeStatic = "dark matter";
-
-    public function __construct()
-    {
-        $this->answer = 42;
-        $this->binaryVar = new \MongoBinData("299792458", 2);
-        $this->floatVar = 3.14159265; // don't know after that
-        $this->dateVar = new \DateTime();
-        $this->intVar = 73; // the best number
-        $this->stringVar = 'H Psi = E . Psi';
-        $this->objVar = new Simple();
-        $this->objVar->answer = 'eureka';
-//        $this->magic = new Document('person');
-//        $this->magic->setName('Howard');
     }
 
 }
