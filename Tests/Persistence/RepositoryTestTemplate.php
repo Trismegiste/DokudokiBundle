@@ -59,6 +59,8 @@ abstract class RepositoryTestTemplate extends \PHPUnit_Framework_TestCase
         return (string) $simple->getId();
     }
 
+    abstract protected function assertSimpleInsert(array $struc);
+
     /**
      * @depends testCreation
      */
@@ -67,6 +69,7 @@ abstract class RepositoryTestTemplate extends \PHPUnit_Framework_TestCase
         $found = $this->collection->findOne(array('_id' => new \MongoId($pk)));
         $this->assertNotNull($found);
         $this->assertInternalType('array', $found);
+        $this->assertSimpleInsert($found);
 
         return $pk;
     }

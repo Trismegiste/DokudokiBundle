@@ -29,6 +29,11 @@ class RepositoryInvocationTest extends RepositoryTestTemplate
         return $obj;
     }
 
+    protected function assertSimpleInsert(array $struc)
+    {
+        $this->assertEquals(42, $struc['answer']);
+    }
+
     protected function editSimpleObject($obj)
     {
         $obj->answer = 73;
