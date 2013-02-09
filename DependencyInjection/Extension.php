@@ -27,20 +27,6 @@ class Extension extends BaseExtension
         $container->getDefinition('dokudoki.builder.whitemagic')->addArgument($config['alias']);
         $container->getDefinition('dokudoki.builder.hoodoo')->addArgument($config['alias']);
 
-//
-//
-//        // factory
-//        $container->setDefinition('dokudoki.factory', new Definition(
-//                        'Trismegiste\DokudokiBundle\Model\Factory',
-//                        array($config['alias'])
-//                )
-//        );
-//        // repository
-//        $container->setDefinition('dokudoki.repository', new Definition(
-//                        'Trismegiste\DokudokiBundle\Persistence\Repository',
-//                        array(new Reference('dokudoki.collection'), new Reference('dokudoki.factory'))
-//                )
-//        );
 //        // type mongobindata
 //        $def = new Definition('Trismegiste\MongoSapinBundle\Form\MongoBinDataType');
 //        $def->addTag('form.type');
