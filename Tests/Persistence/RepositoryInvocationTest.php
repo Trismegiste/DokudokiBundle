@@ -49,13 +49,4 @@ class RepositoryInvocationTest extends RepositoryTestTemplate
         return new \Trismegiste\DokudokiBundle\Tests\Fixtures\InvocStress();
     }
 
-    public function testCycle()
-    {
-        $obj = $this->getComplexObject();
-        $this->assertNull($obj->getId());
-        $this->repo->persist($obj);
-        $found = $this->repo->findByPk($obj->getId());
-        $this->assertEquals($obj, $found);
-    }
-
 }
