@@ -6,13 +6,11 @@
 
 namespace Trismegiste\DokudokiBundle\Tests\Persistence;
 
-use Trismegiste\DokudokiBundle\Transform\Transformer;
 use Trismegiste\DokudokiBundle\Persistence\Repository;
 use Trismegiste\DokudokiBundle\Persistence\Persistable;
 use Trismegiste\DokudokiBundle\Magic\Document;
-use Trismegiste\DokudokiBundle\Transform\Delegation\MappingDirector;
 use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation;
-
+use Trismegiste\DokudokiBundle\Facade\Provider;
 /**
  * Description of ConnectorTest
  *
@@ -29,9 +27,8 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $test = new ConnectorTest();
         $this->collection = $test->testCollection();
-        $director = new MappingDirector();
-        $this->factory = new Transformer($director->create(new Invocation()));
-        $this->repo = new Repository($this->collection, $this->factory);
+        $facade = new Provider($this->collection);
+        $this->repo = $facade->createRepository(new Invocation());
     }
 
     public function testInit()
