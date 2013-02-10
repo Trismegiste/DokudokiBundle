@@ -11,7 +11,7 @@ class Cart
 
     public $info = '';
     protected $address;
-    private $row = array();
+    protected $row = array();
     protected $notInitialized;
     static public $transientProp = 123;
 
