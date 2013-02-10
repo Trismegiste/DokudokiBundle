@@ -44,9 +44,24 @@ class RepositoryInvocationTest extends RepositoryTestTemplate
         $this->assertEquals(73, $obj->answer);
     }
 
-    protected function getComplexObject()
+    public function getComplexObject()
     {
-        return new \Trismegiste\DokudokiBundle\Tests\Fixtures\InvocStress();
+        $obj = new \Trismegiste\DokudokiBundle\Tests\Fixtures\InvocStress();
+        $dump = array(
+            '-fqcn' => 'Trismegiste\\DokudokiBundle\\Tests\\Fixtures\\InvocStress',
+            'floatVar' => 3.14159265,
+            'binaryVar' => new \MongoBinData('299792458', 2),
+            'dateVar' => new \MongoDate(),
+            'stringVar' => 'H Psi = E . Psi',
+            'intVar' => 73,
+            'objVar' => array(
+                '-fqcn' => 'Trismegiste\\DokudokiBundle\\Tests\\Fixtures\\Simple',
+                'id' => NULL,
+                'answer' => 'eureka',
+            ),
+            'answer' => 42,
+        );
+        return array(array($obj, $dump));
     }
 
 }

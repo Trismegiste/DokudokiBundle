@@ -113,13 +113,21 @@ abstract class RepositoryTestTemplate extends \PHPUnit_Framework_TestCase
         $this->assertEditedObject($obj);
     }
 
-    abstract protected function getComplexObject();
+    abstract public function getComplexObject();
 
-    public function testCycle()
+    /**
+     * @dataProvider getComplexObject
+     */
+    public function testCycle($obj, $dump)
     {
-        $obj = $this->getComplexObject();
         $this->assertNull($obj->getId());
         $this->repo->persist($obj);
+        $this->assertInstanceOf('\MongoId', $obj->getId());
+        // db
+        $found = $this->collection->findOne(array('_id' => $obj->getId()));
+        unset($found['_id']);
+        $this->assertEquals($dump, $found);
+        // restore
         $found = $this->repo->findByPk($obj->getId());
         $this->assertEquals($obj, $found);
     }

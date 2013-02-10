@@ -44,11 +44,12 @@ class RepositoryBlackMagicTest extends RepositoryTestTemplate
         $this->assertEquals('Orthanc', $obj->getAddress());
     }
 
-    protected function getComplexObject()
+    public function getComplexObject()
     {
         $provider = new MagicFixture();
-        $obj = $provider->getFullTreeObject();
-        return $obj;
+        return array(
+            array($provider->getFullTreeObject(), $provider->getFullTreeFlat())
+        );
     }
 
 }
