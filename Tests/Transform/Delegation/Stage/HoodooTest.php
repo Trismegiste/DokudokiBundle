@@ -193,7 +193,7 @@ class HoodooTest extends AbstractStageTest
         $this->assertArrayHasKey(MapAlias::CLASS_KEY, $dump);
         $this->assertEquals(42, $dump['answer']);
         $restore = $this->mediator->recursivCreate($dump);
-        $this->assertEquals(range(1, 100), $restore->getTransient());
+        $this->assertEquals(range(1, 10), $restore->getTransient());
     }
 
 }

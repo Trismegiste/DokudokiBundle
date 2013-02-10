@@ -149,7 +149,7 @@ class InvocationTest extends AbstractStageTest
         $this->assertNull($dump['transient']);
         $this->assertEquals(42, $dump['answer']);
         $restore = $this->mediator->recursivCreate($dump);
-        $this->assertEquals(range(1, 100), $restore->getTransient());
+        $this->assertEquals(range(1, 10), $restore->getTransient());
     }
 
 }

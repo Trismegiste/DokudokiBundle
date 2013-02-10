@@ -7,7 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Tests\Persistence;
 
 use Trismegiste\DokudokiBundle\Persistence\Repository;
-use Trismegiste\DokudokiBundle\Facade\Provider;
+use Trismegiste\DokudokiBundle\Tests\Fixtures;
 
 /**
  * Test repository with Invocation stage
@@ -60,9 +60,19 @@ class RepositoryInvocationTest extends RepositoryTestTemplate
                 'answer' => 'eureka',
             ),
             'answer' => 42,
-            'vector' => array(1,2,3)
+            'vector' => array(1, 2, 3)
         );
         return array(array($obj, $dump));
+    }
+
+    /**
+     * @expectedException LogicException
+     * @expectedExceptionMessage A root entity cannot be Skippable
+     */
+    public function testSkippableRoot()
+    {
+        $obj = new Fixtures\NonSense();
+        $this->repo->persist($obj);
     }
 
 }

@@ -10,6 +10,7 @@ use Trismegiste\DokudokiBundle\Persistence\Repository;
 use Trismegiste\DokudokiBundle\Facade\Provider;
 use Trismegiste\DokudokiBundle\Tests\Fixtures;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapAlias;
+
 /**
  * Test repository with WhiteMagic stage
  *
@@ -86,6 +87,62 @@ class RepositoryWhiteMagicTest extends RepositoryTestTemplate
         );
 
         return array(array($obj, $dump));
+    }
+
+    public function getCleanable()
+    {
+        $obj = new \Trismegiste\DokudokiBundle\Tests\Fixtures\Simple();
+        $obj->answer = new Fixtures\Bear();
+        $dump = array(
+            MapAlias::CLASS_KEY => 'simple',
+            'answer' => array(
+                MapAlias::CLASS_KEY => 'Hibernate',
+                'answer' => 42,
+                'transient' => null
+            )
+        );
+        return array(array($obj, $dump));
+    }
+
+    /**
+     * @dataProvider getCleanable
+     */
+    public function testCleanable($obj, $dump)
+    {
+        $this->assertNull($obj->getId());
+        $this->repo->persist($obj);
+        $this->assertInstanceOf('\MongoId', $obj->getId());
+        $this->assertAttributeEquals(null, 'transient', $obj->answer); // beware of that
+        // db
+        $found = $this->collection->findOne(array('_id' => $obj->getId()));
+        unset($found['_id']);
+        $this->assertEquals($dump, $found);
+        // restore
+        $found = $this->repo->findByPk($obj->getId());
+        $this->assertEquals(range(1, 10), $found->answer->getTransient());
+    }
+
+    public function testChildSkippable()
+    {
+        $obj = new Fixtures\Simple();
+        $obj->dummy = new Fixtures\IntoVoid();
+        $obj->product = new Fixtures\Product("aaa", 23);
+        $this->repo->persist($obj);
+        // restore
+        $dump = $this->collection->findOne(array('_id' => $obj->getId()));
+        $this->assertNull($dump['dummy']);
+        $this->assertNotNull($dump['product']);
+        $this->assertArrayHasKey(MapAlias::CLASS_KEY, $dump['product']);
+    }
+
+    /**
+     * @expectedException LogicException
+     * @expectedExceptionMessage A root entity cannot be Skippable
+     */
+    public function testSkippableRoot()
+    {
+        $obj = new Fixtures\NonSense();
+        $this->repo->persist($obj);
     }
 
 }

@@ -16,7 +16,7 @@ class Bear implements Cleanable
 
     public function __construct()
     {
-        $this->transient = range(1, 100);
+        $this->transient = range(1, 10);
     }
 
     public function getTransient()
@@ -31,7 +31,7 @@ class Bear implements Cleanable
 
     public function sleep()
     {
-        unset($this->transient);
+        $this->transient = null;
     }
 
 }
