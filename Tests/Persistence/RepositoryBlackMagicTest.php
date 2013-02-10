@@ -7,6 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Tests\Persistence;
 
 use Trismegiste\DokudokiBundle\Magic\Document;
+use Trismegiste\DokudokiBundle\Tests\Fixtures\MagicFixture;
 
 /**
  * Test repository with Invocation stage
@@ -45,10 +46,8 @@ class RepositoryBlackMagicTest extends RepositoryTestTemplate
 
     protected function getComplexObject()
     {
-        $obj = $this->getSimpleObject();
-        $servant = new Document('person');
-        $servant->setName('Wormtongue');
-        $obj->setServant($servant);
+        $provider = new MagicFixture();
+        $obj = $provider->getFullTreeObject();
         return $obj;
     }
 
