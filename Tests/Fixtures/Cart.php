@@ -20,7 +20,7 @@ class Cart
         $this->address = $addr;
     }
 
-    public function addItem($qt, Product $pro)
+    public function addItem($qt, $pro)
     {
         $this->row[] = array('qt' => $qt, 'item' => $pro);
     }
