@@ -12,7 +12,7 @@ use Trismegiste\DokudokiBundle\Transform\Delegation\MappingBuilder;
 
 /**
  * Design Pattern: Template Method
- * AbstractProvider is an implemtentation of the factory method 
+ * AbstractProvider is an implementation of the factory method 
  * with injection of required service
  * 
  * @author flo

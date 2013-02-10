@@ -9,7 +9,8 @@ namespace Trismegiste\DokudokiBundle\Facade;
 use Trismegiste\DokudokiBundle\Transform\Mediator\RecursiveMapper;
 
 /**
- * Provider is a concrete & highly coupled provider for Repository
+ * Provider is a concrete & highly coupled facade for this bundle
+ * It creates Repository 
  *
  * @author flo
  */
