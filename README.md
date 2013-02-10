@@ -27,10 +27,7 @@ For two reasons, the first is fairly technical :
 Because, like the cake, "ODM is a lie". Turning MongoDB into an ORM-like
 abstraction is the worst thing you can do against a NoSQL database.
 
-I have a good opinion about [ORM][*5]
-because of speed in the model development process.
-But when it comes to ODM, you loose the features of NoSQL and you don't have
-the features of a RDBMS, here are some :
+With an ODM, you loose both NoSQL and RDBMS features, here are some :
 
  * No rich document of MongoDB because the query generator sux and the mapping is complex
  * No schemaless capability because you freeze the model in classes
@@ -38,18 +35,19 @@ the features of a RDBMS, here are some :
  * No constraint of RDBMS (references and types) because there is none
  * No atomicity : the only atomicity in MongoDB is on one document
 
-In fact ODM is a slow ORM without ACID : what is the point of using MongoDB ?
+In fact ODM is a slow [ORM][*5] without ACID : what is the point of using MongoDB ?
 
 The second reason is more abstract :
 
-I think MDE is not the only paradigm. With MDE, the first task is to design and
+With recent concepts of NoSQL, SOA and HMVC, I believe MDE is somewhat 
+past-history, not always but very often.
+It is more suited for V-cycle and fits with difficulties in agile process (except
+if your CTO is good enough)
+
+With MDE, the first task is to design and
 code the model. It is difficult to paralelize this part, it's blocking everything
 else to come. Because of constraints of RDBMS, it drives to over-engineering
 (for my experience) and meanwhile, the customer waits and sees nothing.
-
-I believe, with NoSQL and KISS, MDE is somewhat past-history, not always but very often.
-It is more suited for V-cycle and fits with difficulties in agile process (except
-if your CTO is good enough)
 
 That's why I stop chasing the ["Mythical Object Database"][*3] and start hacking.
 
@@ -104,9 +102,6 @@ If you have a good model and the time to carefully alias classes in the database
 use the "WhiteMagic" stage. There is automapping but without surprise, your model cannot
 turn into chaos.
 
-The magic is : another app, without the model classes, can anyway
-restore documents with the BlackMagic stage.
-
 ### Cosmic Balance
 If you need to evolve the model above, you can use "Hoodoo" stage, a
 "WhiteMagic" stage mixed with some magic from "BlackMagic" stage. There is a
@@ -121,7 +116,7 @@ The root classes must implement the Persistable interface.
 
 ### What is a "root class" ?
 It is a class stored in the collection, which contains the MongoId in the key '_id'.
-All children in this class don't need to implement Persistable, they are
+All other agregated objects in this class don't need to implement Persistable, they are
 recursively stored.
 
 ### How can I remove some transient properties ?
@@ -152,7 +147,13 @@ this lib. And this hack is encapsuled and can be easily removed.
 Abstraction is good but seriously, we're talking about performance here...
 Have you ever switch an app to another database ?
 
-### Is there any lazy loading and proxy classes for DBRef ?
+### Is there any other constraints you have used ?
+* No switch because it is hidden inheritance
+* No static because it is global
+* SRP, OCP, LSP, ISP, DIP at maximum level
+* coupling at minimum level
+
+### Is there any lazy loading or proxy classes for DBRef ?
 Fly, you fools
 
 ## TODO
@@ -172,6 +173,5 @@ This one, I'm pretty sure it is unique ^_^
 [*4]: https://github.com/sebastianbergmann/phpunit-mock-objects/blob/1.1.1/PHPUnit/Framework/MockObject/Generator.php#L232
 [*5]: http://en.wikipedia.org/wiki/Object-relational_mapping
 [*7]: http://www.elasticsearch.org/
-[*8]: http://www.mongodb.org/
 [*10]: http://en.wikipedia.org/wiki/Keep_it_simple_stupid
 [*11]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/Persistence/RepositoryTest.php#L43
