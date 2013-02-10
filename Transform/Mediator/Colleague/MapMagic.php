@@ -11,7 +11,7 @@ use Trismegiste\DokudokiBundle\Magic\Document;
 
 /**
  * MapMagic is a mapper to and from a Magic Document
- * Must be placed after MapObject to overcome its responsibilities
+ * Must be responsible before MapObject to shortcut the mapping
  *
  * @author florent
  */

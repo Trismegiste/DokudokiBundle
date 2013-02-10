@@ -9,12 +9,13 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
 
 /**
- * MongoBinData is a mapper to and from an \MongoBinData .
- * Must be placed after MapObject
+ * MongoInvariant is a mapper to and from Mongo type which does not change
+ * between memory and database, like MongoBinData or MongoId.
+ * Must be responsible before MapObject to shortcut when in mapToDb
  * 
  * @author florent
  */
-class MongoBinData extends AbstractMapper
+class MongoInvariant extends AbstractMapper
 {
 
     /**
@@ -38,7 +39,8 @@ class MongoBinData extends AbstractMapper
      */
     public function isResponsibleFromDb($var)
     {
-        return (gettype($var) == 'object' ) && (get_class($var) == 'MongoBinData');
+        return (gettype($var) == 'object' )
+                && in_array(get_class($var), array('MongoBinData', 'MongoId'));
     }
 
     /**
