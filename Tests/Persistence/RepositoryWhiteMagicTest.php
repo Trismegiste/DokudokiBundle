@@ -145,6 +145,13 @@ class RepositoryWhiteMagicTest extends RepositoryTestTemplate
         $this->repo->persist($obj);
     }
 
+    /**
+     * Person is Persistable but non aliased, that's why persisting it throws
+     * a mapping exception
+     * 
+     * @expectedException Trismegiste\DokudokiBundle\Transform\MappingException
+     * @expectedExceptionMessage persistence
+     */
     public function testNonAliasedPersistable()
     {
         $this->repo->persist(new Fixtures\Person());
