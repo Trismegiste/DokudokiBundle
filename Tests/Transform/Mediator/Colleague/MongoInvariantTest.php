@@ -26,7 +26,8 @@ class MongoInvariantTest extends MapperTestTemplate
     public function getDataFromDb()
     {
         $obj = new \MongoBinData('bazinga', 2);
-        return array(array($obj, clone $obj));
+        $id = new \MongoId();
+        return array(array($obj, clone $obj), array($id, $id));
     }
 
     public function getDataToDb()
@@ -36,7 +37,7 @@ class MongoInvariantTest extends MapperTestTemplate
 
     public function getResponsibleDataToDb()
     {
-        return array(array(new \MongoBinData('mahalo', 2)));
+        return array(array(new \MongoId(), new \MongoBinData('mahalo', 2)));
     }
 
     public function getResponsibleDataFromDb()
