@@ -6,21 +6,21 @@
 
 namespace Trismegiste\DokudokiBundle\Tests\Transform\Mediator\Colleague;
 
-use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MongoBinData;
+use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MongoInvariant;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapObject;
 
 /**
- * Test for MongoBinData
+ * Test for MongoInvariant
  *
  * @author flo
  */
-class MongoBinDataTest extends MapperTestTemplate
+class MongoInvariantTest extends MapperTestTemplate
 {
 
     protected function createMapper()
     {
         $mediator = $this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMediator');
-        return new MongoBinData($mediator);
+        return new MongoInvariant($mediator);
     }
 
     public function getDataFromDb()

@@ -9,7 +9,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
 
 /**
- * MapFailure is hte last mapper which throws exception when no other mapper
+ * MapFailure is the last mapper which throws exception when no other mapper
  * is responsible.
  *
  * @author florent

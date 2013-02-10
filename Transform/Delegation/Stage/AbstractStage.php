@@ -47,7 +47,7 @@ abstract class AbstractStage implements MappingBuilder
     public function createDbSpecific(TypeRegistry $algo)
     {
         new Colleague\DateObject($algo);
-        new Colleague\MongoBinData($algo);
+        new Colleague\MongoInvariant($algo);
     }
 
     /**
