@@ -124,8 +124,8 @@ class WhiteMagicTest extends AbstractStageTest
     }
 
     /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Cannot dump object to database
+     * @expectedException Trismegiste\DokudokiBundle\Transform\MappingException
+     * @expectedExceptionMessage persistence
      */
     public function testClassNotAliased()
     {

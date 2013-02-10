@@ -29,7 +29,8 @@ class MapFailureTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException Trismegiste\DokudokiBundle\Transform\MappingException
+     * @expectedExceptionMessage restoration
      */
     public function testMapFromDb()
     {
@@ -37,7 +38,8 @@ class MapFailureTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException Trismegiste\DokudokiBundle\Transform\MappingException
+     * @expectedExceptionMessage persistence
      */
     public function testMapToDb()
     {

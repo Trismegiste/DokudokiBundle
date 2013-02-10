@@ -145,4 +145,9 @@ class RepositoryWhiteMagicTest extends RepositoryTestTemplate
         $this->repo->persist($obj);
     }
 
+    public function testNonAliasedPersistable()
+    {
+        $this->repo->persist(new Fixtures\Person());
+    }
+
 }

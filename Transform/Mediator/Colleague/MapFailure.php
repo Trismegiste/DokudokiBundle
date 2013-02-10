@@ -7,6 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
+use Trismegiste\DokudokiBundle\Transform\MappingException;
 
 /**
  * MapFailure is the last mapper which throws exception when no other mapper
@@ -22,7 +23,7 @@ class MapFailure extends AbstractMapper
      */
     public function mapFromDb($var)
     {
-        throw new \RuntimeException('Non instantiable object in database');
+        throw new MappingException($var, 'restoration');
     }
 
     /**
@@ -30,7 +31,7 @@ class MapFailure extends AbstractMapper
      */
     public function mapToDb($var)
     {
-        throw new \InvalidArgumentException('Cannot dump object to database');
+        throw new MappingException($var, 'persistence');
     }
 
     /**
