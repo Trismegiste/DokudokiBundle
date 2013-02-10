@@ -60,6 +60,7 @@ class RepositoryInvocationTest extends RepositoryTestTemplate
                 'answer' => 'eureka',
             ),
             'answer' => 42,
+            'vector' => array(1,2,3)
         );
         return array(array($obj, $dump));
     }

@@ -28,6 +28,7 @@ class InvocStress extends Simple
         $this->stringVar = 'H Psi = E . Psi';
         $this->objVar = new Simple();
         $this->objVar->answer = 'eureka';
+        $this->vector = array(1, 2, 3);
     }
 
 }

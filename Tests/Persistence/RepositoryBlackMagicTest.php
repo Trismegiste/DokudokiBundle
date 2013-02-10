@@ -10,7 +10,7 @@ use Trismegiste\DokudokiBundle\Magic\Document;
 use Trismegiste\DokudokiBundle\Tests\Fixtures\MagicFixture;
 
 /**
- * Test repository with Invocation stage
+ * Test repository with BlackMagic stage
  *
  * @author flo
  */
