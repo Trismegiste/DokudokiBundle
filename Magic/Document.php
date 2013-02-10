@@ -17,11 +17,13 @@ use Trismegiste\DokudokiBundle\Persistence\Persistable;
  * $doc = new Document();
  * $doc->setAnswser(42);
  * echo $doc->getAnswer();
- * print_r($doc->getUnTyped());
  * ?>
  * </code></pre>
  *
- * @author flo
+ * Why final ?
+ * Because Php Magic is good but with inheritance it can become a mess.
+ * If you have time for subclassing a magic document and put it in your model, 
+ * I suggest you'd better create a real class.
  */
 final class Document extends InternalContent implements Persistable
 {

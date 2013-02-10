@@ -1,6 +1,9 @@
 # DokudokiBundle
 
-Yet another [MongoDB][*2] database layer
+Yo dawg, I herd ya like mongodb, so we put a
+document in yer document so ya can haz atomicity
+while ya persist.
+Atomicity in [MongoDB][*2] explained by xzibit
 
 ## What
 
@@ -8,11 +11,10 @@ It's a minimalistic database layer with automatic mapping.
 It is intended for **advanced users** of [MongoDB][*2]
 who know and understand the growth of a model on a schemaless database.
 
-When I mean minimalistic, I mean the longest method takes about 20 lines
-(that was my first constraint when I start to code this bundle).
-In fact, if you except the mandatory classes for symfony bundle, all
-the NCLOC are shorter than the infamous method [UnitOfWork::createEntity][*1]
-of Doctrine 2 (that was my second constraint : don't code over 1k NCLOC)
+When I mean minimalistic, I mean all
+the NCLOC of the dbal itself are shorter than the infamous 
+method [UnitOfWork::createEntity][*1]
+of Doctrine 2
 
 Of course, features are also minimalistic. Don't expect the impossible. Nevertheless
 there are some functionalities you don't find anywhere else.
@@ -148,7 +150,9 @@ Abstraction is good but seriously, we're talking about performance here...
 Have you ever switch an app to another database ?
 
 ### Is there any other constraints you have used ?
-* No switch because it is hidden inheritance
+* Minimum number of switch because it is hidden inheritance
+* No more than 5 methods per class
+* No method longer than 20 NCLOC
 * No static because it is global
 * SRP, OCP, LSP, ISP, DIP at maximum level
 * coupling at minimum level

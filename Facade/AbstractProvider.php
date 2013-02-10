@@ -40,7 +40,7 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
-     * Creates the director for builder the mapping chain
+     * Creates the director for building the mapping chain
      * 
      * @return MappingDirector
      */
