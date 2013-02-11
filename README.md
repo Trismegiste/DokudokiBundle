@@ -1,6 +1,7 @@
 # DokudokiBundle
 
 ![Yo dawg Xzibit](./Resources/doc/img/atomicity.jpg)
+
 Atomicity in [MongoDB][*2] explained by Xzibit
 
 ## What
