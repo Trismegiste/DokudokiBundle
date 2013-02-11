@@ -1,9 +1,7 @@
 # DokudokiBundle
 
-Yo dawg, I herd ya like mongodb, so we put a
-document in yer document so ya can haz atomicity
-while ya persist.
-Atomicity in [MongoDB][*2] explained by xzibit
+![Yo dawg Xzibit](./Resources/doc/img/atomicity.jpg)
+Atomicity in [MongoDB][*2] explained by Xzibit
 
 ## What
 
@@ -12,7 +10,7 @@ It is intended for **advanced users** of [MongoDB][*2]
 who know and understand the growth of a model on a schemaless database.
 
 When I mean minimalistic, I mean all
-the NCLOC of the dbal itself are shorter than the infamous 
+the NCLOC of the dbal itself are shorter than the infamous
 method [UnitOfWork::createEntity][*1]
 of Doctrine 2
 
@@ -41,7 +39,7 @@ In fact ODM is a slow [ORM][*5] without ACID : what is the point of using MongoD
 
 The second reason is more abstract :
 
-With recent concepts of NoSQL, SOA and HMVC, I believe MDE is somewhat 
+With recent concepts of NoSQL, SOA and HMVC, I believe MDE is somewhat
 past-history, not always but very often.
 It is more suited for V-cycle and fits with difficulties in agile process (except
 if your CTO is good enough)
