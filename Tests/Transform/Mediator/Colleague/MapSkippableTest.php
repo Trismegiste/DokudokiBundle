@@ -25,18 +25,18 @@ class MapSkippableTest extends MapperTestTemplate
 
     public function getDataFromDb() {}
     public function getResponsibleDataFromDb() {}
-    public function testResponsibleFromDb() {}
+    public function testResponsibleFromDb($var) {}
 
     /**
      * @expectedException LogicException
      * @expectedExceptionMessage There is a bug here
      */
-    public function testMapFromDb()
+    public function testMapFromDb($src, $dest)
     {
         $obj = $this->getMock('Trismegiste\DokudokiBundle\Transform\Skippable');
         $this->mapper->mapFromDb($obj);
     }
-        
+
     public function getDataToDb()
     {
         return array(array(new IntoVoid(), null));
