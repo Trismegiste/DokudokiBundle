@@ -8,6 +8,6 @@ php:
 
 before_script:
   - pecl -q install mongo && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
-  - composer.phar --prefer-dist --dev install
+  - composer --prefer-dist --dev install
 
 script: phpunit --coverage-text
