@@ -21,10 +21,12 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        $server = (false !== getenv('SYMFONY__MONGODB__SERVER')) ? getenv('SYMFONY__MONGODB__SERVER') : 'localhost:27017';
+
         $this->container = new ContainerBuilder();
         $extension = new Extension();
         $fullConfig = array(
-            'server' => 'localhost:27017',
+            'server' => $server,
             'database' => 'Test',
             'collection' => 'sandbox',
             'alias' => array(
