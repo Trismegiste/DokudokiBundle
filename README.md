@@ -23,8 +23,6 @@ you in the process to build an app regardless the model is finished or not.
 
 ## Why
 
-For two reasons, the first is fairly technical :
-
 Because, like the cake, "ODM is a lie". Turning MongoDB into an ORM-like
 abstraction is the worst thing you can do against a NoSQL database.
 
@@ -37,18 +35,6 @@ With an ODM, you loose both NoSQL and RDBMS features, here are some :
  * No atomicity : the only atomicity in MongoDB is on one document
 
 In fact ODM is a slow [ORM][*5] without ACID : what is the point of using MongoDB ?
-
-The second reason is more abstract :
-
-With recent concepts of NoSQL, SOA and HMVC, I believe MDE is somewhat
-past-history, not always but very often.
-It is more suited for V-cycle and fits with difficulties in agile process (except
-if your CTO is good enough)
-
-With MDE, the first task is to design and
-code the model. It is difficult to paralelize this part, it's blocking everything
-else to come. Because of constraints of RDBMS, it drives to over-engineering
-(for my experience) and meanwhile, the customer waits and sees nothing.
 
 That's why I stop chasing the ["Mythical Object Database"][*3] and start hacking.
 
@@ -108,6 +94,17 @@ If you need to evolve the model above, you can use "Hoodoo" stage, a
 "WhiteMagic" stage mixed with some magic from "BlackMagic" stage. There is a
 safety net to prevent some "real" classes to become "fake" classes. This lowers
 the rate of WTF per minutes and you choose the level of magic.
+
+## About MDE
+With recent concepts of NoSQL, SOA and HMVC, I believe MDE is somewhat
+past-history, not always but very often.
+It is more suited for V-cycle and fits with difficulties in agile process (except
+if your CTO is good enough)
+
+With MDE, the first task is to design and
+code the model. It is difficult to paralelize this part, it's blocking everything
+else to come. Because of constraints of RDBMS, it drives to over-engineering
+(for my experience) and meanwhile, the customer waits and sees nothing.
 
 ## FAQ
 

@@ -51,7 +51,7 @@ class RepositoryInvocationTest extends RepositoryTestTemplate
             '-fqcn' => 'Trismegiste\\DokudokiBundle\\Tests\\Fixtures\\InvocStress',
             'floatVar' => 3.14159265,
             'binaryVar' => new \MongoBinData('299792458', 2),
-            'dateVar' => new \MongoDate(),
+            'dateVar' => new \MongoDate(1360826408, 0),
             'stringVar' => 'H Psi = E . Psi',
             'intVar' => 73,
             'objVar' => array(
