@@ -16,7 +16,8 @@
         "symfony/http-kernel": "2.1.*",
         "symfony/dependency-injection": "2.1.*",
         "symfony/yaml": "2.1.*",
-        "symfony/config": "2.1.*"
+        "symfony/config": "2.1.*",
+        "symfony/form": "2.1.*"
     },
     "autoload": {
         "psr-0": {
@@ -25,5 +26,5 @@
     },
     "target-dir": "Trismegiste/DokudokiBundle",
     "licence": "CC-BY-SA-3.0",
-    "version": "0.5.7-alpha"
+    "version": "0.9.2"
 }
