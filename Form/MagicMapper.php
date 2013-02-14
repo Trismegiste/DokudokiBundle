@@ -19,7 +19,8 @@ class MagicMapper implements DataMapperInterface
     public function mapDataToForms($data, array $forms)
     {
         if (!is_null($data)) {
-            $struc = $data->getUnTyped();
+            $iter = $data->getIterator();
+            $struc = iterator_to_array($iter, true);
             foreach ($forms as $form) {
                 $key = $form->getName();
                 if (array_key_exists($key, $struc)) {
