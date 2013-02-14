@@ -80,11 +80,36 @@ class MagicFormTypeTest extends FunctionalTestForm
             'product1' => array('title' => 'EF-35 L')
         ));
         $data = $form->getData();
-        print_r($data);
         $this->assertStringStartsWith('Bradbury', $data->getAddress());
         $this->assertInstanceOf(static::$magicDocummentClassName, $data->getProduct1());
         $this->assertEquals('product', $data->getProduct1()->getClassname());
         $this->assertEquals('EF-35 L', $data->getProduct1()->getTitle());
+    }
+
+    public function testMixedEmbeddedObjectCreation()
+    {
+        $form = $this->formFactory->create(new CartPlusType());
+        $form->bind(array(
+            'address' => 'Bradbury apartments, ninth sector. NM46751',
+            'row' => array(
+                array(
+                    'qt' => 3,
+                    'item' => array('title' => 'EF-85 L', 'price' => 1999)
+                )
+            )
+        ));
+        $obj = $form->getData();
+        $product = new Document('product');
+        $product->setTitle('EF-85 L');
+        $product->setPrice(1999);
+        $cart = new Document('cart');
+        $cart->setAddress('Bradbury apartments, ninth sector. NM46751');
+        $cart->setRow(
+                array(
+                    array('qt' => 3, 'item' => $product)
+                )
+        );
+        $this->assertEquals($cart, $obj);
     }
 
 }

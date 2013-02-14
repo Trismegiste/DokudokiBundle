@@ -1,7 +1,7 @@
 <?php
 
 /*
- * mongosapin
+ * DokudokiBundle
  */
 
 namespace Trismegiste\DokudokiBundle\Form;
@@ -14,16 +14,16 @@ use Symfony\Component\Form\FormInterface;
 use Trismegiste\DokudokiBundle\Magic\Document;
 
 /**
- * This is a form for DynamicType, it is mostly presetting datamapper
+ * This is a form for Magic\Document, it is mostly presetting datamapper
  * and some factory trick for new instance.
  *
  * Usage :
- * 1. subclass an AbstractType to make your form
+ * 1. subclass an AbstractType to make your form (do not subclass this class : symfony recommandations )
  * 2. Override setDefaultOptions and set the property 'class_key',
- *    the same value will be persisted in the key classKey of the Automagic
+ *    the same value will be persisted in the key classKey of the Document
  * 3. Override getParent to return 'magic_form'
  *
- * @author flo
+ * @todo Add a check between getClassName() and class_key
  */
 class MagicFormType extends AbstractType
 {
