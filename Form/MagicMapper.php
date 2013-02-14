@@ -21,6 +21,7 @@ class MagicMapper implements DataMapperInterface
         if (!is_null($data)) {
             $iter = $data->getIterator();
             $struc = iterator_to_array($iter, true);
+            print_r($struc);
             foreach ($forms as $form) {
                 $key = $form->getName();
                 if (array_key_exists($key, $struc)) {
