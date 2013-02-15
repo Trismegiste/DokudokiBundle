@@ -29,6 +29,7 @@ class InvocStress extends Simple
         $this->objVar = new Simple();
         $this->objVar->answer = 'eureka';
         $this->vector = array(1, 2, 3);
+        print_r($this->dateVar);
     }
 
 }
