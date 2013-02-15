@@ -31,7 +31,7 @@ class MongoFileTransformer implements DataTransformerInterface
             return null;
         }
 
-        $model = new \MongoBinData(file_get_contents($uploadfile->getRealPath()), 2);
+        $model = new \MongoBinData(file_get_contents($uploadfile->getRealPath()), \MongoBinData::BYTE_ARRAY);
         return $model;
     }
 

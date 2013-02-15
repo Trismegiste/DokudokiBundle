@@ -17,7 +17,10 @@ use Trismegiste\DokudokiBundle\Magic\Document;
 class MagicFormTypeTest extends FunctionalTestForm
 {
 
-    static protected $magicDocummentClassName = 'Trismegiste\DokudokiBundle\Magic\Document';
+    protected function assertMagicDocument($doc)
+    {
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $doc);
+    }
 
     protected function buildDoc($class, $data)
     {
@@ -119,7 +122,7 @@ class MagicFormTypeTest extends FunctionalTestForm
         $form = $this->formFactory->create($typeForm, $before);
         $form->bind($input);
         $obj = $form->getData();
-        $this->assertInstanceOf(static::$magicDocummentClassName, $obj);
+        $this->assertMagicDocument($obj);
         $this->assertNotEmpty($obj->getClassname());
         $this->assertEquals($after, $obj);
     }
