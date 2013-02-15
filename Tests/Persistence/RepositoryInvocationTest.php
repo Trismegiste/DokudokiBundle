@@ -47,11 +47,12 @@ class RepositoryInvocationTest extends RepositoryTestTemplate
     public function getComplexObject()
     {
         $obj = new \Trismegiste\DokudokiBundle\Tests\Fixtures\InvocStress();
+        $tmp = new \DateTime('2013-02-14 08:20:08');
         $dump = array(
             '-fqcn' => 'Trismegiste\\DokudokiBundle\\Tests\\Fixtures\\InvocStress',
             'floatVar' => 3.14159265,
             'binaryVar' => new \MongoBinData('299792458', 2),
-            'dateVar' => new \MongoDate(1360826408, 0),
+            'dateVar' => new \MongoDate($tmp->getTimestamp(), 0),
             'stringVar' => 'H Psi = E . Psi',
             'intVar' => 73,
             'objVar' => array(
