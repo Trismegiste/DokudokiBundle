@@ -19,51 +19,6 @@ class MagicFormTypeTest extends FunctionalTestForm
 
     static protected $magicDocummentClassName = 'Trismegiste\DokudokiBundle\Magic\Document';
 
-    public function testChildObjectEdition()
-    {
-        $obj = new Document('product');
-        $obj->setTitle('EOS 5D mk III');
-        $cart = new Document('cart');
-        $cart->setProduct1($obj);
-        $form = $this->formFactory->create(new CartType(), $cart);
-        $form->bind(array(
-            'address' => 'Bradbury apartments, ninth sector. NM46751',
-            'title' => 'wesh',
-            'product1' => array('title' => 'EF-35 L')
-        ));
-        $data = $form->getData();
-        $this->assertStringStartsWith('Bradbury', $data->getAddress());
-        $this->assertInstanceOf(static::$magicDocummentClassName, $data->getProduct1());
-        $this->assertEquals('product', $data->getProduct1()->getClassname());
-        $this->assertEquals('EF-35 L', $data->getProduct1()->getTitle());
-    }
-
-    public function testMixedEmbeddedObjectCreation()
-    {
-        $form = $this->formFactory->create(new CartPlusType());
-        $form->bind(array(
-            'address' => 'Bradbury apartments, ninth sector. NM46751',
-            'row' => array(
-                array(
-                    'qt' => 3,
-                    'item' => array('title' => 'EF-85 L', 'price' => 1999)
-                )
-            )
-        ));
-        $obj = $form->getData();
-        $product = new Document('product');
-        $product->setTitle('EF-85 L');
-        $product->setPrice(1999);
-        $cart = new Document('cart');
-        $cart->setAddress('Bradbury apartments, ninth sector. NM46751');
-        $cart->setRow(
-                array(
-                    array('qt' => 3, 'item' => $product)
-                )
-        );
-        $this->assertEquals($cart, $obj);
-    }
-
     protected function buildDoc($class, $data)
     {
         $obj = new Document($class);
@@ -109,13 +64,50 @@ class MagicFormTypeTest extends FunctionalTestForm
         );
     }
 
+    protected function getEmbeddedEdition()
+    {
+        $orig = $this->buildDoc('cart', array('address' => 'Bradbury apartments, ninth sector. NM46751'));
+        $orig->setProduct1($this->buildDoc('product', array('title' => 'EF-85 L', 'price' => 1999)));
+        $cart = $this->buildDoc('cart', array('address' => 'Bradbury apartments, ninth sector. NM46751'));
+        $cart->setProduct1($this->buildDoc('product', array('title' => 'VTOL', 'price' => 10000)));
+        return array(null, new CartType(), array(
+                'address' => 'Bradbury apartments, ninth sector. NM46751',
+                'product1' => array('title' => 'VTOL', 'price' => 10000),
+                'title' => 'not used'
+            ),
+            $cart
+        );
+    }
+
+    public function getChildCreation()
+    {
+        $result = $this->buildDoc('cart', array('address' => 'Bradbury apartments, ninth sector. NM46751'));
+        $result->setRow(
+                array(
+                    array('qt' => 3, 'item' => $this->buildDoc('product', array('title' => 'EF-85 L', 'price' => 1999)))
+                )
+        );
+
+        return array(null, new CartPlusType(), array(
+                'address' => 'Bradbury apartments, ninth sector. NM46751',
+                'row' => array(
+                    array(
+                        'qt' => 3,
+                        'item' => array('title' => 'EF-85 L', 'price' => 1999)
+                    )
+            )),
+            $result);
+    }
+
     public function getConfigBinding()
     {
         return array(
             $this->getSimpleCreation(),
             $this->getSimpleEdition(),
             $this->getAddEdition(),
-            $this->getEmbeddedCreation()
+            $this->getEmbeddedCreation(),
+            $this->getEmbeddedEdition(),
+            $this->getChildCreation()
         );
     }
 
