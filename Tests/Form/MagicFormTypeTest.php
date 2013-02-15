@@ -19,54 +19,6 @@ class MagicFormTypeTest extends FunctionalTestForm
 
     static protected $magicDocummentClassName = 'Trismegiste\DokudokiBundle\Magic\Document';
 
-    public function testObjectCreation()
-    {
-        $form = $this->formFactory->create(new ProductType());
-        $form->bind(array('title' => 'EF-85 L'));
-        $obj = $form->getData();
-        $this->assertInstanceOf(static::$magicDocummentClassName, $obj);
-        $this->assertEquals('product', $obj->getClassname());
-        $this->assertEquals('EF-85 L', $obj->getTitle());
-    }
-
-    public function testObjectEdition()
-    {
-        $obj = new Document('product');
-        $obj->setTitle('EOS 7D');
-        $this->assertEquals('EOS 7D', $obj->getTitle());
-        $form = $this->formFactory->create(new ProductType(), $obj);
-        $form->bind(array('title' => 'EF-85 L'));
-        $this->assertInstanceOf(static::$magicDocummentClassName, $obj);
-        $this->assertEquals('product', $obj->getClassname());
-        $this->assertEquals('EF-85 L', $obj->getTitle());
-    }
-
-    public function testObjectEditionAddUnchanged()
-    {
-        $obj = new Document('product');
-        $obj->setTitle('EOS 7D');
-        $obj->setDescription('Bokehlicious');
-        $form = $this->formFactory->create(new ProductType(), $obj);
-        $form->bind(array('title' => 'EF-85 L'));
-        $this->assertEquals('EF-85 L', $obj->getTitle());
-        $this->assertEquals('Bokehlicious', $obj->getDescription());
-    }
-
-    public function testEmbeddedObjectCreation()
-    {
-        $form = $this->formFactory->create(new CartType());
-        $form->bind(array(
-            'address' => 'Bradbury apartments, ninth sector. NM46751',
-            'product1' => array('title' => 'EF-85 L', 'price' => 1999)
-        ));
-        $obj = $form->getData();
-        $this->assertInstanceOf(static::$magicDocummentClassName, $obj);
-        $this->assertEquals('cart', $obj->getClassname());
-        $this->assertStringStartsWith('Bradbury', $obj->getAddress());
-        $this->assertInstanceOf(static::$magicDocummentClassName, $obj->getProduct1());
-        $this->assertEquals(1999, $obj->getProduct1()->getPrice());
-    }
-
     public function testChildObjectEdition()
     {
         $obj = new Document('product');
@@ -112,30 +64,58 @@ class MagicFormTypeTest extends FunctionalTestForm
         $this->assertEquals($cart, $obj);
     }
 
+    protected function buildDoc($class, $data)
+    {
+        $obj = new Document($class);
+        foreach ($data as $key => $val) {
+            call_user_func(array($obj, 'set' . ucfirst($key)), $val);
+        }
+
+        return $obj;
+    }
+
     protected function getSimpleCreation()
     {
-        $result = new Document('product');
-        $result->setTitle('EOS 1DX');
-        $result->setPrice(null);
+        $result = $this->buildDoc('product', array('title' => 'EOS 1DX', 'price' => null));
+
         return array(null, new ProductType(), array('title' => 'EOS 1DX'), $result);
     }
 
     protected function getSimpleEdition()
     {
-        $origin = new Document('product');
-        $origin->setTitle('EOS 1DX');
-        $origin->setPrice(7000);
-        $result = new Document('product');
-        $result->setTitle('EF-85 L');
-        $result->setPrice(2000);
+        $origin = $this->buildDoc('product', array('title' => 'EOS 1DX', 'price' => 7000));
+        $result = $this->buildDoc('product', array('title' => 'EF-85 L', 'price' => 2000));
+
         return array($origin, new ProductType(), array('title' => 'EF-85 L', 'price' => 2000), $result);
+    }
+
+    protected function getAddEdition()
+    {
+        $origin = $this->buildDoc('product', array('title' => 'EOS 1DX', 'description' => 'lorem'));
+        $result = $this->buildDoc('product', array('title' => 'EOS 1DX', 'price' => null, 'description' => 'lorem'));
+
+        return array($origin, new ProductType(), array('title' => 'EOS 1DX'), $result);
+    }
+
+    protected function getEmbeddedCreation()
+    {
+        $cart = $this->buildDoc('cart', array('address' => 'Bradbury apartments, ninth sector. NM46751'));
+        $cart->setProduct1($this->buildDoc('product', array('title' => 'EF-85 L', 'price' => 1999)));
+        return array(null, new CartType(), array(
+                'address' => 'Bradbury apartments, ninth sector. NM46751',
+                'product1' => array('title' => 'EF-85 L', 'price' => 1999)
+            ),
+            $cart
+        );
     }
 
     public function getConfigBinding()
     {
         return array(
             $this->getSimpleCreation(),
-            $this->getSimpleEdition()
+            $this->getSimpleEdition(),
+            $this->getAddEdition(),
+            $this->getEmbeddedCreation()
         );
     }
 
