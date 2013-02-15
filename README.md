@@ -102,7 +102,7 @@ It is more suited for V-cycle and fits with difficulties in agile process (excep
 if your CTO is good enough)
 
 With MDE, the first task is to design and
-code the model. It is difficult to paralelize this part, it's blocking everything
+code the model. It is difficult to parallelize this part, it's blocking everything
 else to come. Because of constraints of RDBMS, it drives to over-engineering
 (for my experience) and meanwhile, the customer waits and sees nothing.
 

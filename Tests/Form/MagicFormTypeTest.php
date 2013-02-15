@@ -112,4 +112,44 @@ class MagicFormTypeTest extends FunctionalTestForm
         $this->assertEquals($cart, $obj);
     }
 
+    protected function getSimpleCreation()
+    {
+        $result = new Document('product');
+        $result->setTitle('EOS 1DX');
+        $result->setPrice(null);
+        return array(null, new ProductType(), array('title' => 'EOS 1DX'), $result);
+    }
+
+    protected function getSimpleEdition()
+    {
+        $origin = new Document('product');
+        $origin->setTitle('EOS 1DX');
+        $origin->setPrice(7000);
+        $result = new Document('product');
+        $result->setTitle('EF-85 L');
+        $result->setPrice(2000);
+        return array($origin, new ProductType(), array('title' => 'EF-85 L', 'price' => 2000), $result);
+    }
+
+    public function getConfigBinding()
+    {
+        return array(
+            $this->getSimpleCreation(),
+            $this->getSimpleEdition()
+        );
+    }
+
+    /**
+     * @dataProvider getConfigBinding
+     */
+    public function testBindingForm($before, \Symfony\Component\Form\AbstractType $typeForm, $input, $after)
+    {
+        $form = $this->formFactory->create($typeForm, $before);
+        $form->bind($input);
+        $obj = $form->getData();
+        $this->assertInstanceOf(static::$magicDocummentClassName, $obj);
+        $this->assertNotEmpty($obj->getClassname());
+        $this->assertEquals($after, $obj);
+    }
+
 }
