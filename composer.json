@@ -17,8 +17,7 @@
         "symfony/dependency-injection": "2.1.*",
         "symfony/yaml": "2.1.*",
         "symfony/config": "2.1.*",
-        "symfony/form": "2.1.*",
-        "whatthejeff/nyancat-phpunit-resultprinter": "1.0.*@dev"
+        "symfony/form": "2.1.*"
     },
     "autoload": {
         "psr-0": {

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="Tests/bootstrap.php"
-         colors="true"
-         printerFile="vendor/whatthejeff/nyancat-phpunit-resultprinter/src/NyanCat/PHPUnit/ResultPrinter.php"
-         printerClass="NyanCat\PHPunit\ResultPrinter"
->
+         colors="true">
+
     <testsuites>
         <testsuite name="Dokudoki unit and func tests">
             <directory>./Tests</directory>
@@ -15,7 +13,7 @@
             <directory>./Resources</directory>
             <directory>./Tests</directory>
             <directory>./vendor</directory>
-        </blacklist>>
+        </blacklist>
     </filter>
 
     <logging>
