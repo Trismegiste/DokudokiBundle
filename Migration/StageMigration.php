@@ -45,8 +45,7 @@ abstract class StageMigration
     {
         $iter = $this->collection->find();
         foreach ($iter as $struc) {
-            $pk = $struc['_id'];
-            $old = $src->findByPk((string) $pk);
+            $old = $src->createFromDb($struc);
             $dst->persist($old);
         }
     }
