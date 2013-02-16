@@ -144,7 +144,7 @@ abstract class RepositoryTestTemplate extends \PHPUnit_Framework_TestCase
                 ->getMock();
         $collection->expects($this->once())
                 ->method('findOne')
-                ->will($this->returnValue(array('_id'=> $this->getMock('MongoId'))));
+                ->will($this->returnValue(array('_id' => $this->getMock('MongoId'))));
 
         $factory = $this->getMockBuilder('Trismegiste\DokudokiBundle\Transform\Transformer')
                 ->disableOriginalConstructor()
@@ -154,6 +154,23 @@ abstract class RepositoryTestTemplate extends \PHPUnit_Framework_TestCase
                 ->will($this->returnValue(new \stdClass()));
         $repo = new Repository($collection, $factory);
         $repo->findByPk(123);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage The database entry does not have a primary key
+     */
+    public function testNotCreatingInvalidData()
+    {
+        $collection = $this->getMockBuilder('MongoCollection')
+                ->disableOriginalConstructor()
+                ->getMock();
+
+        $factory = $this->getMockBuilder('Trismegiste\DokudokiBundle\Transform\Transformer')
+                ->disableOriginalConstructor()
+                ->getMock();
+        $repo = new Repository($collection, $factory);
+        $repo->createFromDb(array());
     }
 
 }
