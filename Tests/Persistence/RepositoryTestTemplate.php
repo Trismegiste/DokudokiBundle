@@ -144,7 +144,7 @@ abstract class RepositoryTestTemplate extends \PHPUnit_Framework_TestCase
                 ->getMock();
         $collection->expects($this->once())
                 ->method('findOne')
-                ->will($this->returnValue(array()));
+                ->will($this->returnValue(array('_id'=> $this->getMock('MongoId'))));
 
         $factory = $this->getMockBuilder('Trismegiste\DokudokiBundle\Transform\Transformer')
                 ->disableOriginalConstructor()

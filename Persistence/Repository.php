@@ -47,6 +47,19 @@ class Repository implements RepositoryInterface
         if (is_null($struc)) {
             throw new NotFoundException($pk);
         }
+
+        return $this->createFromDb($struc);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function createFromDb(array $struc)
+    {
+        if (!isset($struc['_id'])) {
+            throw new \InvalidArgumentException("The database entry does not have a primary key");
+        }
+        $id = $struc['_id'];
         unset($struc['_id']);
         $obj = $this->factory->create($struc);
         if ($obj instanceof Persistable) {
