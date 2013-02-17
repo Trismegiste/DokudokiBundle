@@ -64,7 +64,7 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
     public function testScan()
     {
         $stat = $this->migration->analyse();
-
+//        print_r($stat);
         $this->assertEquals(array(
             'found' => array(
                 'trunk' => 1,
@@ -80,16 +80,9 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
     /**
      * @depends testScan
      */
-    public function notestMigrate($stat)
+    public function testGenerate($stat)
     {
-        foreach ($stat['fqcn'] as $className => $dummy) {
-            $part = explode('\\', $className);
-            $last = array_pop($part);
-            $aliasMap['AliasFor' . $last] = $className;
-        }
-
-        $destination = $this->facade->createRepository(new Stage\WhiteMagic($aliasMap));
-        $this->migration->migrate($this->source, $destination);
+        $this->migration->generate($stat, $aliasCfg);
     }
 
 }

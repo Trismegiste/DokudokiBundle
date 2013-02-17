@@ -15,7 +15,7 @@ use Trismegiste\DokudokiBundle\Magic\Document;
 class AliasCollector extends MapMagic
 {
 
-    public $collector = array('found' => array());
+    public $collector = array('found' => array(), 'properties' => array());
 
     /**
      * {@inheritDoc}
@@ -27,7 +27,7 @@ class AliasCollector extends MapMagic
         unset($param[Document::classKey]);
 
         foreach ($param as $key => $val) {
-            // go deeper
+            $this->collector['properties'][$alias][$key] = true;
             $this->mediator->recursivCreate($val);
         }
 

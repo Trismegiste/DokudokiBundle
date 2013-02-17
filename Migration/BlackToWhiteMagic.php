@@ -36,4 +36,9 @@ class BlackToWhiteMagic extends StageMigration
         return $this->classStat;
     }
 
+    public function generate(array $collected, $aliasCfg)
+    {
+        
+    }
+
 }
