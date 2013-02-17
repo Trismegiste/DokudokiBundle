@@ -25,7 +25,7 @@ class InvocationToWhiteMagicTest extends \PhpUnit_Framework_TestCase
     protected $source;
     protected $facade;
     protected $stopWatch;
-    protected $depth = 10;
+    protected $depth = 6;
 
     protected function setUp()
     {
@@ -40,7 +40,7 @@ class InvocationToWhiteMagicTest extends \PhpUnit_Framework_TestCase
     protected function tearDown()
     {
         $delta = microtime(true) - $this->stopWatch;
-        printf("\n%.0f ms\n", 1000 * $delta);
+//        printf("\n%.0f ms\n", 1000 * $delta);
     }
 
     protected function createTree(Fixtures\Branch $node, $lvl)
