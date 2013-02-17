@@ -10,7 +10,8 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
 use Trismegiste\DokudokiBundle\Persistence\RepositoryInterface;
 
 /**
- * StageMigration is ...
+ * StageMigration is a Template Method pattern for creating a migration
+ * service.
  *
  * @author flo
  */
