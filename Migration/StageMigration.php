@@ -19,7 +19,7 @@ abstract class StageMigration
 {
 
     protected $collection;
-    protected $mediator;
+    private $mediator;
 
     public function __construct(\MongoCollection $coll)
     {
