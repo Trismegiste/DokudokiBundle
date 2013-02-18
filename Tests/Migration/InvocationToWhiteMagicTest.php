@@ -48,8 +48,8 @@ class InvocationToWhiteMagicTest extends \PhpUnit_Framework_TestCase
         if ($lvl == 0) {
             return new Fixtures\Leaf();
         } else {
-            $node->append($this->createTree(new Fixtures\Branch(), $lvl - 1));
-            $node->append($this->createTree(new Fixtures\Branch(), $lvl - 1));
+            $node->setLeft($this->createTree(new Fixtures\Branch(), $lvl - 1));
+            $node->setRight($this->createTree(new Fixtures\Branch(), $lvl - 1));
             return $node;
         }
     }

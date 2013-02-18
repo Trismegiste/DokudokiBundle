@@ -36,9 +36,25 @@ class BlackToWhiteMagic extends StageMigration
         return $this->classStat;
     }
 
-    public function generate(array $collected, $aliasCfg)
+    public function generate(array $alias)
     {
+        $result = array();
+        foreach ($alias as $classAlias => $classParam) {
+            print_r($classParam);
+            if (array_key_exists('property', $classParam)) {
+                $template = (array_key_exists('_id', $classParam)) ? 'GetterSetterPersistable' : 'GetterSetterClass';
+            } else {
+                $property = array();
+                $template = 'GetterSetterClass';
+            }
+            $fqcn = $classParam['fqcn'];
+            preg_match('#(.+)\\\\([^\\\\]+)$#', $fqcn, $extract);
+            $classNamespace = $extract[1];
+            $className = $extract[2];
+       //     $result[] = include $template;
+        }
         
+        return $result;
     }
 
 }

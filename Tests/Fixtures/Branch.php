@@ -12,11 +12,17 @@ namespace Trismegiste\DokudokiBundle\Tests\Fixtures;
 class Branch extends Leaf
 {
 
-    protected $vertices;
+    protected $left;
+    protected $right;
 
-    public function append(Leaf $vertex)
+    public function setRight(Leaf $vertex)
     {
-        $this->vertices[] = $vertex;
+        $this->right = $vertex;
+    }
+
+    public function setLeft(Leaf $vertex)
+    {
+        $this->left = $vertex;
     }
 
 }

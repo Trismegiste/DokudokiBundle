@@ -64,12 +64,23 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
     public function testScan()
     {
         $stat = $this->migration->analyse();
-//        print_r($stat);
+
         $this->assertEquals(array(
             'found' => array(
                 'trunk' => 1,
                 'branch' => (1 << $this->depth) - 2,
                 'leaf' => 1 << $this->depth
+            ),
+            'properties' => array(
+                'trunk' => array(
+                    '_id' => true,
+                    'left' => true,
+                    'right' => true,
+                ),
+                'branch' => array(
+                    'left' => true,
+                    'right' => true,
+                )
             ),
             'root' => 1
                 ), $stat);
@@ -82,7 +93,11 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
      */
     public function testGenerate($stat)
     {
-        $this->migration->generate($stat, $aliasCfg);
+        $cfg = \Symfony\Component\Yaml\Yaml::parse(file_get_contents(__DIR__ . '/model1.yml'));
+        $classArray = $this->migration->generate($cfg['alias']);
+        foreach ($classArray as $generatedClass) {
+            eval($generatedClass);
+        }        
     }
 
 }

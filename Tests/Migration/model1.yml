@@ -1,0 +1,14 @@
+alias:
+    leaf:
+        fqcn: Trismegiste\DokudokiBundle\Tests\Fixtures\Leaf
+    branch:
+        fqcn: Trismegiste\DokudokiBundle\Tests\Fixtures\Branch
+        property:
+            - left
+            - right
+    trunk:
+        fqcn: Trismegiste\DokudokiBundle\Tests\Fixtures\Trunk
+        property:
+            - left
+            - right
+            - _id
