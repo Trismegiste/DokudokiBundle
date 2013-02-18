@@ -95,9 +95,10 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
     {
         $cfg = \Symfony\Component\Yaml\Yaml::parse(file_get_contents(__DIR__ . '/model1.yml'));
         $classArray = $this->migration->generate($cfg['alias']);
-        foreach ($classArray as $generatedClass) {
-            eval($generatedClass);
-        }        
+        $this->assertCount(3, $classArray);
+        foreach ($classArray as $idx =>$generated) {
+            file_put_contents("tmp$idx.php", $generated);
+        }
     }
 
 }

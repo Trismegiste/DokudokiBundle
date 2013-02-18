@@ -55,7 +55,7 @@ class BlackToWhiteMagic extends StageMigration
             $className = $extract[2];
             ob_start();
             include __DIR__ . '/../Resources/template/' . $template . '.php';
-            echo ob_get_clean();
+            $result[] = ob_get_clean();
         }
 
         return $result;
