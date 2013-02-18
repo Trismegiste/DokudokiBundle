@@ -4,7 +4,7 @@
  * Template for generating a class with properies, getters and setters
  * in camelCase.
  */
-echo '<?php';
+echo '<?php' . PHP_EOL;
 ?>
 namespace <?php echo $classNamespace ?>;
 
