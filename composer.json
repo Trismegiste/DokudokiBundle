@@ -17,7 +17,8 @@
         "symfony/dependency-injection": "2.1.*",
         "symfony/yaml": "2.1.*",
         "symfony/config": "2.1.*",
-        "symfony/form": "2.1.*"
+        "symfony/form": "2.1.*",
+        "symfony/console": "2.1.*"
     },
     "autoload": {
         "psr-0": {
