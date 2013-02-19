@@ -1,4 +1,4 @@
-# DokudokiBundle
+# DokudokiBundle [![Build Status](https://travis-ci.org/Trismegiste/DokudokiBundle.png?branch=master)](https://travis-ci.org/Trismegiste/DokudokiBundle)
 
 ![Yo dawg Xzibit](./Resources/doc/img/atomicity.jpg)
 
