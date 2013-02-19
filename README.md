@@ -67,6 +67,8 @@ and, for example, don't need to start over after a dirty prototype. You even
 can generate a model with the data you had stored into collections
 when you don't have one.
 
+See [Examples of using this dbal in PHPUnit Tests][*12]
+
 ### Black Magic is black
 If you have no model and a lot of forms to design, start with the "BlackMagic" stage.
 It is full of magic methods, magic mapping and magic documents,
@@ -76,37 +78,33 @@ But be warned :
 it is for prototyping and your database can turn back against you
 if you are not careful. That's what I call "Form Driven Development".
 
+See full example in [unit test][*13]
+
 ```php
-    public function testBlackMagicExample()
-    {
-        // construct a form
-        $form = $this->formFactory
-                ->createBuilder('magic_form', null, array('class_key' => 'product'))
-                ->add('title')
-                ->add('price')
-                ->getForm();
-        // bind data to th form
-        $form->bind(array('title' => 'EF-85 L', 'price' => 2000));
-        $doc = $form->getData();
-        // getting the magic document
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $doc);
-        $this->assertEquals('product', $doc->getClassName());
-        $this->assertEquals('EF-85 L', $doc->getTitle());
-        $this->assertEquals(2000, $doc->getPrice());
-        // persistence with repository
-        $this->repository->persist($doc);
-        // retrieving the content in the MongoDB
-        $dump = $this->collection->findOne(array('_id' => $doc->getId()));
-        $this->assertEquals('product', $dump['-class']);
-        $this->assertEquals('EF-85 L', $dump['title']);
-        $this->assertEquals(2000, $dump['price']);
-        // restoring with repository
-        $restore = $this->repository->findByPk((string) $doc->getId());
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $restore);
-        $this->assertEquals('product', $restore->getClassName());
-        $this->assertEquals('EF-85 L', $restore->getTitle());
-        $this->assertEquals(2000, $restore->getPrice());
-    }
+// construct a form
+$form = $this->formFactory
+        ->createBuilder('magic_form', null, array('class_key' => 'product'))
+        ->add('title')
+        ->add('price')
+        ->getForm();
+// bind data to th form
+$form->bind(array('title' => 'EF-85 L', 'price' => 2000));
+$doc = $form->getData();
+// getting the magic document
+$this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $doc);
+$this->assertEquals('product', $doc->getClassName());
+$this->assertEquals('EF-85 L', $doc->getTitle());
+// persistence with blackmagic repository
+$this->blackmagic->persist($doc);
+// retrieving the content in the MongoDB
+$dump = $this->collection->findOne(array('_id' => $doc->getId()));
+$this->assertEquals('product', $dump['-class']);  // we store a key for the type
+$this->assertEquals('EF-85 L', $dump['title']);
+// restoring with blackmagic repository
+$restore = $this->blackmagic->findByPk((string) $doc->getId());
+$this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $restore);
+$this->assertEquals('product', $restore->getClassName());
+$this->assertEquals('EF-85 L', $restore->getTitle());
 ```
 
 ### Serialization could be enough
@@ -117,12 +115,46 @@ and documents.
 But if you need to make complex queries or map-reduce, it can be
 very dirty. This stage is usefull for RESTful app without GUI.
 
+See full example in [unit test][*14]
+
+```php
+// simple object
+$doc = new \Some\Sample\Product('EF-85 L', 2000);
+// persisting
+$this->invocation->persist($doc);
+// restoring with invocation repository
+$restore = $this->invocation->findByPk((string) $doc->getId());
+$this->assertInstanceOf('Some\Sample\Product', $restore);
+// retrieving the content in the MongoDB
+$dump = $this->collection->findOne(array('_id' => $doc->getId()));
+$this->assertEquals('Some\Sample\Product', $dump['-fqcn']);  // we store the FQCN
+$this->assertEquals('EF-85 L', $dump['title']);
+$this->assertEquals(2000, $dump['price']);
+```
+
 ### White Magic is for Lawful Good
 If you have a good model and the time to carefully alias classes in the database,
 use the "WhiteMagic" stage. There is automapping but without surprise, your model cannot
 turn into chaos.
 
-### Cosmic Balance
+See full example in [unit test][*15]
+
+```php
+// simple object
+$doc = new \Some\Sample\Product('EF-85 L', 2000);
+// persisting
+$this->whitemagic->persist($doc);
+// restoring with whitemagic repository
+$restore = $this->whitemagic->findByPk((string) $doc->getId());
+$this->assertInstanceOf('Some\Sample\Product', $restore);
+// retrieving the content in the MongoDB
+$dump = $this->collection->findOne(array('_id' => $doc->getId()));
+$this->assertEquals('product', $dump['-class']);  // here is the aliasing
+$this->assertEquals('EF-85 L', $dump['title']);
+$this->assertEquals(2000, $dump['price']);
+```
+
+### Hoodoo child
 If you need to evolve the model above, you can use "Hoodoo" stage, a
 "WhiteMagic" stage mixed with some magic from "BlackMagic" stage. There is a
 safety net to prevent some "real" classes to become "fake" classes. This lowers
@@ -218,3 +250,7 @@ This one, I'm pretty sure it is unique ^_^
 [*7]: http://www.elasticsearch.org/
 [*10]: http://en.wikipedia.org/wiki/Keep_it_simple_stupid
 [*11]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/Persistence/RepositoryTest.php#L43
+[*12]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php
+[*13]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L47
+[*14]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L75
+[*15]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L91
