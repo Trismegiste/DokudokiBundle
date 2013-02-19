@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Form {
+namespace Trismegiste\DokudokiBundle\Tests {
 
     use Symfony\Component\Form\Forms,
         Trismegiste\DokudokiBundle\Form\MagicFormType,
@@ -15,7 +15,7 @@ namespace Trismegiste\DokudokiBundle\Tests\Form {
      *
      * @author florent
      */
-    class ReadmeExampleTest extends FunctionalTestForm
+    class ReadmeExampleTest extends \PHPUnit_Framework_TestCase
     {
 
         protected $formFactory;

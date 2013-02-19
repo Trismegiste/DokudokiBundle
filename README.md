@@ -56,7 +56,7 @@ and you store it. It's like serialization but in MongoDB.
 All non static properties are stored in a way you can query easily with the
 powerfull (but very strange I admit) language of MongoDB.
 
-See the [PHPUnit tests][*11] for examples.
+See the [PHPUnit tests][*12] for examples.
 
 ## Four modes of working
 
@@ -249,7 +249,6 @@ This one, I'm pretty sure it is unique ^_^
 [*5]: http://en.wikipedia.org/wiki/Object-relational_mapping
 [*7]: http://www.elasticsearch.org/
 [*10]: http://en.wikipedia.org/wiki/Keep_it_simple_stupid
-[*11]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/Persistence/RepositoryTest.php#L43
 [*12]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php
 [*13]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L47
 [*14]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L75
