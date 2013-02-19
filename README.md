@@ -76,6 +76,39 @@ But be warned :
 it is for prototyping and your database can turn back against you
 if you are not careful. That's what I call "Form Driven Development".
 
+```php
+    public function testBlackMagicExample()
+    {
+        // construct a form
+        $form = $this->formFactory
+                ->createBuilder('magic_form', null, array('class_key' => 'product'))
+                ->add('title')
+                ->add('price')
+                ->getForm();
+        // bind data to th form
+        $form->bind(array('title' => 'EF-85 L', 'price' => 2000));
+        $doc = $form->getData();
+        // getting the magic document
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $doc);
+        $this->assertEquals('product', $doc->getClassName());
+        $this->assertEquals('EF-85 L', $doc->getTitle());
+        $this->assertEquals(2000, $doc->getPrice());
+        // persistence with repository
+        $this->repository->persist($doc);
+        // retrieving the content in the MongoDB
+        $dump = $this->collection->findOne(array('_id' => $doc->getId()));
+        $this->assertEquals('product', $dump['-class']);
+        $this->assertEquals('EF-85 L', $dump['title']);
+        $this->assertEquals(2000, $dump['price']);
+        // restoring with repository
+        $restore = $this->repository->findByPk((string) $doc->getId());
+        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $restore);
+        $this->assertEquals('product', $restore->getClassName());
+        $this->assertEquals('EF-85 L', $restore->getTitle());
+        $this->assertEquals(2000, $restore->getPrice());
+    }
+```
+
 ### Serialization could be enough
 If you have a lot of nearly complete model classes and don't want configure anything,
 use the "Invocation" stage. Only magic mapping and strict typing between objects
@@ -105,6 +138,16 @@ With MDE, the first task is to design and
 code the model. It is difficult to parallelize this part, it's blocking everything
 else to come. Because of constraints of RDBMS, it drives to over-engineering
 (for my experience) and meanwhile, the customer waits and sees nothing.
+
+## About performance
+
+I have not fully tested this dbal but the hydration is the slowest part of this
+layer. For example, one document with 100 entities (think about a customer,
+with his addresses, past orders with products etc...)
+takes about 100 ms to be stored on a standard dual-core desktop without APC.
+
+It is not very efficient but when you seek high performance, you can
+forget about ORM, ODM and so on.
 
 ## FAQ
 
