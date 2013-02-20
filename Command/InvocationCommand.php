@@ -13,6 +13,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Trismegiste\DokudokiBundle\Migration\InvocationToWhiteMagic;
 
 /**
  * InvocationCommand is ...
@@ -61,7 +62,7 @@ class InvocationCommand extends Command implements ContainerAwareInterface
     protected function executeAnalyse(OutputInterface $output)
     {
         $collection = $this->container->get('dokudoki.collection');
-        $service = new \Trismegiste\DokudokiBundle\Migration\InvocationToWhiteMagic($collection);
+        $service = new InvocationToWhiteMagic($collection);
         $report = $service->analyse();
         $output->writeln("dokudoki:");
         $output->writeln(str_repeat(' ', 4) . "alias:");
@@ -73,6 +74,16 @@ class InvocationCommand extends Command implements ContainerAwareInterface
         foreach ($report['missing'] as $key => $dummy) {
             $output->writeln(str_repeat(' ', 8) . "notFound: $key");
         }
+    }
+
+    protected function executeMigrate(OutputInterface $output)
+    {
+        $source = $this->container->get('dokudoki.repository.invocation');
+        $destination = $this->container->get('dokudoki.repository.whitemagic');
+        $collection = $this->container->get('dokudoki.collection');
+        $service = new InvocationToWhiteMagic($collection);
+        $migrated = $service->migrate($source, $destination);
+        $output->writeln("$migrated root entities were migrated.");
     }
 
 }

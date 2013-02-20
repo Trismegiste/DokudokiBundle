@@ -44,11 +44,15 @@ abstract class StageMigration
 
     public function migrate(RepositoryInterface $src, RepositoryInterface $dst)
     {
+        $cardinal = 0;
         $iter = $this->collection->find();
         foreach ($iter as $struc) {
             $old = $src->createFromDb($struc);
             $dst->persist($old);
+            $cardinal++;
         }
+
+        return $cardinal;
     }
 
 }
