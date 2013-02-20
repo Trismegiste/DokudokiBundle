@@ -6,7 +6,7 @@
 
 namespace Trismegiste\DokudokiBundle\Tests\Command;
 
-use Trismegiste\DokudokiBundle\Command\InvocationCommand;
+use Trismegiste\DokudokiBundle\Command\BlackMagicCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -23,7 +23,7 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->application = new Application();
-        $command = new InvocationCommand();
+        $command = new BlackMagicCommand();
         $command->setContainer($this->getContainer());
         $this->application->add($command);
     }
@@ -39,8 +39,8 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
         $collection->expects($this->once())
                 ->method('find')
                 ->will($this->returnValue(array(
-                            array('_id' => $this->getMock('MongoId'), '-fqcn' => 'stdClass', 'data' => 73),
-                            array('_id' => $this->getMock('MongoId'), '-fqcn' => 'H2G2', 'answer' => 42)
+                            array('_id' => $this->getMock('MongoId'), '-class' => 'product', 'data' => 73),
+                            array('_id' => $this->getMock('MongoId'), '-class' => 'user', 'answer' => 42)
                         )));
         $container->set('dokudoki.collection', $collection);
 
@@ -49,20 +49,19 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
 
     public function testAnalyse()
     {
-        $command = $this->application->find('dokudoki:invocation');
+        $command = $this->application->find('dokudoki:blackmagic');
         $commandTester = new CommandTester($command);
         $commandTester->execute(array('command' => $command->getName(), 'action' => 'analyse'));
 
         $parsed = \Symfony\Component\Yaml\Yaml::parse($commandTester->getDisplay());
         $this->assertEquals(
                 array('dokudoki' => array(
-                'alias' => array('stdClass' => 'stdClass'),
-                'missing' => array('notFound' => 'H2G2')
+                'alias' => array('product' => 'F\Q\C\N','user' => 'F\Q\C\N')
                 ))
                 , $parsed);
     }
 
-    public function testMigrate()
+    public function notestMigrate()
     {
         $command = $this->application->find('dokudoki:invocation');
         // I am injecting more services in the container owned by the command (a little ugly, I confess)
