@@ -56,36 +56,16 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
         $parsed = \Symfony\Component\Yaml\Yaml::parse($commandTester->getDisplay());
         $this->assertEquals(
                 array('dokudoki' => array(
-                'alias' => array('product' => 'F\Q\C\N','user' => 'F\Q\C\N')
+                'alias' => array('product' => 'F\Q\C\N', 'user' => 'F\Q\C\N')
                 ))
                 , $parsed);
     }
 
-    public function notestMigrate()
+    public function testGeneration()
     {
-        $command = $this->application->find('dokudoki:invocation');
-        // I am injecting more services in the container owned by the command (a little ugly, I confess)
-        $refl = new \ReflectionObject($command);
-        $prop = $refl->getProperty('container');
-        $prop->setAccessible(true);
-        $container = $prop->getValue($command);
-        // filling container with mockup of Repository for Invocation stage
-        $invoc = $this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Persistence\RepositoryInterface');
-        $invoc->expects($this->exactly(2))
-                ->method('createFromDb')
-                ->with($this->anything())
-                ->will($this->returnValue($this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Persistence\Persistable')));
-        $container->set('dokudoki.repository.invocation', $invoc);
-        // filling container with mockup of Repository for WhiteMagic stage
-        $white = $this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Persistence\RepositoryInterface');
-        $white->expects($this->exactly(2))
-                ->method('persist')
-                ->with($this->anything());
-        $container->set('dokudoki.repository.whitemagic', $white);
-
+        $command = $this->application->find('dokudoki:blackmagic');
         $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName(), 'action' => 'migrate'));
-        $this->assertContains('2 root entities were migrated.', $commandTester->getDisplay());
+        $commandTester->execute(array('command' => $command->getName(), 'action' => 'generate'));
     }
 
 }
