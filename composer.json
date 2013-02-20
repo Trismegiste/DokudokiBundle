@@ -1,6 +1,6 @@
 {
     "name": "trismegiste/dokudoki",
-    "description": "Agnostic schemaless database layer for MongoDB",
+    "description": "Schemaless database layer for MongoDB and helpers for schemaless capabilities",
     "type": "symfony-bundle",
     "keywords": ["dbal", "mongodb", "symfony2"],
     "authors": [
@@ -27,5 +27,5 @@
     },
     "target-dir": "Trismegiste/DokudokiBundle",
     "licence": "CC-BY-SA-3.0",
-    "version": "0.9.2"
+    "version": "0.9.7"
 }
