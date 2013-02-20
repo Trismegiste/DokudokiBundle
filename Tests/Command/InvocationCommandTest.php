@@ -31,6 +31,7 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
     protected function getContainer()
     {
         $container = new \Symfony\Component\DependencyInjection\Container();
+        // filling container with mockup of MongoCollection
         $collection = $this->getMockBuilder('MongoCollection')
                 ->disableOriginalConstructor()
                 ->setMethods(array('find'))
@@ -41,7 +42,6 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
                             array('_id' => $this->getMock('MongoId'), '-fqcn' => 'stdClass', 'data' => 73),
                             array('_id' => $this->getMock('MongoId'), '-fqcn' => 'H2G2', 'answer' => 42)
                         )));
-
         $container->set('dokudoki.collection', $collection);
 
         return $container;
@@ -65,8 +65,28 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
     public function testMigrate()
     {
         $command = $this->application->find('dokudoki:invocation');
+        // I am injecting more service in the container owned by the command (a little ugly, I confess)
+        $refl = new \ReflectionObject($command);
+        $prop = $refl->getProperty('container');
+        $prop->setAccessible(true);
+        $container = $prop->getValue($command);
+        // filling container with mockup of Repository for Invocation stage
+        $invoc = $this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Persistence\RepositoryInterface');
+        $invoc->expects($this->exactly(2))
+                ->method('createFromDb')
+                ->with($this->anything())
+                ->will($this->returnValue($this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Persistence\Persistable')));
+        $container->set('dokudoki.repository.invocation', $invoc);
+        // filling container with mockup of Repository for WhiteMagic stage
+        $white = $this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Persistence\RepositoryInterface');
+        $white->expects($this->exactly(2))
+                ->method('persist')
+                ->with($this->anything());
+        $container->set('dokudoki.repository.whitemagic', $white);
+
         $commandTester = new CommandTester($command);
         $commandTester->execute(array('command' => $command->getName(), 'action' => 'migrate'));
+        $this->assertContains('2 root entities were migrated.', $commandTester->getDisplay());
     }
 
 }
