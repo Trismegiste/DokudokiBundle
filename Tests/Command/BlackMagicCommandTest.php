@@ -11,11 +11,11 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
- * InvocationCommandTest tests the command InvocationCommand
+ * BlackMagicCommandTest tests the command BlackMagicCommand
  *
  * @author flo
  */
-class InvocationCommandTest extends \PHPUnit_Framework_TestCase
+class BlackMagicCommandTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $application;
@@ -36,7 +36,7 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
                 ->disableOriginalConstructor()
                 ->setMethods(array('find'))
                 ->getMock();
-        $collection->expects($this->once())
+        $collection->expects($this->any())
                 ->method('find')
                 ->will($this->returnValue(array(
                             array('_id' => $this->getMock('MongoId'), '-class' => 'product', 'data' => 73),
