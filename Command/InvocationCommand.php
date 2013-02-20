@@ -49,21 +49,30 @@ class InvocationCommand extends Command implements ContainerAwareInterface
     {
         $cmd = $input->getArgument('action');
         switch ($cmd) {
-            case 'analyse' : $this->executeAnalyse();
+            case 'analyse' : $this->executeAnalyse($output);
                 break;
-            case 'migrate' : $this->executeMigrate();
+            case 'migrate' : $this->executeMigrate($output);
                 break;
             default:
                 $output->writeln("<error>Unknown Command $cmd</error>");
         }
     }
 
-    protected function executeAnalyse()
+    protected function executeAnalyse(OutputInterface $output)
     {
         $collection = $this->container->get('dokudoki.collection');
         $service = new \Trismegiste\DokudokiBundle\Migration\InvocationToWhiteMagic($collection);
         $report = $service->analyse();
-        print_r($report);
+        $output->writeln("dokudoki:");
+        $output->writeln(str_repeat(' ', 4) . "alias:");
+        foreach ($report['fqcn'] as $key => $dummy) {
+            preg_match('#([^\\\\]+)$#', $key, $extract);
+            $output->writeln(str_repeat(' ', 8) . "{$extract[1]}: $key");
+        }
+        $output->writeln(str_repeat(' ', 4) . "missing:");
+        foreach ($report['missing'] as $key => $dummy) {
+            $output->writeln(str_repeat(' ', 8) . "notFound: $key");
+        }
     }
 
 }

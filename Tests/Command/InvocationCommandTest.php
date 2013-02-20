@@ -37,7 +37,10 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
                 ->getMock();
         $collection->expects($this->once())
                 ->method('find')
-                ->will($this->returnValue(array(array('_id' => $this->getMock('MongoId'), '-fqcn' => 'H2G2', 'answer' => 42))));
+                ->will($this->returnValue(array(
+                            array('_id' => $this->getMock('MongoId'), '-fqcn' => 'stdClass', 'data' => 73),
+                            array('_id' => $this->getMock('MongoId'), '-fqcn' => 'H2G2', 'answer' => 42)
+                        )));
 
         $container->set('dokudoki.collection', $collection);
 
@@ -50,7 +53,13 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(array('command' => $command->getName(), 'action' => 'analyse'));
 
-        echo $commandTester->getDisplay();
+        $parsed = \Symfony\Component\Yaml\Yaml::parse($commandTester->getDisplay());
+        $this->assertEquals(
+                array('dokudoki' => array(
+                'alias' => array('stdClass' => 'stdClass'),
+                'missing' => array('notFound' => 'H2G2')
+            ))
+                , $parsed);
     }
 
 }
