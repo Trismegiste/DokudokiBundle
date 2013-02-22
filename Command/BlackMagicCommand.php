@@ -63,8 +63,7 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
 
     protected function executeAnalyse($filename, OutputInterface $output)
     {
-        $collection = $this->container->get('dokudoki.collection');
-        $service = new BlackToWhiteMagic($collection, array());
+        $service = $this->container->get('dokudoki.migration.black2white');
         $report = $service->analyse();
         $output->writeln("dokudoki:");
         $output->writeln(str_repeat(' ', 4) . "alias:");
@@ -84,8 +83,7 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
 
     protected function executeGenerate($filename, OutputInterface $output)
     {
-        $collection = $this->container->get('dokudoki.collection');
-        $service = new BlackToWhiteMagic($collection, array());
+        $service = $this->container->get('dokudoki.migration.black2white');
         $cfg = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($filename));
         $generatedClass = $service->generate($cfg['alias']);
         foreach ($generatedClass as $idx => $content) {
