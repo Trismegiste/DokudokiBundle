@@ -31,7 +31,7 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
     {
         $test = new ConnectorTest();
         $this->collection = $test->testCollection();
-        $this->migration = new BlackToWhiteMagic($this->collection);
+        $this->migration = new BlackToWhiteMagic($this->collection, array());
         $this->facade = new Provider($this->collection);
         $this->source = $this->facade->createRepository(new Stage\BlackMagic());
         $this->stopWatch = microtime(true);

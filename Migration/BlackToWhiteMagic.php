@@ -13,12 +13,19 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
 /**
  * BlackToWhiteMagic is a service for migrating from BlackMagic or Hoodoo stages
  * to WhiteMagic stage
- * 
+ *
  */
 class BlackToWhiteMagic extends StageMigration
 {
 
     protected $classStat;
+    protected $aliasConfig;
+
+    public function __construct(\MongoCollection $coll, array $config)
+    {
+        parent::__construct($coll);
+        $this->aliasConfig = $config;
+    }
 
     protected function buildMapper(Mediator $algo)
     {

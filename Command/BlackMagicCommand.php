@@ -40,9 +40,11 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
     {
         $this
                 ->setName('dokudoki:blackmagic')
-                ->setDescription('Analytics and generation for BlackMagic stage')
+                ->setDescription('Analytics and generation for BlackMagic and Hoodoo stages')
                 ->addArgument('action', InputArgument::REQUIRED, 'analyse|generate')
-                ->addOption('config', null, InputOption::VALUE_REQUIRED, 'The statistics filename to dump/use', 'blackmagic.yml');
+                ->addOption('config', null, InputOption::VALUE_REQUIRED, 'The statistics filename to dump/use', 'blackmagic.yml')
+                ->addOption('missing-only', null, InputOption::VALUE_NONE, 'Finds only the missing aliases from the configuration');
+
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -62,7 +64,7 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
     protected function executeAnalyse($filename, OutputInterface $output)
     {
         $collection = $this->container->get('dokudoki.collection');
-        $service = new BlackToWhiteMagic($collection);
+        $service = new BlackToWhiteMagic($collection, array());
         $report = $service->analyse();
         $output->writeln("dokudoki:");
         $output->writeln(str_repeat(' ', 4) . "alias:");
@@ -83,7 +85,7 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
     protected function executeGenerate($filename, OutputInterface $output)
     {
         $collection = $this->container->get('dokudoki.collection');
-        $service = new BlackToWhiteMagic($collection);
+        $service = new BlackToWhiteMagic($collection, array());
         $cfg = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($filename));
         $generatedClass = $service->generate($cfg['alias']);
         foreach ($generatedClass as $idx => $content) {
