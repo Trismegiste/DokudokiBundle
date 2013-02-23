@@ -65,7 +65,7 @@ class BlackToWhiteMagic extends StageMigration
         $result = array();
         foreach ($alias as $classAlias => $classParam) {
 
-            $property = (array_key_exists('property', $classParam)) ? $classParam['property'] : array();
+            $property = (array_key_exists('properties', $classParam)) ? $classParam['properties'] : array();
 
             if (false !== $idx = array_search('_id', $property)) {
                 $template = 'GetterSetterPersistable';

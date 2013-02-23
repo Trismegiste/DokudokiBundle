@@ -86,4 +86,12 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testMigrationService()
+    {
+        $this->assertInstanceOf(
+                'Trismegiste\DokudokiBundle\Migration\BlackToWhiteMagic'
+                , $this->container->get('dokudoki.migration.black2white')
+        );
+    }
+
 }

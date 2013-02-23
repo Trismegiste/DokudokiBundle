@@ -48,5 +48,10 @@
             <argument type="service" id="dokudoki.builder.whitemagic"/>
         </service>
         
+        <service id="dokudoki.migration.black2white" 
+                class="Trismegiste\DokudokiBundle\Migration\BlackToWhiteMagic">
+            <argument type="service" id="dokudoki.collection"/>
+        </service>
+        
     </services>
 </container>

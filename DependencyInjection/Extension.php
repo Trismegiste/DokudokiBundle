@@ -26,6 +26,7 @@ class Extension extends BaseExtension
         $container->getDefinition('dokudoki.connector')->addArgument($config);
         $container->getDefinition('dokudoki.builder.whitemagic')->addArgument($config['alias']);
         $container->getDefinition('dokudoki.builder.hoodoo')->addArgument($config['alias']);
+        $container->getDefinition('dokudoki.migration.black2white')->addArgument($config['alias']);
 
 //        // type mongobindata
 //        $def = new Definition('Trismegiste\MongoSapinBundle\Form\MongoBinDataType');
