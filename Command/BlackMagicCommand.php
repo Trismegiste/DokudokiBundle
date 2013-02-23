@@ -82,9 +82,10 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
     {
         $service = $this->container->get('dokudoki.migration.black2white');
         $cfg = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($filename));
-        $generatedClass = $service->generate($cfg['alias']);
-        foreach ($generatedClass as $idx => $content) {
-            file_put_contents(dirname($filename) . "/class$idx.php", $content);
+        $classParam = $cfg['alias'];
+        $generatedClass = $service->generate($classParam);
+        foreach ($generatedClass as $alias => $content) {
+            file_put_contents(dirname($filename) . "/class_$alias.php", $content);
         }
         $output->writeln(count($generatedClass) . " classes were generated.");
     }

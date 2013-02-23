@@ -102,14 +102,14 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
                     )
                 ),
                 'branch' => array(
-                    'fqcn' => 'Not\Found\FQCN',
+                    'fqcn' => 'Not\Found\FQCN\Branch',
                     'properties' => array(
                         0 => 'left',
                         1 => 'right',
                     )
                 ),
                 'leaf' => array(
-                    'fqcn' => 'Not\Found\FQCN',
+                    'fqcn' => 'Not\Found\FQCN\Leaf',
                 )
             )
                 ), $stat);
@@ -124,7 +124,7 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
         $classArray = $this->migration->generate($cfg['alias']);
         $this->assertCount(3, $classArray);
         foreach ($classArray as $idx => $generated) {
-            file_put_contents(sys_get_temp_dir() . "/tmp$idx.php", $generated);
+            file_put_contents(sys_get_temp_dir() . "/tmp_$idx.php", $generated);
         }
     }
 

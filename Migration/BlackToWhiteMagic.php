@@ -49,7 +49,7 @@ class BlackToWhiteMagic extends StageMigration
         $report = array();
         foreach ($this->classStat['found'] as $alias => $counter) {
             $classReport = array();
-            $classReport['fqcn'] = isset($this->aliasConfig[$alias]) ? $this->aliasConfig[$alias] : 'Not\Found\FQCN';
+            $classReport['fqcn'] = isset($this->aliasConfig[$alias]) ? $this->aliasConfig[$alias] : 'Not\Found\FQCN\\' . ucfirst($alias);
             if (array_key_exists($alias, $this->classStat['properties'])) {
                 foreach ($this->classStat['properties'][$alias] as $prop => $dummy) {
                     $classReport['properties'][] = $prop;
@@ -79,7 +79,7 @@ class BlackToWhiteMagic extends StageMigration
             $className = $extract[2];
             ob_start();
             include __DIR__ . '/../Resources/template/' . $template . '.php';
-            $result[] = ob_get_clean();
+            $result[$classAlias] = ob_get_clean();
         }
 
         return $result;

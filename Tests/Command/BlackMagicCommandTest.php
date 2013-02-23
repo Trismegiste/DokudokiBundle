@@ -63,11 +63,11 @@ class BlackMagicCommandTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(
             'alias' => array(
                 'product' => array(
-                    'fqcn' => 'Not\\Found\\FQCN',
+                    'fqcn' => 'Not\Found\FQCN\Product',
                     'properties' => array('_id', 'data')
                 ),
                 'user' => array(
-                    'fqcn' => 'Not\\Found\\FQCN',
+                    'fqcn' => 'Not\Found\FQCN\User',
                     'properties' => array('_id', 'answer')
             ))), $parsed);
 
