@@ -53,14 +53,31 @@ class BlackMagicCommandTest extends \PHPUnit_Framework_TestCase
         $fchReport = tempnam(sys_get_temp_dir(), 'report');
         $command = $this->application->find('dokudoki:blackmagic');
         $commandTester = new CommandTester($command);
-        $commandTester->execute(
-                array('command' => $command->getName(), 'action' => 'analyse')
-                , array('config' => $fchReport)
-        );
+        $commandTester->execute(array(
+            'command' => $command->getName(),
+            'action' => 'analyse',
+            '--config' => $fchReport
+        ));
 
         $parsed = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($fchReport));
-        $this->assertEquals(
-                array('Report' => array('Aliases' => 2))
+        $this->assertEquals(array(
+            'alias' => array(
+                'product' => array(
+                    'fqcn' => 'Not\\Found\\FQCN',
+                    'properties' => array(
+                        0 => '_id',
+                        1 => 'data',
+                    )
+                ),
+                'user' => array(
+                    'fqcn' => 'Not\\Found\\FQCN',
+                    'properties' => array(
+                        0 => '_id',
+                        1 => 'answer',
+                    )
+                )
+            )
+                )
                 , $parsed);
 
         return $fchReport;
@@ -71,12 +88,12 @@ class BlackMagicCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testGeneration($report)
     {
-        echo $report;
         $command = $this->application->find('dokudoki:blackmagic');
         $commandTester = new CommandTester($command);
         $commandTester->execute(
-                array('command' => $command->getName(), 'action' => 'generate')
-                , array('config' => $report)
+                array('command' => $command->getName(),
+                    'action' => 'generate',
+                    '--config' => $report)
         );
     }
 

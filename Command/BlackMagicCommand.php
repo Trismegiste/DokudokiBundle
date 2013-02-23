@@ -51,6 +51,7 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
     {
         $cmd = $input->getArgument('action');
         $filename = $input->getOption('config');
+
         switch ($cmd) {
             case 'analyse' : $this->executeAnalyse($filename, $output);
                 break;
