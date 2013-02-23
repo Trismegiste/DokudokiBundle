@@ -50,23 +50,34 @@ class BlackMagicCommandTest extends \PHPUnit_Framework_TestCase
 
     public function testAnalyse()
     {
+        $fchReport = tempnam(sys_get_temp_dir(), 'report');
         $command = $this->application->find('dokudoki:blackmagic');
         $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName(), 'action' => 'analyse'));
+        $commandTester->execute(
+                array('command' => $command->getName(), 'action' => 'analyse')
+                , array('config' => $fchReport)
+        );
 
-        $parsed = \Symfony\Component\Yaml\Yaml::parse($commandTester->getDisplay());
+        $parsed = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($fchReport));
         $this->assertEquals(
-                array('dokudoki' => array(
-                'alias' => array('product' => 'F\Q\C\N', 'user' => 'F\Q\C\N')
-                ))
+                array('Report' => array('Aliases' => 2))
                 , $parsed);
+
+        return $fchReport;
     }
 
-    public function testGeneration()
+    /**
+     * @depends testAnalyse
+     */
+    public function testGeneration($report)
     {
+        echo $report;
         $command = $this->application->find('dokudoki:blackmagic');
         $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName(), 'action' => 'generate'));
+        $commandTester->execute(
+                array('command' => $command->getName(), 'action' => 'generate')
+                , array('config' => $report)
+        );
     }
 
 }

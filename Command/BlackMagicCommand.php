@@ -64,21 +64,10 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
     protected function executeAnalyse($filename, OutputInterface $output)
     {
         $service = $this->container->get('dokudoki.migration.black2white');
-        $report = $service->analyse();
-        $output->writeln("dokudoki:");
-        $output->writeln(str_repeat(' ', 4) . "alias:");
-        $dumpConfig = array();
-        foreach ($report['found'] as $alias => $counter) {
-            $dumpConfig['alias'][$alias]['fqcn'] = 'F\Q\C\N';
-            $output->writeln(str_repeat(' ', 8) . "$alias: F\\Q\\C\\N");
-            if (array_key_exists($alias, $report['properties'])) {
-                $dumpConfig['alias'][$alias]['property'] = array();
-                foreach ($report['properties'][$alias] as $prop => $dummy) {
-                    $dumpConfig['alias'][$alias]['property'][] = $prop;
-                }
-            }
-        }
-        file_put_contents($filename, \Symfony\Component\Yaml\Yaml::dump($dumpConfig, 4));
+        $report = $service->filter();
+        $output->writeln("Report:");
+        $output->writeln("  Aliases: ".count($report['alias']));
+        file_put_contents($filename, \Symfony\Component\Yaml\Yaml::dump($report, 4));
     }
 
     protected function executeGenerate($filename, OutputInterface $output)
