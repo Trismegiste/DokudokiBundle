@@ -15,7 +15,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Trismegiste\DokudokiBundle\Migration\InvocationToWhiteMagic;
 
 /**
- * InvocationCommand is ...
+ * InvocationCommand is a migration command.
+ * It searches all entities in the collection and collects the FQCN.
+ * 
+ * It generates a report to help you to create an alias map for WhiteMagic stage
  *
  * @author flo
  */
@@ -58,6 +61,11 @@ class InvocationCommand extends Command implements ContainerAwareInterface
         }
     }
 
+    /**
+     * Generate the report of FQCN
+     * 
+     * @param OutputInterface $output 
+     */
     protected function executeAnalyse(OutputInterface $output)
     {
         $collection = $this->container->get('dokudoki.collection');
@@ -75,6 +83,10 @@ class InvocationCommand extends Command implements ContainerAwareInterface
         }
     }
 
+    /**
+     * Do the migration from Invocation stage to WhiteMagic stage
+     * for all entities (including embedded entities)
+     */
     protected function executeMigrate(OutputInterface $output)
     {
         $source = $this->container->get('dokudoki.repository.invocation');

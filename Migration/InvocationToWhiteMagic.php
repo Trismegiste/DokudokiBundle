@@ -11,9 +11,8 @@ use Trismegiste\DokudokiBundle\Migration\Analyser;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
 
 /**
- * InvocationToWhiteMagic is ...
- *
- * @author flo
+ * InvocationToWhiteMagic is a service for migrating from Invocation stages
+ * to WhiteMagic stage
  */
 class InvocationToWhiteMagic extends StageMigration
 {

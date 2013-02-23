@@ -64,21 +64,12 @@ class BlackMagicCommandTest extends \PHPUnit_Framework_TestCase
             'alias' => array(
                 'product' => array(
                     'fqcn' => 'Not\\Found\\FQCN',
-                    'properties' => array(
-                        0 => '_id',
-                        1 => 'data',
-                    )
+                    'properties' => array('_id', 'data')
                 ),
                 'user' => array(
                     'fqcn' => 'Not\\Found\\FQCN',
-                    'properties' => array(
-                        0 => '_id',
-                        1 => 'answer',
-                    )
-                )
-            )
-                )
-                , $parsed);
+                    'properties' => array('_id', 'answer')
+            ))), $parsed);
 
         return $fchReport;
     }
@@ -95,6 +86,16 @@ class BlackMagicCommandTest extends \PHPUnit_Framework_TestCase
                     'action' => 'generate',
                     '--config' => $report)
         );
+    }
+
+    public function testUnknownCmd()
+    {
+        $command = $this->application->find('dokudoki:blackmagic');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(
+                array('command' => $command->getName(), 'action' => 'reaction')
+        );
+        $this->assertStringStartsWith('Unknown Command reaction', $commandTester->getDisplay());
     }
 
 }

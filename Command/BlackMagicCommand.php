@@ -16,7 +16,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Trismegiste\DokudokiBundle\Migration\BlackToWhiteMagic;
 
 /**
- * BlackMagicCommand is ...
+ * BlackMagicCommand is a migration command.
+ * It searches all magic documents and collects their properties.
+ * 
+ * After generating a report, you can the FQCN for each class and ask
+ * for a code generation in order to replace the magic documents with 
+ * real classes. 
+ * 
+ * You can start from the black magic stage or the hoodoo stage and 
+ * filter
  *
  * @author flo
  */
@@ -44,7 +52,6 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
                 ->addArgument('action', InputArgument::REQUIRED, 'analyse|generate')
                 ->addOption('config', null, InputOption::VALUE_REQUIRED, 'The statistics filename to dump/use', 'blackmagic.yml')
                 ->addOption('missing-only', null, InputOption::VALUE_NONE, 'Finds only the missing aliases from the configuration');
-
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -67,7 +74,7 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
         $service = $this->container->get('dokudoki.migration.black2white');
         $report = $service->filter();
         $output->writeln("Report:");
-        $output->writeln("  Aliases: ".count($report['alias']));
+        $output->writeln("  Aliases: " . count($report['alias']));
         file_put_contents($filename, \Symfony\Component\Yaml\Yaml::dump($report, 4));
     }
 

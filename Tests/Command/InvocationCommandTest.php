@@ -36,7 +36,7 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
                 ->disableOriginalConstructor()
                 ->setMethods(array('find'))
                 ->getMock();
-        $collection->expects($this->once())
+        $collection->expects($this->any())
                 ->method('find')
                 ->will($this->returnValue(array(
                             array('_id' => $this->getMock('MongoId'), '-fqcn' => 'stdClass', 'data' => 73),
@@ -87,6 +87,16 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(array('command' => $command->getName(), 'action' => 'migrate'));
         $this->assertContains('2 root entities were migrated.', $commandTester->getDisplay());
+    }
+
+    public function testUnknownCmd()
+    {
+        $command = $this->application->find('dokudoki:invocation');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(
+                array('command' => $command->getName(), 'action' => 'reaction')
+        );
+        $this->assertStringStartsWith('Unknown Command reaction', $commandTester->getDisplay());
     }
 
 }
