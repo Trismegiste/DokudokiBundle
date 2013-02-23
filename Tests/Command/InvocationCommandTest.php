@@ -71,14 +71,14 @@ class InvocationCommandTest extends \PHPUnit_Framework_TestCase
         $prop->setAccessible(true);
         $container = $prop->getValue($command);
         // filling container with mockup of Repository for Invocation stage
-        $invoc = $this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Persistence\RepositoryInterface');
+        $invoc = $this->getMock('Trismegiste\DokudokiBundle\Persistence\RepositoryInterface');
         $invoc->expects($this->exactly(2))
                 ->method('createFromDb')
                 ->with($this->anything())
-                ->will($this->returnValue($this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Persistence\Persistable')));
+                ->will($this->returnValue($this->getMock('Trismegiste\DokudokiBundle\Persistence\Persistable')));
         $container->set('dokudoki.repository.invocation', $invoc);
         // filling container with mockup of Repository for WhiteMagic stage
-        $white = $this->getMockForAbstractClass('Trismegiste\DokudokiBundle\Persistence\RepositoryInterface');
+        $white = $this->getMock('Trismegiste\DokudokiBundle\Persistence\RepositoryInterface');
         $white->expects($this->exactly(2))
                 ->method('persist')
                 ->with($this->anything());

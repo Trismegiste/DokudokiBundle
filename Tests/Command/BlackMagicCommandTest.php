@@ -42,7 +42,8 @@ class BlackMagicCommandTest extends \PHPUnit_Framework_TestCase
                             array('_id' => $this->getMock('MongoId'), '-class' => 'product', 'data' => 73),
                             array('_id' => $this->getMock('MongoId'), '-class' => 'user', 'answer' => 42)
                         )));
-        $container->set('dokudoki.collection', $collection);
+        $migration = new \Trismegiste\DokudokiBundle\Migration\BlackToWhiteMagic($collection, array());
+        $container->set('dokudoki.migration.black2white', $migration);
 
         return $container;
     }

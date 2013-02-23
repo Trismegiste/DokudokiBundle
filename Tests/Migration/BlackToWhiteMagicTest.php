@@ -31,7 +31,7 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
     {
         $test = new ConnectorTest();
         $this->collection = $test->testCollection();
-        $this->migration = new BlackToWhiteMagic($this->collection, array());
+        $this->migration = new BlackToWhiteMagic($this->collection, array('trunk' => 'Alias\Trunk'));
         $this->facade = new Provider($this->collection);
         $this->source = $this->facade->createRepository(new Stage\BlackMagic());
         $this->stopWatch = microtime(true);
@@ -86,6 +86,33 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
                 ), $stat);
 
         return $stat;
+    }
+
+    public function testFilter()
+    {
+        $stat = $this->migration->filter();
+        $this->assertEquals(array(
+            'alias' => array(
+                'trunk' => array(
+                    'fqcn' => 'Alias\Trunk',
+                    'properties' => array(
+                        0 => '_id',
+                        1 => 'left',
+                        2 => 'right',
+                    )
+                ),
+                'branch' => array(
+                    'fqcn' => 'Not\Found\FQCN',
+                    'properties' => array(
+                        0 => 'left',
+                        1 => 'right',
+                    )
+                ),
+                'leaf' => array(
+                    'fqcn' => 'Not\Found\FQCN',
+                )
+            )
+                ), $stat);
     }
 
     /**
