@@ -1,3 +1,4 @@
+stage: dummy
 server: localhost:27017
 database: Test
 collection: sandbox

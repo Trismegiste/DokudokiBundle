@@ -31,6 +31,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $cfg = $this->processConfig('config_minimal.yml');
         $expected = array(
+            'stage' => 'dummy',
             'server' => 'localhost:27017',
             'database' => 'Test',
             'collection' => 'sandbox',
@@ -52,6 +53,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $cfg = $this->processConfig('config_full.yml');
         $expected = array(
+            'stage' => 'dummy',
             'server' => 'localhost:27017',
             'database' => 'Test',
             'collection' => 'sandbox',

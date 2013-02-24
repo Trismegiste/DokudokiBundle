@@ -19,6 +19,12 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
                 ->children()
+                    ->scalarNode('stage')
+                        ->isRequired()
+                        ->cannotBeEmpty()
+                        ->info('The magic stage used by this application')
+                        ->example('blackmagic')
+                    ->end()
                     ->scalarNode('server')
                         ->isRequired()
                         ->cannotBeEmpty()

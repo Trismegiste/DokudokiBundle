@@ -27,6 +27,8 @@ class Extension extends BaseExtension
         $container->getDefinition('dokudoki.builder.whitemagic')->addArgument($config['alias']);
         $container->getDefinition('dokudoki.builder.hoodoo')->addArgument($config['alias']);
         $container->getDefinition('dokudoki.migration.black2white')->addArgument($config['alias']);
+
+        $container->setAlias('dokudoki.repository', 'dokudoki.repository.' . $config['stage']);
     }
 
     public function getAlias()

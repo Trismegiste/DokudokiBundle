@@ -26,6 +26,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         $this->container = new ContainerBuilder();
         $extension = new Extension();
         $fullConfig = array(
+            'stage' => 'blackmagic',
             'server' => $server,
             'database' => 'Test',
             'collection' => 'sandbox',
@@ -83,6 +84,13 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
                 'Trismegiste\DokudokiBundle\Persistence\Repository', $this->container->get('dokudoki.repository.' . $stage)
+        );
+    }
+
+    public function testDefaultRepository()
+    {
+        $this->assertInstanceOf(
+                'Trismegiste\DokudokiBundle\Persistence\Repository', $this->container->get('dokudoki.repository')
         );
     }
 
