@@ -53,5 +53,13 @@
             <argument type="service" id="dokudoki.collection"/>
         </service>
         
+        <service id="magic_form" class="Trismegiste\DokudokiBundle\Form\MagicFormType">
+            <tag name="form.type"/>    
+        </service>
+
+        <service id="dokudoki_file" class="Trismegiste\DokudokiBundle\Form\MongoBinDataType">
+            <tag name="form.type"/>    
+        </service>
+
     </services>
 </container>
