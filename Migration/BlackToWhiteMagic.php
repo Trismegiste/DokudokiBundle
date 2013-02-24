@@ -43,13 +43,21 @@ class BlackToWhiteMagic extends StageMigration
         return $this->classStat;
     }
 
-    public function filter()
+    public function filter($missingOnly = false)
     {
         $cardinal = parent::analyse();
         $report = array();
         foreach ($this->classStat['found'] as $alias => $counter) {
             $classReport = array();
-            $classReport['fqcn'] = isset($this->aliasConfig[$alias]) ? $this->aliasConfig[$alias] : 'Not\Found\FQCN\\' . ucfirst($alias);
+            if (isset($this->aliasConfig[$alias])) {
+                if ($missingOnly) {
+                    continue;
+                }
+                $fqcn = $this->aliasConfig[$alias];
+            } else {
+                $fqcn = 'Not\Found\FQCN\\' . ucfirst($alias);
+            }
+            $classReport['fqcn'] = $fqcn;
             if (array_key_exists($alias, $this->classStat['properties'])) {
                 foreach ($this->classStat['properties'][$alias] as $prop => $dummy) {
                     $classReport['properties'][] = $prop;

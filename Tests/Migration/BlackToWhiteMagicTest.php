@@ -88,7 +88,7 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
         return $stat;
     }
 
-    public function testFilter()
+    public function testFilterOff()
     {
         $stat = $this->migration->filter();
         $this->assertEquals(array(
@@ -101,6 +101,25 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
                         2 => 'right',
                     )
                 ),
+                'branch' => array(
+                    'fqcn' => 'Not\Found\FQCN\Branch',
+                    'properties' => array(
+                        0 => 'left',
+                        1 => 'right',
+                    )
+                ),
+                'leaf' => array(
+                    'fqcn' => 'Not\Found\FQCN\Leaf',
+                )
+            )
+                ), $stat);
+    }
+
+    public function testFilterOn()
+    {
+        $stat = $this->migration->filter(true);
+        $this->assertEquals(array(
+            'alias' => array(
                 'branch' => array(
                     'fqcn' => 'Not\Found\FQCN\Branch',
                     'properties' => array(
