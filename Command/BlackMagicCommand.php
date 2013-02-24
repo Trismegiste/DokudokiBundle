@@ -58,9 +58,10 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
     {
         $cmd = $input->getArgument('action');
         $filename = $input->getOption('config');
+        $missingOnlyFilter = $input->hasOption('missing-only');
 
         switch ($cmd) {
-            case 'analyse' : $this->executeAnalyse($filename, $output);
+            case 'analyse' : $this->executeAnalyse($filename, $missingOnlyFilter, $output);
                 break;
             case 'generate' : $this->executeGenerate($filename, $output);
                 break;
@@ -69,10 +70,10 @@ class BlackMagicCommand extends Command implements ContainerAwareInterface
         }
     }
 
-    protected function executeAnalyse($filename, OutputInterface $output)
+    protected function executeAnalyse($filename, $missingOnly, OutputInterface $output)
     {
         $service = $this->container->get('dokudoki.migration.black2white');
-        $report = $service->filter();
+        $report = $service->filter($missingOnly);
         $output->writeln("Report:");
         $output->writeln("  Aliases: " . count($report['alias']));
         file_put_contents($filename, \Symfony\Component\Yaml\Yaml::dump($report, 4));
