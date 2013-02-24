@@ -27,16 +27,6 @@ class Extension extends BaseExtension
         $container->getDefinition('dokudoki.builder.whitemagic')->addArgument($config['alias']);
         $container->getDefinition('dokudoki.builder.hoodoo')->addArgument($config['alias']);
         $container->getDefinition('dokudoki.migration.black2white')->addArgument($config['alias']);
-
-//        // type mongobindata
-//        $def = new Definition('Trismegiste\MongoSapinBundle\Form\MongoBinDataType');
-//        $def->addTag('form.type');
-//        $container->setDefinition('mongosapin_file', $def);
-//        // magic form type
-//        $def = new Definition('Trismegiste\MongoSapinBundle\Form\MagicFormType',
-//                        array(new Reference('dokudoki.factory')));
-//        $def->addTag('form.type');
-//        $container->setDefinition('magic_form', $def);
     }
 
     public function getAlias()
