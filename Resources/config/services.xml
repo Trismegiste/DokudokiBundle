@@ -11,8 +11,13 @@
                  factory-service="dokudoki.connector"
                  factory-method="getCollection"/>
 
+        <service id="dokudoki.data_collector.db" class="Trismegiste\DokudokiBundle\Persistence\DataCollector">
+            <tag name="data_collector" template="TrismegisteDokudokiBundle:Profiler:statistics.html.twig" id="mongodb"/>
+        </service>
+
         <service id="dokudoki.facade" class="Trismegiste\DokudokiBundle\Facade\Provider">
             <argument type="service" id="dokudoki.collection" />
+            <argument type="service" id="dokudoki.data_collector.db" />
         </service>
 
         <service id="dokudoki.builder.blackmagic" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\BlackMagic" public="false"/>
@@ -20,45 +25,45 @@
         <service id="dokudoki.builder.hoodoo" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Hoodoo" public="false"/>
         <service id="dokudoki.builder.invocation" class="Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation" public="false"/>
 
-        <service id="dokudoki.repository.blackmagic" 
-                class="Trismegiste\DokudokiBundle\Persistence\Repository"
-                factory-service="dokudoki.facade"
-                factory-method="createRepository">
+        <service id="dokudoki.repository.blackmagic"
+                 class="Trismegiste\DokudokiBundle\Persistence\Repository"
+                 factory-service="dokudoki.facade"
+                 factory-method="createRepository">
             <argument type="service" id="dokudoki.builder.blackmagic"/>
         </service>
-        
-        <service id="dokudoki.repository.invocation" 
-                class="Trismegiste\DokudokiBundle\Persistence\Repository"
-                factory-service="dokudoki.facade"
-                factory-method="createRepository">
+
+        <service id="dokudoki.repository.invocation"
+                 class="Trismegiste\DokudokiBundle\Persistence\Repository"
+                 factory-service="dokudoki.facade"
+                 factory-method="createRepository">
             <argument type="service" id="dokudoki.builder.invocation"/>
         </service>
-            
-        <service id="dokudoki.repository.hoodoo" 
-                class="Trismegiste\DokudokiBundle\Persistence\Repository"
-                factory-service="dokudoki.facade"
-                factory-method="createRepository">
+
+        <service id="dokudoki.repository.hoodoo"
+                 class="Trismegiste\DokudokiBundle\Persistence\Repository"
+                 factory-service="dokudoki.facade"
+                 factory-method="createRepository">
             <argument type="service" id="dokudoki.builder.hoodoo"/>
         </service>
-            
-        <service id="dokudoki.repository.whitemagic" 
-                class="Trismegiste\DokudokiBundle\Persistence\Repository"
-                factory-service="dokudoki.facade"
-                factory-method="createRepository">
+
+        <service id="dokudoki.repository.whitemagic"
+                 class="Trismegiste\DokudokiBundle\Persistence\Repository"
+                 factory-service="dokudoki.facade"
+                 factory-method="createRepository">
             <argument type="service" id="dokudoki.builder.whitemagic"/>
         </service>
-        
-        <service id="dokudoki.migration.black2white" 
-                class="Trismegiste\DokudokiBundle\Migration\BlackToWhiteMagic">
+
+        <service id="dokudoki.migration.black2white"
+                 class="Trismegiste\DokudokiBundle\Migration\BlackToWhiteMagic">
             <argument type="service" id="dokudoki.collection"/>
         </service>
-        
+
         <service id="magic_form" class="Trismegiste\DokudokiBundle\Form\MagicFormType">
-            <tag name="form.type"/>    
+            <tag name="form.type"/>
         </service>
 
         <service id="dokudoki_file" class="Trismegiste\DokudokiBundle\Form\MongoBinDataType">
-            <tag name="form.type"/>    
+            <tag name="form.type"/>
         </service>
 
     </services>
