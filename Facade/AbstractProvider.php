@@ -23,7 +23,7 @@ abstract class AbstractProvider implements ProviderInterface
 
     protected $collection;
 
-    public function __construct(\MongoCollection $coll, Logger $logs )
+    public function __construct(\MongoCollection $coll)
     {
         $this->collection = $coll;
     }
