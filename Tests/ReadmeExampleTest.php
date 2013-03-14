@@ -61,10 +61,6 @@ namespace Trismegiste\DokudokiBundle\Tests {
             $this->assertEquals('EF-85 L', $doc->getTitle());
             // persistence with blackmagic repository
             $this->blackmagic->persist($doc);
-            // retrieving the content in the MongoDB
-            $dump = $this->collection->findOne(array('_id' => $doc->getId()));
-            $this->assertEquals('product', $dump['-class']);
-            $this->assertEquals('EF-85 L', $dump['title']);
             // restoring with blackmagic repository
             $restore = $this->blackmagic->findByPk((string) $doc->getId());
             $this->assertInstanceOf('Trismegiste\DokudokiBundle\Magic\Document', $restore);

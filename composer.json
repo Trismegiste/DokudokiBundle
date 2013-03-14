@@ -18,7 +18,8 @@
         "symfony/yaml": "2.1.*",
         "symfony/config": "2.1.*",
         "symfony/form": "2.1.*",
-        "symfony/console": "2.1.*"
+        "symfony/console": "2.1.*",
+        "nikic/php-parser": "0.9.x-dev"
     },
     "autoload": {
         "psr-0": {
