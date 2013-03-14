@@ -13,12 +13,12 @@
         "php": ">=5.3.8"
     },
     "require-dev": {
-        "symfony/http-kernel": "2.1.*",
-        "symfony/dependency-injection": "2.1.*",
-        "symfony/yaml": "2.1.*",
-        "symfony/config": "2.1.*",
-        "symfony/form": "2.1.*",
-        "symfony/console": "2.1.*",
+        "symfony/http-kernel": "2.2.*",
+        "symfony/dependency-injection": "2.2.*",
+        "symfony/yaml": "2.2.*",
+        "symfony/config": "2.2.*",
+        "symfony/form": "2.2.*",
+        "symfony/console": "2.2.*",
         "nikic/php-parser": "0.9.x-dev"
     },
     "autoload": {
@@ -28,5 +28,5 @@
     },
     "target-dir": "Trismegiste/DokudokiBundle",
     "license": "CC-BY-SA-3.0",
-    "version": "1.0"
+    "version": "1.1"
 }
