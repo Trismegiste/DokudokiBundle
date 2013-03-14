@@ -62,7 +62,6 @@ class FunWithParserTest extends \PHPUnit_Framework_TestCase
     {
         $ret = $this->repo->findByPk($pk);
         $code = file_get_contents($this->refl->getFileName());
-        echo $this->stripWhiteSpace($ret);
         $this->assertEquals($this->stripWhiteSpace($code), $this->stripWhiteSpace('<?php ' . $ret));
     }
 
