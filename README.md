@@ -35,7 +35,7 @@ Use Composer like any other PHP package :
 ### Legacy for Symfony 2.1
 ```
     "require": {
-        "trismegiste/dokudoki": "Symfony2.1"
+        "trismegiste/dokudoki": "dev-Symfony2.1"
     },
 ```
 
