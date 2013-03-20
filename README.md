@@ -21,6 +21,24 @@ In my quest for rapid development
 and the "Don't repeat yourself", I try to make an agnostic DBAL which *helps*
 you in the process to build an app regardless the model is finished or not.
 
+## How
+
+Use Composer like any other PHP package :
+
+### For Symfony 2.2
+```
+    "require": {
+        "trismegiste/dokudoki": "dev-master"
+    },
+```
+
+### Legacy for Symfony 2.1
+```
+    "require": {
+        "trismegiste/dokudoki": "Symfony2.1"
+    },
+```
+
 ## Why
 
 Because, like the cake, "ODM is a lie". Turning MongoDB into an ORM-like
