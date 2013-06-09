@@ -1,0 +1,18 @@
+# Mondrian - static code analysis configuration
+# More info at https://github.com/Trismegiste/Mondrian
+graph:
+    calling:
+        'Trismegiste\DokudokiBundle\DependencyInjection\Extension::load':
+            ignore:
+                - 'Trismegiste\DokudokiBundle\DependencyInjection\Extension::load'
+        'Trismegiste\DokudokiBundle\Facade\AbstractProvider::createRepository':
+            ignore:
+                - 'Trismegiste\DokudokiBundle\Transform\TransformerInterface::create'
+        'Trismegiste\DokudokiBundle\Form\MagicMapper::mapDataToForms':
+            ignore:
+                - 'Trismegiste\DokudokiBundle\Form\MagicFormType::getName'
+                - 'Trismegiste\DokudokiBundle\Form\MongoBinDataType::getName'
+                - 'Trismegiste\DokudokiBundle\Persistence\DataCollector::getName'
+        'Trismegiste\DokudokiBundle\Persistence\Repository::createFromDb':
+            ignore:
+                - 'Trismegiste\DokudokiBundle\Transform\Delegation\MappingDirector::create'
