@@ -12,7 +12,7 @@ namespace Trismegiste\DokudokiBundle\Utils;
  *
  * @author flo
  */
-class InjectionClass extends ReflectionClassBC
+class InjectionClass extends \ReflectionClass
 {
 
     /**
