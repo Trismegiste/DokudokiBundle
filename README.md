@@ -225,11 +225,6 @@ No
 ### What about MongoDate ?
 Any DateTime are converted into MongoDate and vice versa.
 
-### I have seen the ReflectionClassBC, it is ugly
-That's right. [PHPUnit does the same for Mockup][*4], by the way.
-But the gain is you don't require PHP 5.4 to use
-this lib. And this hack is encapsuled and can be easily removed.
-
 ### I see you're using mongo types in your classes model, what about abstraction ?
 Abstraction is good but seriously, we're talking about performance here...
 Have you ever switch an app to another database ?
