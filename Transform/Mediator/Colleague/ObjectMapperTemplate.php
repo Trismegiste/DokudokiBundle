@@ -55,7 +55,7 @@ abstract class ObjectMapperTemplate extends AbstractMapper
             // set the value
             $reflector->injectProperty($obj, $key, $mapped);
         }
-        $reflector->fixHackBC($obj);
+
         // wakeup the object
         if ($obj instanceof Cleanable) {
             $obj->wakeup();
