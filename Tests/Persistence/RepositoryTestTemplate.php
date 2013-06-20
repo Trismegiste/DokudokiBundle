@@ -40,7 +40,7 @@ abstract class RepositoryTestTemplate extends \PHPUnit_Framework_TestCase
      */
     public function testNotFound()
     {
-        $obj = $this->repo->findByPk(666);
+        $obj = $this->repo->findByPk('49a702d5450046d3d515d10d');
     }
 
     abstract protected function getSimpleObject();
@@ -153,7 +153,7 @@ abstract class RepositoryTestTemplate extends \PHPUnit_Framework_TestCase
                 ->method('create')
                 ->will($this->returnValue(new \stdClass()));
         $repo = new Repository($collection, $factory);
-        $repo->findByPk(123);
+        $repo->findByPk('49a702d5450046d3d515d10d');
     }
 
     /**
