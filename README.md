@@ -197,9 +197,22 @@ forget about ORM, ODM and so on.
 
 ## FAQ
 
+### Is Symfony2 mandatory ?
+No, the DBAL can work in standalone mode. Anyway you miss a lot of features with
+forms and black magic stage. The full framework itself is not mandatory, only
+some components. And almost all unit tests don't need any symfony component.
+For example, you could easily make a provider for silex and pimple.
+
+### What are the requirements ?
+ * PHP >= 5.4 
+ * PECL Mongo extension >= 1.3
+ * The dev-master runs with Symfony2.3 and there are branches for 2.1 and 2.2
+
 ### How to map properties ?
 All *object's* properties are stored. You have only one thing to do :
-The root classes must implement the Persistable interface.
+The root classes must implement the Persistable interface
+(there is a trait for implementing this interface). You don't need to extend
+any particuliar class, therefore you can follow the DDD without constraint.
 
 ### What is a "root class" ?
 It is a class stored in the collection, which contains the MongoId in the key '_id'.
@@ -226,24 +239,19 @@ No
 Any DateTime are converted into MongoDate and vice versa.
 
 ### I see you're using mongo types in your classes model, what about abstraction ?
-Abstraction is good but seriously, we're talking about performance here...
-Have you ever switch an app to another database ?
+Seriously, have you ever switch an app to another database ?
 
 ### Is there any other constraints you have used ?
+* No mandatory inheritance for model except one interface (for DDD concern)
 * Minimum number of switch because it is hidden inheritance
 * No more than 5 methods per class
 * No method longer than 20 NCLOC
 * No static because it is global
 * SRP, OCP, LSP, ISP, DIP at maximum level
-* coupling at minimum level
+* coupling at minimum level (checked with [Mondrian][*16] )
 
 ### Is there any lazy loading or proxy classes for DBRef ?
 Fly, you fools
-
-## TODO
-
- * Storing DBRef properly but no automagic or whatsoever
- * Make a Trait for Persistable
 
 ## Why this silly name ?
 Well, I'm not good at finding names, that's why I tend to keep the most ridiculous
@@ -262,3 +270,4 @@ This one, I'm pretty sure it is unique ^_^
 [*13]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L47
 [*14]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L75
 [*15]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L91
+[*16]: https://github.com/Trismegiste/Mondrian
