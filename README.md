@@ -25,17 +25,17 @@ you in the process to build an app regardless the model is finished or not.
 
 Use Composer like any other PHP package :
 
-### For Symfony 2.2
+### For Symfony 2.3
 ```
     "require": {
         "trismegiste/dokudoki": "dev-master"
     },
 ```
 
-### Legacy for Symfony 2.1
+### Legacy for Symfony 2.x
 ```
     "require": {
-        "trismegiste/dokudoki": "dev-Symfony2.1"
+        "trismegiste/dokudoki": "dev-Symfony2.x"
     },
 ```
 
@@ -204,7 +204,7 @@ some components. And almost all unit tests don't need any symfony component.
 For example, you could easily make a provider for silex and pimple.
 
 ### What are the requirements ?
- * PHP >= 5.4 
+ * PHP >= 5.4
  * PECL Mongo extension >= 1.3
  * The dev-master runs with Symfony2.3 and there are branches for 2.1 and 2.2
 
