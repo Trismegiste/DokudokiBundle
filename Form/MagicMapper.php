@@ -16,7 +16,7 @@ use Symfony\Component\Form\DataMapperInterface;
 class MagicMapper implements DataMapperInterface
 {
 
-    public function mapDataToForms($data, array $forms)
+    public function mapDataToForms($data, $forms)
     {
         if (!is_null($data)) {
             $iter = $data->getIterator();
@@ -30,7 +30,7 @@ class MagicMapper implements DataMapperInterface
         }
     }
 
-    public function mapFormsToData(array $forms, &$data)
+    public function mapFormsToData($forms, &$data)
     {
         foreach ($forms as $key => $field) {
             call_user_func(array($data, 'set' . ucfirst($key)), $field->getData());
