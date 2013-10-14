@@ -30,6 +30,7 @@ class Invocation extends AbstractStage
     public function createObject(TypeRegistry $algo)
     {
         new Colleague\MapSkippable($algo);
+        new Colleague\PhpCollection($algo);
         new Colleague\MapObject($algo);
     }
 
