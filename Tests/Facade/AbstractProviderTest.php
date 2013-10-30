@@ -1,6 +1,6 @@
 <?php
 
-namespace Trismegiste\DokudokiBundle\Tests\Facade;
+namespace tests\Facade;
 
 use Trismegiste\DokudokiBundle\Facade\AbstractProvider;
 

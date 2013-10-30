@@ -9,7 +9,7 @@ namespace Trismegiste\DokudokiBundle\Transform\Tests;
 use Trismegiste\DokudokiBundle\Transform\Transformer;
 use Trismegiste\DokudokiBundle\Transform\Delegation\MappingDirector;
 use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation;
-use Trismegiste\DokudokiBundle\Tests\Fixtures\IntoVoid;
+use tests\Fixtures\IntoVoid;
 
 /**
  * TransformerTest test for Transformer

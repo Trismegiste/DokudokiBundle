@@ -4,7 +4,7 @@
  * mongosain
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\DependencyInjection;
+namespace tests\DependencyInjection;
 
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Config\Definition\Processor;
@@ -59,10 +59,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             'collection' => 'sandbox',
             'alias' => array(
                 'default' => 'stdClass',
-                'cart' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\Cart',
-                'hybernate' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\Bear',
-                'product' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\Product',
-                'checkCall' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\VerifMethod',
+                'cart' => 'tests\Fixtures\Cart',
+                'hybernate' => 'tests\Fixtures\Bear',
+                'product' => 'tests\Fixtures\Product',
+                'checkCall' => 'tests\Fixtures\VerifMethod',
             )
         );
         $this->assertEquals($expected, $cfg);

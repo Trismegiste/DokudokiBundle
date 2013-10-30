@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Example;
+namespace tests\Example;
 
 use Trismegiste\DokudokiBundle\Persistence\Persistable;
 

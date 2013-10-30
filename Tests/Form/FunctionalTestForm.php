@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Form;
+namespace tests\Form;
 
 use Symfony\Component\Form\Forms;
 use Trismegiste\DokudokiBundle\Form\MagicFormType;

@@ -4,7 +4,7 @@
  * Dokudokibundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Fixtures;
+namespace tests\Fixtures;
 
 class InvocStress extends Simple
 {

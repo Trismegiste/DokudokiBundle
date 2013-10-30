@@ -4,10 +4,10 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Transform\Delegation\Stage;
+namespace tests\Transform\Delegation\Stage;
 
 use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\WhiteMagic;
-use Trismegiste\DokudokiBundle\Tests\Fixtures;
+use tests\Fixtures;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapAlias;
 
 /**
@@ -19,7 +19,7 @@ class WhiteMagicTest extends AbstractStageTest
 
     protected function createBuilder()
     {
-        $fixture = 'Trismegiste\DokudokiBundle\Tests\Fixtures';
+        $fixture = 'tests\Fixtures';
         $alias = array(
             'default' => 'stdClass',
             'Cart' => $fixture . '\Cart',
@@ -85,7 +85,7 @@ class WhiteMagicTest extends AbstractStageTest
         $obj = new Fixtures\VerifMethod(100);
         $dump = $this->mediator->recursivDesegregate($obj);
         $restore = $this->mediator->recursivCreate($dump);
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Tests\Fixtures\VerifMethod', $restore);
+        $this->assertInstanceOf('tests\Fixtures\VerifMethod', $restore);
         $this->assertEquals(119.6, $restore->getTotal());
     }
 

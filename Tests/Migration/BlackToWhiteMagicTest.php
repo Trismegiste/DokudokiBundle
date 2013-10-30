@@ -4,10 +4,10 @@
  * Dokudokibundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Migration;
+namespace tests\Migration;
 
 use Trismegiste\DokudokiBundle\Migration\BlackToWhiteMagic;
-use Trismegiste\DokudokiBundle\Tests\Persistence\ConnectorTest;
+use tests\Persistence\ConnectorTest;
 use Trismegiste\DokudokiBundle\Facade\Provider;
 use Trismegiste\DokudokiBundle\Transform\Delegation\Stage;
 use Trismegiste\DokudokiBundle\Magic\Document;

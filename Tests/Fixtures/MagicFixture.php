@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Fixtures;
+namespace tests\Fixtures;
 
 use Trismegiste\DokudokiBundle\Magic\Document;
 

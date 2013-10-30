@@ -31,7 +31,7 @@ namespace Trismegiste\DokudokiBundle\Tests {
                     ->addType(new MagicFormType())
                     ->getFormFactory();
 
-            $connector = new \Trismegiste\DokudokiBundle\Tests\Persistence\ConnectorTest();
+            $connector = new \tests\Persistence\ConnectorTest();
             $this->collection = $connector->testCollection();
             $facade = new \Trismegiste\DokudokiBundle\Facade\Provider($this->collection);
             $this->blackmagic = $facade->createRepository(new Stage\BlackMagic());

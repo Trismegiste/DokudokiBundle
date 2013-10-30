@@ -4,10 +4,10 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Persistence;
+namespace tests\Persistence;
 
 use Trismegiste\DokudokiBundle\Persistence\Repository;
-use Trismegiste\DokudokiBundle\Tests\Fixtures;
+use tests\Fixtures;
 
 /**
  * Test repository with Invocation stage
@@ -24,7 +24,7 @@ class RepositoryInvocationTest extends RepositoryTestTemplate
 
     protected function getSimpleObject()
     {
-        $obj = new \Trismegiste\DokudokiBundle\Tests\Fixtures\Simple();
+        $obj = new \tests\Fixtures\Simple();
         $obj->answer = 42;
         return $obj;
     }
@@ -46,17 +46,17 @@ class RepositoryInvocationTest extends RepositoryTestTemplate
 
     public function getComplexObject()
     {
-        $obj = new \Trismegiste\DokudokiBundle\Tests\Fixtures\InvocStress();
+        $obj = new \tests\Fixtures\InvocStress();
         $tmp = new \DateTime('2013-02-14 08:20:08');
         $dump = array(
-            '-fqcn' => 'Trismegiste\\DokudokiBundle\\Tests\\Fixtures\\InvocStress',
+            '-fqcn' => 'tests\\Fixtures\\InvocStress',
             'floatVar' => 3.14159265,
             'binaryVar' => new \MongoBinData('299792458', 2),
             'dateVar' => new \MongoDate($tmp->getTimestamp(), 0),
             'stringVar' => 'H Psi = E . Psi',
             'intVar' => 73,
             'objVar' => array(
-                '-fqcn' => 'Trismegiste\\DokudokiBundle\\Tests\\Fixtures\\Simple',
+                '-fqcn' => 'tests\\Fixtures\\Simple',
                 'id' => NULL,
                 'answer' => 'eureka',
             ),

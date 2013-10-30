@@ -4,7 +4,7 @@
  * Dokudokibundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Persistence;
+namespace tests\Persistence;
 
 /**
  * PersistableImplTest tests the trait for Persistable

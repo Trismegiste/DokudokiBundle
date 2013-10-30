@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Transform\Mediator\Colleague;
+namespace tests\Transform\Mediator\Colleague;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapObject;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;

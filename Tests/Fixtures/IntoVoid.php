@@ -4,7 +4,7 @@
  * Dokudoki
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Fixtures;
+namespace tests\Fixtures;
 
 use Trismegiste\DokudokiBundle\Transform\Skippable;
 

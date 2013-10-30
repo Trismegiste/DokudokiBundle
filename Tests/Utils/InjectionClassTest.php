@@ -4,7 +4,7 @@
  * DokudoiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Utils;
+namespace tests\Utils;
 
 use Trismegiste\DokudokiBundle\Utils\InjectionClass;
 

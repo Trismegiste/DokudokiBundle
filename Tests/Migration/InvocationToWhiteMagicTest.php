@@ -4,13 +4,13 @@
  * Dokudokibundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Migration;
+namespace tests\Migration;
 
 use Trismegiste\DokudokiBundle\Migration\InvocationToWhiteMagic;
-use Trismegiste\DokudokiBundle\Tests\Persistence\ConnectorTest;
+use tests\Persistence\ConnectorTest;
 use Trismegiste\DokudokiBundle\Facade\Provider;
 use Trismegiste\DokudokiBundle\Transform\Delegation\Stage;
-use Trismegiste\DokudokiBundle\Tests\Fixtures;
+use tests\Fixtures;
 
 /**
  * InvocationToWhiteMagicTest is ...
@@ -68,9 +68,9 @@ class InvocationToWhiteMagicTest extends \PhpUnit_Framework_TestCase
         $this->assertEquals(array(
             'missing' => array(),
             'fqcn' => array(
-                'Trismegiste\\DokudokiBundle\\Tests\\Fixtures\\Trunk' => 1,
-                'Trismegiste\\DokudokiBundle\\Tests\\Fixtures\\Branch' => (1 << $this->depth) - 2,
-                'Trismegiste\\DokudokiBundle\\Tests\\Fixtures\\Leaf' => 1 << $this->depth
+                'tests\Fixtures\Trunk' => 1,
+                'tests\Fixtures\Branch' => (1 << $this->depth) - 2,
+                'tests\Fixtures\Leaf' => 1 << $this->depth
             ),
             'root' => 1
                 ), $stat);

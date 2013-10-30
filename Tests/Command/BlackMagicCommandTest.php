@@ -4,7 +4,7 @@
  * Dokudokibundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Command;
+namespace tests\Command;
 
 use Trismegiste\DokudokiBundle\Command\BlackMagicCommand;
 use Symfony\Component\Console\Application;

@@ -4,9 +4,9 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Form;
+namespace tests\Form;
 
-use Trismegiste\DokudokiBundle\Tests\Form\ProductType;
+use tests\Form\ProductType;
 use Trismegiste\DokudokiBundle\Magic\Document;
 
 /**

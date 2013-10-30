@@ -4,9 +4,9 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Example;
+namespace tests\Example;
 
-use Trismegiste\DokudokiBundle\Tests\Persistence\ConnectorTest;
+use tests\Persistence\ConnectorTest;
 use Trismegiste\DokudokiBundle\Facade\Provider;
 
 /**
@@ -27,7 +27,7 @@ class FunWithParserTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->refl = new \ReflectionClass('Trismegiste\DokudokiBundle\Tests\Fixtures\Branch');
+        $this->refl = new \ReflectionClass('tests\Fixtures\Branch');
         $test = new ConnectorTest();
         $this->collection = $test->testCollection();
         $facade = new Provider($this->collection);

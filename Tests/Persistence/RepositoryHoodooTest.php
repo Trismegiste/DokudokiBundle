@@ -4,11 +4,11 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Persistence;
+namespace tests\Persistence;
 
 use Trismegiste\DokudokiBundle\Persistence\Repository;
 use Trismegiste\DokudokiBundle\Magic\Document;
-use Trismegiste\DokudokiBundle\Tests\Fixtures;
+use tests\Fixtures;
 
 /**
  * Test repository with Hoodoo stage
@@ -20,7 +20,7 @@ class RepositoryHoodooTest extends RepositoryWhiteMagicTest
 
     protected function createBuilder()
     {
-        $fixture = 'Trismegiste\DokudokiBundle\Tests\Fixtures';
+        $fixture = 'tests\Fixtures';
         $alias = array(
             'simple' => $fixture . '\Simple',
             'Order' => $fixture . '\Order',

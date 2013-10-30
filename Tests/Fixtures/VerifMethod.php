@@ -4,7 +4,7 @@
  * Dokudoki
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Fixtures;
+namespace tests\Fixtures;
 
 class VerifMethod
 {

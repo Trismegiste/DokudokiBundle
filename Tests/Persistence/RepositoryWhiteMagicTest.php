@@ -4,11 +4,11 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Persistence;
+namespace tests\Persistence;
 
 use Trismegiste\DokudokiBundle\Persistence\Repository;
 use Trismegiste\DokudokiBundle\Facade\Provider;
-use Trismegiste\DokudokiBundle\Tests\Fixtures;
+use tests\Fixtures;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapAlias;
 
 /**
@@ -21,7 +21,7 @@ class RepositoryWhiteMagicTest extends RepositoryTestTemplate
 
     protected function createBuilder()
     {
-        $fixture = 'Trismegiste\DokudokiBundle\Tests\Fixtures';
+        $fixture = 'tests\Fixtures';
         $alias = array(
             'simple' => $fixture . '\Simple',
             'Order' => $fixture . '\Order',
@@ -34,7 +34,7 @@ class RepositoryWhiteMagicTest extends RepositoryTestTemplate
 
     protected function getSimpleObject()
     {
-        $obj = new \Trismegiste\DokudokiBundle\Tests\Fixtures\Simple();
+        $obj = new \tests\Fixtures\Simple();
         $obj->answer = 42;
         return $obj;
     }
@@ -91,7 +91,7 @@ class RepositoryWhiteMagicTest extends RepositoryTestTemplate
 
     public function getCleanable()
     {
-        $obj = new \Trismegiste\DokudokiBundle\Tests\Fixtures\Simple();
+        $obj = new \tests\Fixtures\Simple();
         $obj->answer = new Fixtures\Bear();
         $dump = array(
             MapAlias::CLASS_KEY => 'simple',

@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Persistence;
+namespace tests\Persistence;
 
 use Trismegiste\DokudokiBundle\Persistence\Connector;
 

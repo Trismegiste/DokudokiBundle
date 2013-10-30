@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Transform\Delegation\Stage;
+namespace tests\Transform\Delegation\Stage;
 
 use Trismegiste\DokudokiBundle\Transform\Delegation\MappingDirector;
 

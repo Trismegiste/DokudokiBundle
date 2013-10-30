@@ -4,7 +4,7 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Transform\Mediator\Colleague;
+namespace tests\Transform\Mediator\Colleague;
 
 /**
  * Design pattern : Template method

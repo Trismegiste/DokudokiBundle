@@ -4,11 +4,11 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Transform\Delegation\Stage;
+namespace tests\Transform\Delegation\Stage;
 
 use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\BlackMagic;
 use Trismegiste\DokudokiBundle\Magic\Document;
-use Trismegiste\DokudokiBundle\Tests\Fixtures\MagicFixture;
+use tests\Fixtures\MagicFixture;
 
 /**
  * test for Mediator created by BlackMagic builder

@@ -4,7 +4,7 @@
  * sf2ffbp
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Form;
+namespace tests\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

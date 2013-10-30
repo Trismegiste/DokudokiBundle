@@ -4,7 +4,7 @@
  * Dokudoki test
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\DependencyInjection;
+namespace tests\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Trismegiste\DokudokiBundle\DependencyInjection\Extension;
@@ -32,10 +32,10 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
             'collection' => 'sandbox',
             'alias' => array(
                 'default' => 'stdClass',
-                'cart' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\Cart',
-                'hybernate' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\Bear',
-                'product' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\Product',
-                'checkCall' => 'Trismegiste\DokudokiBundle\Tests\Fixtures\VerifMethod',
+                'cart' => 'tests\Fixtures\Cart',
+                'hybernate' => 'tests\Fixtures\Bear',
+                'product' => 'tests\Fixtures\Product',
+                'checkCall' => 'tests\Fixtures\VerifMethod',
             )
         );
         $extension->load(array($fullConfig), $this->container);

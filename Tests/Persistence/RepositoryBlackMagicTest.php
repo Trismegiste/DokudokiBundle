@@ -4,10 +4,10 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Persistence;
+namespace tests\Persistence;
 
 use Trismegiste\DokudokiBundle\Magic\Document;
-use Trismegiste\DokudokiBundle\Tests\Fixtures\MagicFixture;
+use tests\Fixtures\MagicFixture;
 
 /**
  * Test repository with BlackMagic stage

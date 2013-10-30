@@ -4,14 +4,13 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Form;
+namespace tests\Form;
 
-use Trismegiste\DokudokiBundle\Tests\Form\FunctionalTestForm;
+use tests\Form\FunctionalTestForm;
 use Trismegiste\DokudokiBundle\Form\MongoBinDataType;
 
 /**
- * MongoFileTypeTest is a test for the MongoBinDataType
- * @author florent
+ * MongoBinDataTypeTest is a test for the MongoBinDataType
  */
 class MongoBinDataTypeTest extends FunctionalTestForm
 {
@@ -47,7 +46,7 @@ class MongoBinDataTypeTest extends FunctionalTestForm
         $file
                 ->expects($this->any())
                 ->method('getRealPath')
-                ->will($this->returnValue('./Resources/doc/img/atomicity.jpg'));
+                ->will($this->returnValue(__DIR__ . '/../../doc/img/atomicity.jpg'));
 
         $form = $this->formFactory->create(new MongoBinDataType());
         $form->bind($file);

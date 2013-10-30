@@ -4,10 +4,10 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests\Transform\Delegation\Stage;
+namespace tests\Transform\Delegation\Stage;
 
 use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Invocation;
-use Trismegiste\DokudokiBundle\Tests\Fixtures;
+use tests\Fixtures;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapObject;
 
 /**
@@ -34,7 +34,7 @@ class InvocationTest extends AbstractStageTest
         $obj2->addItem(3, new Fixtures\Product('EF85L', 1999));
         $obj2->addItem(1, new Fixtures\Product('Bike', 650));
 
-        $fixture = 'Trismegiste\DokudokiBundle\Tests\Fixtures';
+        $fixture = 'tests\Fixtures';
         $dump2 = array(
             MapObject::FQCN_KEY => $fixture . '\Cart',
             'address' => '86 fdfg de fdf',
@@ -59,7 +59,27 @@ class InvocationTest extends AbstractStageTest
                 )
             )
         );
-        return array(array($obj, $dump), array($obj2, $dump2));
+
+        $obj3 = new Fixtures\CartPlus();
+        $obj3->addItem(3, new Fixtures\Product('EF85L', 1999));
+        $dump3 = [
+            MapObject::FQCN_KEY => $fixture . '\CartPlus',
+            'row' => [
+                MapObject::FQCN_KEY => 'SplObjectStorage',
+                'content' => [
+                    'key' => [
+                        [
+                            MapObject::FQCN_KEY => $fixture . '\Product',
+                            'title' => 'EF85L',
+                            'price' => 1999
+                        ]
+                    ],
+                    'value' => [3]
+                ]
+            ]
+        ];
+
+        return array(array($obj, $dump), array($obj2, $dump2), [$obj3, $dump3]);
     }
 
     public function getDataToDb()
@@ -79,7 +99,7 @@ class InvocationTest extends AbstractStageTest
         $obj = new Fixtures\VerifMethod(100);
         $dump = $this->mediator->recursivDesegregate($obj);
         $restore = $this->mediator->recursivCreate($dump);
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Tests\Fixtures\VerifMethod', $restore);
+        $this->assertInstanceOf('tests\Fixtures\VerifMethod', $restore);
         $this->assertEquals(119.6, $restore->getTotal());
     }
 

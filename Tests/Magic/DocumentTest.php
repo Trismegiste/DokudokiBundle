@@ -1,6 +1,6 @@
 <?php
 
-namespace Trismegiste\DokudokiBundle\Tests\Magic;
+namespace tests\Magic;
 
 use Trismegiste\DokudokiBundle\Magic\Document;
 
