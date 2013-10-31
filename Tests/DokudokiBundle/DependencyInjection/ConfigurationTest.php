@@ -59,10 +59,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             'collection' => 'sandbox',
             'alias' => array(
                 'default' => 'stdClass',
-                'cart' => 'tests\Fixtures\Cart',
-                'hybernate' => 'tests\Fixtures\Bear',
-                'product' => 'tests\Fixtures\Product',
-                'checkCall' => 'tests\Fixtures\VerifMethod',
+                'cart' => 'tests\Yuurei\Fixtures\Cart',
+                'hybernate' => 'tests\Yuurei\Fixtures\Bear',
+                'product' => 'tests\Yuurei\Fixtures\Product',
+                'checkCall' => 'tests\Yuurei\Fixtures\VerifMethod',
             )
         );
         $this->assertEquals($expected, $cfg);

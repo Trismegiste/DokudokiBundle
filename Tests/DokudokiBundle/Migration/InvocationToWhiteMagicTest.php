@@ -9,8 +9,9 @@ namespace tests\Migration;
 use Trismegiste\DokudokiBundle\Migration\InvocationToWhiteMagic;
 use tests\Yuurei\Persistence\ConnectorTest;
 use Trismegiste\Yuurei\Facade\Provider;
-use Trismegiste\DokudokiBundle\Transform\Delegation\Stage;
-use tests\Fixtures;
+use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\WhiteMagic;
+use Trismegiste\Yuurei\Transform\Delegation\Stage\Invocation;
+use tests\Yuurei\Fixtures;
 
 /**
  * InvocationToWhiteMagicTest is ...
@@ -33,7 +34,7 @@ class InvocationToWhiteMagicTest extends \PhpUnit_Framework_TestCase
         $this->collection = $test->testCollection();
         $this->migration = new InvocationToWhiteMagic($this->collection);
         $this->facade = new Provider($this->collection);
-        $this->source = $this->facade->createRepository(new Stage\Invocation());
+        $this->source = $this->facade->createRepository(new Invocation());
         $this->stopWatch = microtime(true);
     }
 
@@ -68,9 +69,9 @@ class InvocationToWhiteMagicTest extends \PhpUnit_Framework_TestCase
         $this->assertEquals(array(
             'missing' => array(),
             'fqcn' => array(
-                'tests\Fixtures\Trunk' => 1,
-                'tests\Fixtures\Branch' => (1 << $this->depth) - 2,
-                'tests\Fixtures\Leaf' => 1 << $this->depth
+                'tests\Yuurei\Fixtures\Trunk' => 1,
+                'tests\Yuurei\Fixtures\Branch' => (1 << $this->depth) - 2,
+                'tests\Yuurei\Fixtures\Leaf' => 1 << $this->depth
             ),
             'root' => 1
                 ), $stat);
@@ -89,7 +90,7 @@ class InvocationToWhiteMagicTest extends \PhpUnit_Framework_TestCase
             $aliasMap['AliasFor' . $last] = $className;
         }
 
-        $destination = $this->facade->createRepository(new Stage\WhiteMagic($aliasMap));
+        $destination = $this->facade->createRepository(new WhiteMagic($aliasMap));
         $this->migration->migrate($this->source, $destination);
     }
 

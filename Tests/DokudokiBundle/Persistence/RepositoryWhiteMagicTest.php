@@ -35,7 +35,7 @@ class RepositoryWhiteMagicTest extends RepositoryTestTemplate
 
     protected function getSimpleObject()
     {
-        $obj = new \tests\Yuurei\Fixtures\Simple();
+        $obj = new Fixtures\Simple();
         $obj->answer = 42;
         return $obj;
     }
@@ -92,7 +92,7 @@ class RepositoryWhiteMagicTest extends RepositoryTestTemplate
 
     public function getCleanable()
     {
-        $obj = new \tests\Yuurei\Fixtures\Simple();
+        $obj = new Fixtures\Simple();
         $obj->answer = new Fixtures\Bear();
         $dump = array(
             MapAlias::CLASS_KEY => 'simple',
@@ -150,7 +150,7 @@ class RepositoryWhiteMagicTest extends RepositoryTestTemplate
      * Person is Persistable but non aliased, that's why persisting it throws
      * a mapping exception
      * 
-     * @expectedException Trismegiste\DokudokiBundle\Transform\MappingException
+     * @expectedException Trismegiste\Yuurei\Transform\MappingException
      * @expectedExceptionMessage persistence
      */
     public function testNonAliasedPersistable()

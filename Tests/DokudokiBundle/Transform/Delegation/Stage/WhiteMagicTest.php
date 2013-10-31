@@ -124,7 +124,7 @@ class WhiteMagicTest extends AbstractStageTest
     }
 
     /**
-     * @expectedException Trismegiste\DokudokiBundle\Transform\MappingException
+     * @expectedException Trismegiste\Yuurei\Transform\MappingException
      * @expectedExceptionMessage persistence
      */
     public function testClassNotAliased()

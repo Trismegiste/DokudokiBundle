@@ -6,8 +6,11 @@
 
 namespace Trismegiste\DokudokiBundle\Transform\Delegation\Stage;
 
-use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
-use Trismegiste\DokudokiBundle\Transform\Mediator\TypeRegistry;
+use Trismegiste\Yuurei\Transform\Mediator\Colleague;
+use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapMagic;
+use Trismegiste\Yuurei\Transform\Mediator\TypeRegistry;
+use Trismegiste\Yuurei\Transform\Delegation\Stage\AbstractStage;
+use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapAlias;
 
 /**
  * Design Pattern : Builder
@@ -35,8 +38,8 @@ class Hoodoo extends AbstractStage
     public function createObject(TypeRegistry $algo)
     {
         new Colleague\MapSkippable($algo);
-        new Colleague\MapAlias($algo, $this->aliasMap);
-        new Colleague\MapMagic($algo);  // first, the alias and after, magic
+        new MapAlias($algo, $this->aliasMap);
+        new MapMagic($algo);  // first, the alias and after, magic
     }
 
     public function createBlackHole(TypeRegistry $algo)

@@ -4,7 +4,7 @@ database: Test
 collection: sandbox
 alias:
     default : stdClass
-    cart: tests\Fixtures\Cart
-    hybernate: tests\Fixtures\Bear
-    product: tests\Fixtures\Product
-    checkCall: tests\Fixtures\VerifMethod
+    cart: tests\Yuurei\Fixtures\Cart
+    hybernate: tests\Yuurei\Fixtures\Bear
+    product: tests\Yuurei\Fixtures\Product
+    checkCall: tests\Yuurei\Fixtures\VerifMethod

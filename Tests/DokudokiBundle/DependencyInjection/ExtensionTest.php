@@ -32,10 +32,10 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
             'collection' => 'sandbox',
             'alias' => array(
                 'default' => 'stdClass',
-                'cart' => 'tests\Fixtures\Cart',
-                'hybernate' => 'tests\Fixtures\Bear',
-                'product' => 'tests\Fixtures\Product',
-                'checkCall' => 'tests\Fixtures\VerifMethod',
+                'cart' => 'tests\Yuurei\Fixtures\Cart',
+                'hybernate' => 'tests\Yuurei\Fixtures\Bear',
+                'product' => 'tests\Yuurei\Fixtures\Product',
+                'checkCall' => 'tests\Yuurei\Fixtures\VerifMethod',
             )
         );
         $extension->load(array($fullConfig), $this->container);
@@ -55,7 +55,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testServiceConnector()
     {
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Persistence\Connector', $this->container->get('dokudoki.connector'));
+        $this->assertInstanceOf('Trismegiste\Yuurei\Persistence\Connector', $this->container->get('dokudoki.connector'));
     }
 
     public function testServiceCollection()
@@ -65,7 +65,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testFacade()
     {
-        $this->assertInstanceOf('Trismegiste\DokudokiBundle\Facade\Provider', $this->container->get('dokudoki.facade'));
+        $this->assertInstanceOf('Trismegiste\Yuurei\Facade\Provider', $this->container->get('dokudoki.facade'));
     }
 
     public function getStage()
@@ -83,14 +83,14 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
     public function testRepository($stage)
     {
         $this->assertInstanceOf(
-                'Trismegiste\DokudokiBundle\Persistence\Repository', $this->container->get('dokudoki.repository.' . $stage)
+                'Trismegiste\Yuurei\Persistence\Repository', $this->container->get('dokudoki.repository.' . $stage)
         );
     }
 
     public function testDefaultRepository()
     {
         $this->assertInstanceOf(
-                'Trismegiste\DokudokiBundle\Persistence\Repository', $this->container->get('dokudoki.repository')
+                'Trismegiste\Yuurei\Persistence\Repository', $this->container->get('dokudoki.repository')
         );
     }
 

@@ -46,7 +46,7 @@ class MongoBinDataTypeTest extends FunctionalTestForm
         $file
                 ->expects($this->any())
                 ->method('getRealPath')
-                ->will($this->returnValue(__DIR__ . '/../../doc/img/atomicity.jpg'));
+                ->will($this->returnValue(__DIR__ . '/../../../doc/img/atomicity.jpg'));
 
         $form = $this->formFactory->create(new MongoBinDataType());
         $form->bind($file);

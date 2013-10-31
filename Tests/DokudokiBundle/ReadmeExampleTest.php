@@ -4,11 +4,12 @@
  * DokudokiBundle
  */
 
-namespace Trismegiste\DokudokiBundle\Tests {
+namespace tests\DokudokiBundle {
 
     use Symfony\Component\Form\Forms,
         Trismegiste\DokudokiBundle\Form\MagicFormType,
-        Trismegiste\DokudokiBundle\Transform\Delegation\Stage;
+        Trismegiste\DokudokiBundle\Transform\Delegation\Stage,
+        Trismegiste\Yuurei\Transform\Delegation\Stage\Invocation;
 
     /**
      * ReadmeExample is a ...
@@ -31,11 +32,11 @@ namespace Trismegiste\DokudokiBundle\Tests {
                     ->addType(new MagicFormType())
                     ->getFormFactory();
 
-            $connector = new \tests\Persistence\ConnectorTest();
+            $connector = new \tests\Yuurei\Persistence\ConnectorTest();
             $this->collection = $connector->testCollection();
-            $facade = new \Trismegiste\DokudokiBundle\Facade\Provider($this->collection);
+            $facade = new \Trismegiste\Yuurei\Facade\Provider($this->collection);
             $this->blackmagic = $facade->createRepository(new Stage\BlackMagic());
-            $this->invocation = $facade->createRepository(new Stage\Invocation());
+            $this->invocation = $facade->createRepository(new Invocation());
             $this->whitemagic = $facade->createRepository(new Stage\WhiteMagic(array('product' => 'Some\Sample\Product')));
         }
 

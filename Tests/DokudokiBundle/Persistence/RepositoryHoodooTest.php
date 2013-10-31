@@ -6,9 +6,7 @@
 
 namespace tests\DokudokiBundle\Persistence;
 
-use Trismegiste\DokudokiBundle\Persistence\Repository;
 use Trismegiste\DokudokiBundle\Magic\Document;
-use tests\Yuurei\Fixtures;
 
 /**
  * Test repository with Hoodoo stage

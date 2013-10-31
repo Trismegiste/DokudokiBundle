@@ -7,7 +7,8 @@
 namespace tests\DokudokiBundle\Transform\Delegation\Stage;
 
 use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\Hoodoo;
-use tests\DokudokiBundle\Fixtures;
+use tests\Yuurei\Fixtures;
+use tests\DokudokiBundle\Fixtures\MagicFixture;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapAlias;
 use Trismegiste\DokudokiBundle\Magic\Document;
 use tests\Yuurei\Transform\Delegation\Stage\AbstractStageTest;
@@ -49,7 +50,7 @@ class HoodooTest extends AbstractStageTest
                 )
             )
         );
-        $provider = new Fixtures\MagicFixture();
+        $provider = new MagicFixture();
         $couple[] = array($provider->getFullTreeObject(), $provider->getFullTreeFlat());
         $couple[] = array($obj, $db);
         return $couple;
@@ -61,7 +62,7 @@ class HoodooTest extends AbstractStageTest
         $obj->bestNumber = 73;
         $dump = array(MapAlias::CLASS_KEY => 'default', 'bestNumber' => 73);
 
-        $obj2 = new \tests\Yuurei\Fixtures\Cart("Bradburry appartments");
+        $obj2 = new Fixtures\Cart("Bradburry appartments");
         $obj2->info = 'confound these ponies';
         $obj2->addItem(3, new \tests\Yuurei\Fixtures\Product('5D mk III', 2999));
         $obj2->addItem(1, new \tests\Yuurei\Fixtures\Product('VTOL', 6500));
@@ -160,7 +161,7 @@ class HoodooTest extends AbstractStageTest
     }
 
     /**
-     * @expectedException Trismegiste\DokudokiBundle\Transform\MappingException
+     * @expectedException Trismegiste\Yuurei\Transform\MappingException
      * @expectedExceptionMessage persistence
      */
     public function testClassNotAliased()

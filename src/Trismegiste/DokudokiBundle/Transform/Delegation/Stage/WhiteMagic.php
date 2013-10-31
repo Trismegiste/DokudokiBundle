@@ -6,8 +6,10 @@
 
 namespace Trismegiste\DokudokiBundle\Transform\Delegation\Stage;
 
-use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
-use Trismegiste\DokudokiBundle\Transform\Mediator\TypeRegistry;
+use Trismegiste\Yuurei\Transform\Mediator\Colleague;
+use Trismegiste\Yuurei\Transform\Mediator\TypeRegistry;
+use Trismegiste\Yuurei\Transform\Delegation\Stage\AbstractStage;
+use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapAlias;
 
 /**
  * Design Pattern : Builder
@@ -33,7 +35,7 @@ class WhiteMagic extends AbstractStage
     public function createObject(TypeRegistry $algo)
     {
         new Colleague\MapSkippable($algo);
-        new Colleague\MapAlias($algo, $this->aliasMap);
+        new MapAlias($algo, $this->aliasMap);
     }
 
     public function createBlackHole(TypeRegistry $algo)
