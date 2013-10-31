@@ -4,14 +4,15 @@
     "type": "symfony-bundle",
     "keywords": ["dbal", "mongodb", "symfony2"],
     "authors": [
-    {
-        "name": "Trismegiste",
-        "email": "florent.g@allopneus.com"
-    }
+        {
+            "name": "Trismegiste",
+            "email": "florent.g@allopneus.com"
+        }
     ],
-   "require": {
+    "require": {
         "php": ">=5.4",
-        "ext-mongo": ">=1.3.0"
+        "ext-mongo": ">=1.3.0",
+        "trismegiste/yuurei": "dev-master"
     },
     "require-dev": {
         "symfony/http-kernel": "2.3.*",
@@ -24,9 +25,15 @@
     },
     "autoload": {
         "psr-0": {
-            "Trismegiste\\": "src"
+            "Trismegiste\\DokudokiBundle\\": "src"
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "c:/Users/flo/Documents/NetBeansProjects/Yuurei"
+        }
+    ],
     "license": "CC-BY-SA-3.0",
     "version": "1.4"
 }
