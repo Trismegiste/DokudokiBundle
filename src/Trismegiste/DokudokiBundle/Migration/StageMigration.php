@@ -6,8 +6,8 @@
 
 namespace Trismegiste\DokudokiBundle\Migration;
 
-use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
-use Trismegiste\DokudokiBundle\Persistence\RepositoryInterface;
+use Trismegiste\Yuurei\Transform\Mediator\Mediator;
+use Trismegiste\Yuurei\Persistence\RepositoryInterface;
 
 /**
  * StageMigration is a Template Method pattern for creating a migration
@@ -24,7 +24,7 @@ abstract class StageMigration
     public function __construct(\MongoCollection $coll)
     {
         $this->collection = $coll;
-        $this->mediator = new \Trismegiste\DokudokiBundle\Transform\Mediator\Mediator();
+        $this->mediator = new Mediator();
         $this->buildMapper($this->mediator);
     }
 

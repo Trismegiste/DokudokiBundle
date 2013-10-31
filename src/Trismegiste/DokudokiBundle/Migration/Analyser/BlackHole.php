@@ -6,8 +6,7 @@
 
 namespace Trismegiste\DokudokiBundle\Migration\Analyser;
 
-use Trismegiste\DokudokiBundle\Transform\Mediator\AbstractMapper;
-use Trismegiste\DokudokiBundle\Transform\MappingException;
+use Trismegiste\Yuurei\Transform\Mediator\AbstractMapper;
 
 /**
  * MapFailure is the last mapper which throws exception when no other mapper

@@ -7,7 +7,8 @@
 namespace Trismegiste\DokudokiBundle\Transform\Delegation\Stage;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
-use Trismegiste\DokudokiBundle\Transform\Mediator\TypeRegistry;
+use Trismegiste\Yuurei\Transform\Mediator\TypeRegistry;
+use Trismegiste\Yuurei\Transform\Delegation\Stage\AbstractStage;
 
 /**
  * Design Pattern : Builder

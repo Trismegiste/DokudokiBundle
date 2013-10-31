@@ -6,7 +6,7 @@
 
 namespace Trismegiste\DokudokiBundle\Migration\Analyser;
 
-use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapObject;
+use Trismegiste\Yuurei\Transform\Mediator\Colleague\MapObject;
 
 /**
  * FqcnCollector is ...

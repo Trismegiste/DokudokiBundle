@@ -6,7 +6,7 @@
 
 namespace Trismegiste\DokudokiBundle\Magic;
 
-use Trismegiste\DokudokiBundle\Persistence\Persistable;
+use Trismegiste\Yuurei\Persistence\Persistable;
 
 /**
  * Document is a container with automatic getters & setters

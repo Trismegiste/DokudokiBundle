@@ -6,9 +6,9 @@
 
 namespace Trismegiste\DokudokiBundle\Migration;
 
-use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapArray;
+use Trismegiste\Yuurei\Transform\Mediator\Colleague\MapArray;
 use Trismegiste\DokudokiBundle\Migration\Analyser;
-use Trismegiste\DokudokiBundle\Transform\Mediator\Mediator;
+use Trismegiste\Yuurei\Transform\Mediator\Mediator;
 
 /**
  * BlackToWhiteMagic is a service for migrating from BlackMagic or Hoodoo stages
