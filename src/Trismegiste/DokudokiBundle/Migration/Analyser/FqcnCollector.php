@@ -9,9 +9,7 @@ namespace Trismegiste\DokudokiBundle\Migration\Analyser;
 use Trismegiste\Yuurei\Transform\Mediator\Colleague\MapObject;
 
 /**
- * FqcnCollector is ...
- *
- * @author flo
+ * FqcnCollector collects FQCN from objects stored with Invocation stage
  */
 class FqcnCollector extends MapObject
 {

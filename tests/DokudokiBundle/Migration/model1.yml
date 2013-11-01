@@ -3,12 +3,12 @@ alias:
         fqcn: Trismegiste\DokudokiBundle\Tests\Fixtures\Leaf
     branch:
         fqcn: Trismegiste\DokudokiBundle\Tests\Fixtures\Branch
-        property:
+        properties:
             - left
             - right
     trunk:
         fqcn: Trismegiste\DokudokiBundle\Tests\Fixtures\Trunk
-        property:
+        properties:
             - left
             - right
             - _id

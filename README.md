@@ -1,25 +1,17 @@
 # DokudokiBundle [![Build Status](https://travis-ci.org/Trismegiste/DokudokiBundle.png?branch=master)](https://travis-ci.org/Trismegiste/DokudokiBundle)
 
-![Yo dawg Xzibit](./Resources/doc/img/atomicity.jpg)
-
-Atomicity in [MongoDB][*2] explained by Xzibit
-
 ## What
 
-It's a minimalistic database layer with automatic mapping.
-It is intended for **advanced users** of [MongoDB][*2]
-who know and understand the growth of a model on a schemaless database.
+It's a bundle based on Yuurei, a micro database layer with automatic mapping.
 
-When I mean minimalistic, I mean all
-the NCLOC of the dbal itself are shorter than the infamous
-method [UnitOfWork::createEntity][*1]
-of Doctrine 2
+This bundle adds multiple features aside from the original mapping of Yuurei :
+3 others mapping systems (full magic, aliasing and mix of both), form components
+to handle MongoDate and uploaded files, DataCollector for WebProfiler and of
+course, a lot of services injected in the DiC of symfony2.
 
-Of course, features are also minimalistic. Don't expect the impossible. Nevertheless
-there are some functionalities you don't find anywhere else.
-In my quest for rapid development
-and the "Don't repeat yourself", I try to make an agnostic DBAL which *helps*
+I try to make an agnostic DBAL which *helps*
 you in the process to build an app regardless the model is finished or not.
+So there is also migration tools.
 
 ## How
 
@@ -44,17 +36,10 @@ Use Composer like any other PHP package :
 Because, like the cake, "ODM is a lie". Turning MongoDB into an ORM-like
 abstraction is the worst thing you can do against a NoSQL database.
 
-With an ODM, you loose both NoSQL and RDBMS features, here are some :
-
- * No rich document of MongoDB because the query generator sux and the mapping is complex
- * No schemaless capability because you freeze the model in classes
- * No JOIN, you must rely on slow lazy loading
- * No constraint of RDBMS (references and types) because there is none
- * No atomicity : the only atomicity in MongoDB is on one document
-
-In fact ODM is a slow [ORM][*5] without ACID : what is the point of using MongoDB ?
-
-That's why I stop chasing the ["Mythical Object Database"][*3] and start hacking.
+I'm fed up by both CRUD antipattern and anemic model produced by ORM and code
+generators. In the end, you realized that you must model your classes for the ORM and not for
+the business. I wanted to restore the Domain Driven Development philosophy developed
+in Symfony2 and ruined by Doctrine2.
 
 ## Guidances
 
@@ -82,13 +67,14 @@ This DBAL has 4 stages, regarding the completion of the model classes.
 
 The trick is you can migrate between these stages when you develop your app
 and, for example, don't need to start over after a dirty prototype. You even
-can generate a model with the data you had stored into collections
+can generate a model from the data you had stored into collections
 when you don't have one.
 
 See [Examples of using this dbal in PHPUnit Tests][*12]
 
 ### Black Magic is black
 If you have no model and a lot of forms to design, start with the "BlackMagic" stage.
+If an anemic model is enough for you, don't create one.
 It is full of magic methods, magic mapping and magic documents,
 it's like working with mockup.
 
@@ -105,7 +91,7 @@ $form = $this->formFactory
         ->add('title')
         ->add('price')
         ->getForm();
-// bind data to th form
+// bind data to the form
 $form->bind(array('title' => 'EF-85 L', 'price' => 2000));
 $doc = $form->getData();
 // getting the magic document
@@ -122,7 +108,9 @@ $this->assertEquals('EF-85 L', $restore->getTitle());
 ```
 
 ### Serialization could be enough
-If you have a lot of nearly complete model classes and don't want configure anything,
+
+This is the original mapping system from Yuurei. If you have a lot of nearly 
+complete model classes and don't want configure anything,
 use the "Invocation" stage. Only magic mapping and strict typing between objects
 and documents.
 
@@ -149,7 +137,7 @@ $this->assertEquals(2000, $dump['price']);
 ### White Magic is for Lawful Good
 If you have a good model and the time to carefully alias classes in the database,
 use the "WhiteMagic" stage. There is automapping but without surprise, your model cannot
-turn into chaos.
+turn into chaos. Any non-aliased class will generate an exception.
 
 See full example in [unit test][*15]
 
@@ -173,17 +161,6 @@ If you need to evolve the model above, you can use "Hoodoo" stage, a
 "WhiteMagic" stage mixed with some magic from "BlackMagic" stage. There is a
 safety net to prevent some "real" classes to become "fake" classes. This lowers
 the rate of WTF per minutes and you choose the level of magic.
-
-## About MDE
-With recent concepts of NoSQL, SOA and HMVC, I believe MDE is somewhat
-past-history, not always but very often.
-It is more suited for V-cycle and fits with difficulties in agile process (except
-if your CTO is good enough)
-
-With MDE, the first task is to design and
-code the model. It is difficult to parallelize this part, it's blocking everything
-else to come. Because of constraints of RDBMS, it drives to over-engineering
-(for my experience) and meanwhile, the customer waits and sees nothing.
 
 ## About performance
 
@@ -240,15 +217,6 @@ Any DateTime are converted into MongoDate and vice versa.
 
 ### I see you're using mongo types in your classes model, what about abstraction ?
 Seriously, have you ever switch an app to another database ?
-
-### Is there any other constraints you have used ?
-* No mandatory inheritance for model except one interface (for DDD concern)
-* Minimum number of switch because it is hidden inheritance
-* No more than 5 methods per class
-* No method longer than 20 NCLOC
-* No static because it is global
-* SRP, OCP, LSP, ISP, DIP at maximum level
-* coupling at minimum level (checked with [Mondrian][*16] )
 
 ### Is there any lazy loading or proxy classes for DBRef ?
 Fly, you fools

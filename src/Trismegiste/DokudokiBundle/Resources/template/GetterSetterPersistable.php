@@ -8,7 +8,7 @@ echo '<?php' . PHP_EOL;
 ?>
 namespace <?php echo $classNamespace ?>;
 
-use Trismegiste\DokudokiBundle\Persistence\Persistable;
+use Trismegiste\Yuurei\Persistence\Persistable;
 
 /**
  *  <?php echo $className ?> is a Persistable class

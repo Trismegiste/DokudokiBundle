@@ -71,6 +71,7 @@ class InvocationCommand extends Command implements ContainerAwareInterface
         $collection = $this->container->get('dokudoki.collection');
         $service = new InvocationToWhiteMagic($collection);
         $report = $service->analyse();
+        // @todo this part sux : use a Yaml generator 
         $output->writeln("dokudoki:");
         $output->writeln(str_repeat(' ', 4) . "alias:");
         foreach ($report['fqcn'] as $key => $dummy) {

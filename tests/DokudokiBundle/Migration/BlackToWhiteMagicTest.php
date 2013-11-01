@@ -143,8 +143,15 @@ class BlackToWhiteMagicTest extends \PhpUnit_Framework_TestCase
         $classArray = $this->migration->generate($cfg['alias']);
         $this->assertCount(3, $classArray);
         foreach ($classArray as $idx => $generated) {
-            file_put_contents(sys_get_temp_dir() . "/tmp_$idx.php", $generated);
+            $generated = str_replace('<?php', '', $generated);
+            eval($generated);
         }
+        $verif1 = new \Trismegiste\DokudokiBundle\Tests\Fixtures\Trunk();
+        $verif2 = new \Trismegiste\DokudokiBundle\Tests\Fixtures\Branch();
+        $verif3 = new \Trismegiste\DokudokiBundle\Tests\Fixtures\Leaf();
+        $this->assertInstanceOf('Trismegiste\Yuurei\Persistence\Persistable', $verif1);
+        $this->assertNotInstanceOf('Trismegiste\Yuurei\Persistence\Persistable', $verif2);
+        $verif2->setLeft($verif3);
     }
 
 }

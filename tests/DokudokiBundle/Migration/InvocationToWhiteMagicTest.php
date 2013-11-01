@@ -91,7 +91,13 @@ class InvocationToWhiteMagicTest extends \PhpUnit_Framework_TestCase
         }
 
         $destination = $this->facade->createRepository(new WhiteMagic($aliasMap));
-        $this->migration->migrate($this->source, $destination);
+        $migrated = $this->migration->migrate($this->source, $destination);
+        $this->assertEquals(1, $migrated);
+        
+        $struc = $this->collection->findOne([]);
+        $this->assertEquals('AliasForTrunk', $struc['-class']);
+        $this->assertEquals('AliasForBranch', $struc['left']['-class']);
+        $this->assertEquals('AliasForBranch', $struc['right']['-class']);
     }
 
 }

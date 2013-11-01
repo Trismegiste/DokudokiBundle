@@ -12,8 +12,6 @@ use Trismegiste\Yuurei\Persistence\RepositoryInterface;
 /**
  * StageMigration is a Template Method pattern for creating a migration
  * service.
- *
- * @author flo
  */
 abstract class StageMigration
 {
@@ -35,6 +33,7 @@ abstract class StageMigration
 
     /**
      * Collect informations from entities in the collection with the mediator
+     * 
      * @return int number of analyzed root entities
      */
     public function analyse()
@@ -54,6 +53,7 @@ abstract class StageMigration
      * 
      * @param RepositoryInterface $src
      * @param RepositoryInterface $dst
+     * 
      * @return int number of migrated root entities
      */
     public function migrate(RepositoryInterface $src, RepositoryInterface $dst)

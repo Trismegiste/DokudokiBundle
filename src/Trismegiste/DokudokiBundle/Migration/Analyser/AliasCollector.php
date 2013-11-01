@@ -10,7 +10,7 @@ use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapMagic;
 use Trismegiste\DokudokiBundle\Magic\Document;
 
 /**
- * AliasCollector collects aliases
+ * AliasCollector collects aliases from magic document
  */
 class AliasCollector extends MapMagic
 {

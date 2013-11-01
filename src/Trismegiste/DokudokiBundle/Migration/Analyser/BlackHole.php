@@ -9,10 +9,7 @@ namespace Trismegiste\DokudokiBundle\Migration\Analyser;
 use Trismegiste\Yuurei\Transform\Mediator\AbstractMapper;
 
 /**
- * MapFailure is the last mapper which throws exception when no other mapper
- * is responsible.
- *
- * @author florent
+ * BlackHole is responsible for everything and eats everything
  */
 class BlackHole extends AbstractMapper
 {

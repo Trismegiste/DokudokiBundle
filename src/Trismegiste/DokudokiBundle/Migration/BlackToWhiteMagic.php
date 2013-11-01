@@ -43,13 +43,25 @@ class BlackToWhiteMagic extends StageMigration
         return $this->classStat;
     }
 
+    /**
+     * Analyses and extract informations from the db
+     * 
+     * If you are in Hoodoo, only a part of entities could be un-aliased.
+     * If you want to complete your aliasing config, set $missingOnly to true
+     * 
+     * @param bool $missingOnly to find only un-aliased entities
+     * 
+     * @return array
+     */
     public function filter($missingOnly = false)
     {
         $cardinal = parent::analyse();
         $report = array();
         foreach ($this->classStat['found'] as $alias => $counter) {
             $classReport = array();
+            // is the entities already aliased ?
             if (isset($this->aliasConfig[$alias])) {
+                // retains only the missing alias
                 if ($missingOnly) {
                     continue;
                 }
@@ -82,6 +94,7 @@ class BlackToWhiteMagic extends StageMigration
                 $template = 'GetterSetterClass';
             }
 
+            $extract = [];
             preg_match('#(.+)\\\\([^\\\\]+)$#', $classParam['fqcn'], $extract);
             $classNamespace = $extract[1];
             $className = $extract[2];
