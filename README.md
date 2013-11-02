@@ -230,13 +230,12 @@ This one, I'm pretty sure it is unique ^_^
 [*1]: https://github.com/doctrine/doctrine2/blob/master/lib/Doctrine/ORM/UnitOfWork.php#L2446
 [*2]: http://www.mongodb.org/
 [*3]: http://en.wikipedia.org/wiki/Object_database
-[*4]: https://github.com/sebastianbergmann/phpunit-mock-objects/blob/1.1.1/PHPUnit/Framework/MockObject/Generator.php#L232
 [*5]: http://en.wikipedia.org/wiki/Object-relational_mapping
 [*7]: http://www.elasticsearch.org/
 [*10]: http://en.wikipedia.org/wiki/Keep_it_simple_stupid
-[*12]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php
-[*13]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L47
-[*14]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L75
-[*15]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L91
+[*12]: https://github.com/Trismegiste/DokudokiBundle/blob/master/tests/DokudokiBundle/ReadmeExampleTest.php
+[*13]: https://github.com/Trismegiste/DokudokiBundle/blob/master/tests/DokudokiBundle/ReadmeExampleTest.php#L47
+[*14]: https://github.com/Trismegiste/DokudokiBundle/blob/master/tests/DokudokiBundle/ReadmeExampleTest.php#L75
+[*15]: https://github.com/Trismegiste/DokudokiBundle/blob/master/tests/DokudokiBundle/ReadmeExampleTest.php#L91
 [*16]: https://github.com/Trismegiste/Mondrian
 [20]: https://github.com/Trismegiste/Yuurei
