@@ -28,12 +28,6 @@
             "Trismegiste\\DokudokiBundle\\": "src"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "c:/Users/flo/Documents/NetBeansProjects/Yuurei"
-        }
-    ],
     "license": "CC-BY-SA-3.0",
     "version": "1.4"
 }

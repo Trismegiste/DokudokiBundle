@@ -2,7 +2,7 @@
 
 ## What
 
-It's a bundle based on Yuurei, a micro database layer with automatic mapping.
+It's a bundle based on [Yuurei][20], a micro database layer with automatic mapping.
 
 This bundle adds multiple features aside from the original mapping of Yuurei :
 3 others mapping systems (full magic, aliasing and mix of both), form components
@@ -239,3 +239,4 @@ This one, I'm pretty sure it is unique ^_^
 [*14]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L75
 [*15]: https://github.com/Trismegiste/DokudokiBundle/blob/master/Tests/ReadmeExampleTest.php#L91
 [*16]: https://github.com/Trismegiste/Mondrian
+[20]: https://github.com/Trismegiste/Yuurei
