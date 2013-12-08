@@ -158,4 +158,9 @@ class RepositoryWhiteMagicTest extends RepositoryTestTemplate
         $this->repo->persist(new Fixtures\Person());
     }
 
+    protected function getQueryForComplexObject()
+    {
+        return ['row.0.item.title' => '5D mk III'];
+    }
+
 }

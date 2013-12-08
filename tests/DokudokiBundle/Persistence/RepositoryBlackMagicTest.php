@@ -53,4 +53,9 @@ class RepositoryBlackMagicTest extends RepositoryTestTemplate
         );
     }
 
+    protected function getQueryForComplexObject()
+    {
+        return ['customer.name' => 'Wayne'];
+    }
+
 }
