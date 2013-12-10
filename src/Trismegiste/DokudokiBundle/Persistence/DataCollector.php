@@ -11,9 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * DataCollector is a ...
- *
- * @author florent
+ * DataCollector collects data for repository
  */
 class DataCollector extends BaseCollector implements Logger
 {
@@ -33,9 +31,9 @@ class DataCollector extends BaseCollector implements Logger
         return 'mongodb';
     }
 
-    public function log($access, $detail)
+    public function log($access, array $detail)
     {
-        $this->data[] = array('access' => $access, 'detail' => $detail);
+        $this->data[] = array('access' => $access, 'detail' => json_encode($detail));
     }
 
     public function getQueries()
