@@ -33,7 +33,7 @@ class DataCollector extends BaseCollector implements Logger
 
     public function log($access, array $detail)
     {
-        $this->data[] = array('access' => $access, 'detail' => json_encode($detail));
+        $this->data[] = array('access' => $access, 'detail' => $detail);
     }
 
     public function getQueries()

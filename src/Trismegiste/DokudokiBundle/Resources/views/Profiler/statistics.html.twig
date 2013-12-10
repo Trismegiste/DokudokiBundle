@@ -1,9 +1,25 @@
 {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
 
+{% block toolbar %}
+    {% set icon %}
+<span>
+    <img width="13" height="28" alt="Dokudoki" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAmklEQVRYw+2XMRLFIAhEQ+Yfyc7ajgtxAi6EFbWddyIncJL5USjilsjMKuwrPI6vCwZ18/I7V77OzD4+ga1XFJRSppupqm8GVPW2Z+kFnkwxHMMtGOzOUkrTzZjZlwJmjqWAiG57fqOD3vsOaBwFRGQ55+lmiOhLASLGUiAi/1PQWtsBjZOI2Aq5hxAAYil48jEZUlBr3Vl00QWEqHu9uXEEMQAAAABJRU5ErkJggg==">
+    <span>{{ collector.queriesCount }}</span>
+</span>
+    {% endset %}
+    {% set text %}
+<div class="sf-toolbar-info-piece">
+    <b>Dokudoki</b>
+    <span>{{ collector.queriesCount }} operations</span>
+</div>
+    {% endset %}
+    {% include '@WebProfiler/Profiler/toolbar_item.html.twig' with { 'link': profiler_url } %}
+{% endblock %}
+
 {% block menu %}
 <span class="label">
-    <span class="icon"><img src="data:image/png;base64,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" alt="synchro" /></span>
-    <strong>Repository</strong>
+    <span class="icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAmklEQVRYw+2XMRLFIAhEQ+Yfyc7ajgtxAi6EFbWddyIncJL5USjilsjMKuwrPI6vCwZ18/I7V77OzD4+ga1XFJRSppupqm8GVPW2Z+kFnkwxHMMtGOzOUkrTzZjZlwJmjqWAiG57fqOD3vsOaBwFRGQ55+lmiOhLASLGUiAi/1PQWtsBjZOI2Aq5hxAAYil48jEZUlBr3Vl00QWEqHu9uXEEMQAAAABJRU5ErkJggg==" alt="synchro" /></span>
+    <strong>Dokudoki</strong>
     <span class="count">
         <span>{{ collector.queriesCount }}</span>
     </span>
@@ -12,12 +28,23 @@
 
 {% block panel %}
 
-<h2>Logs</h2>
+<h3>Operations</h3>
 
-<ul class="alt">
+<table>
+    <tbody>
+        <tr>
+            <th>#</th>
+            <th>Action</th>
+            <th>Parameters</th>
+        </tr>        
     {% for row in collector.queries %}
-    <li class="{{ cycle(['odd', 'even'], loop.index) }}">{{row.access}} - {{row.detail}}</li>
+        <tr>
+            <td>#{{ loop.index }}</td>
+            <td>{{ row.access }}</td>
+            <td>{{ row.detail|json_encode() }}</td>
+        </tr>
     {% endfor %}
-</ul>
+    </tbody>
+</table>
 
 {% endblock %}
