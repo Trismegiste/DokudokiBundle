@@ -29,7 +29,7 @@ class RepositoryDebug extends Decorator
      */
     public function findByPk($id)
     {
-        $this->logger->log('findOne', ['_id' => new \MongoId($id)]);
+        $this->logger->log('findByPk', ['_id' => $id]);
         return parent::findByPk($id);
     }
 
@@ -44,8 +44,7 @@ class RepositoryDebug extends Decorator
 
         $this->logger->log($type, [
             'fqcn' => get_class($doc),
-            '_id' => $doc->getId(),
-            'hash' => spl_object_hash($doc)
+            '_id' => $doc->getId()
         ]);
     }
 
