@@ -28,7 +28,15 @@ class Extension extends BaseExtension
         $container->getDefinition('dokudoki.builder.hoodoo')->addArgument($config['alias']);
         $container->getDefinition('dokudoki.migration.black2white')->addArgument($config['alias']);
 
-        $container->setAlias('dokudoki.repository', 'dokudoki.repository.' . $config['stage']);
+        if ($container->hasParameter('kernel.debug') && $container->getParameter('kernel.debug')) {
+            $def = new Definition('Trismegiste\DokudokiBundle\Persistence\RepositoryDebug', [
+                new Reference('dokudoki.repository.' . $config['stage']),
+                new Reference('dokudoki.data_collector.db')
+            ]);
+            $container->setDefinition('dokudoki.repository', $def);
+        } else {
+            $container->setAlias('dokudoki.repository', 'dokudoki.repository.' . $config['stage']);
+        }
     }
 
     public function getAlias()
