@@ -12,8 +12,6 @@ use tests\Yuurei\Persistence\RepositoryTestTemplate;
 
 /**
  * Test repository with BlackMagic stage
- *
- * @author flo
  */
 class RepositoryBlackMagicTest extends RepositoryTestTemplate
 {
