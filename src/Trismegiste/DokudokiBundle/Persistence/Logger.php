@@ -12,5 +12,5 @@ namespace Trismegiste\DokudokiBundle\Persistence;
 interface Logger
 {
 
-    function log($access, array $detail);
+    function log($access, array $detail, $timer);
 }

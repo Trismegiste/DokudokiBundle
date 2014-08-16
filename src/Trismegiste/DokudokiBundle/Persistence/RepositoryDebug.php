@@ -29,8 +29,13 @@ class RepositoryDebug extends Decorator
      */
     public function findByPk($id)
     {
-        $this->logger->log('findByPk', ['_id' => $id]);
-        return parent::findByPk($id);
+        $stopwatch = \microtime(true);
+        $found = parent::findByPk($id);
+        $delta = \microtime(true) - $stopwatch;
+
+        $this->logger->log('findByPk', ['_id' => $id], $delta);
+
+        return $found;
     }
 
     /**
@@ -40,12 +45,14 @@ class RepositoryDebug extends Decorator
     {
         $type = is_null($doc->getId()) ? 'create' : 'update';
 
+        $stopwatch = \microtime(true);
         parent::persist($doc);
+        $delta = \microtime(true) - $stopwatch;
 
         $this->logger->log($type, [
             'fqcn' => get_class($doc),
             '_id' => $doc->getId()
-        ]);
+                ], $delta);
     }
 
     /**
@@ -53,8 +60,13 @@ class RepositoryDebug extends Decorator
      */
     public function find(array $query = array())
     {
-        $this->logger->log('find', $query);
-        return parent::find($query);
+        $stopwatch = \microtime(true);
+        $found = parent::find($query);
+        $delta = \microtime(true) - $stopwatch;
+
+        $this->logger->log('find', $query, $delta);
+
+        return $found;
     }
 
     /**
@@ -62,8 +74,13 @@ class RepositoryDebug extends Decorator
      */
     public function findOne(array $query = array())
     {
-        $this->logger->log('findOne', $query);
-        return parent::findOne($query);
+        $stopwatch = \microtime(true);
+        $found = parent::findOne($query);
+        $delta = \microtime(true) - $stopwatch;
+
+        $this->logger->log('findOne', $query, $delta);
+
+        return $found;
     }
 
     /**
@@ -71,8 +88,13 @@ class RepositoryDebug extends Decorator
      */
     public function getCursor(array $query = array(), array $fields = array())
     {
-        $this->logger->log('find', $query);
-        return parent::getCursor($query, $fields);
+        $stopwatch = \microtime(true);
+        $found = parent::getCursor($query, $fields);
+        $delta = \microtime(true) - $stopwatch;
+
+        $this->logger->log('find', $query, $delta);
+
+        return $found;
     }
 
 }

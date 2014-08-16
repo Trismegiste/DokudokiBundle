@@ -36,12 +36,14 @@
             <th>#</th>
             <th>Action</th>
             <th>Parameters</th>
+            <th>Timer</th>
         </tr>        
     {% for row in collector.queries %}
         <tr>
             <td>#{{ loop.index }}</td>
             <td>{{ row.access }}</td>
             <td>{{ row.detail|json_encode() }}</td>
+            <td>{{ (row.time * 1000)|number_format() }} ms</td>
         </tr>
     {% endfor %}
     </tbody>

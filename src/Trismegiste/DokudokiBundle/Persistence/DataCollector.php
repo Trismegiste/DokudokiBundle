@@ -31,9 +31,9 @@ class DataCollector extends BaseCollector implements Logger
         return 'mongodb';
     }
 
-    public function log($access, array $detail)
+    public function log($access, array $detail, $timer)
     {
-        $this->data[] = array('access' => $access, 'detail' => $detail);
+        $this->data[] = array('access' => $access, 'detail' => $detail, 'time' => $timer);
     }
 
     public function getQueries()
