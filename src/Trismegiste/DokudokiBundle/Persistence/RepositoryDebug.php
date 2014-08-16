@@ -1,7 +1,7 @@
 <?php
 
 /*
- * GraphRpg
+ * DokudokiBundle
  */
 
 namespace Trismegiste\DokudokiBundle\Persistence;
