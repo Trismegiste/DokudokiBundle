@@ -5,14 +5,13 @@
     "keywords": ["dbal", "mongodb", "symfony2"],
     "authors": [
         {
-            "name": "Trismegiste",
-            "email": "florent.g@allopneus.com"
+            "name": "Trismegiste"
         }
     ],
     "require": {
         "php": ">=5.4",
         "ext-mongo": ">=1.3.0",
-        "trismegiste/yuurei": "dev-master"
+        "trismegiste/yuurei": "2.1.*"
     },
     "require-dev": {
         "symfony/http-kernel": "2.3.*",
@@ -28,6 +27,4 @@
             "Trismegiste\\DokudokiBundle\\": "src"
         }
     },
-    "license": "CC-BY-SA-3.0",
-    "version": "2.1"
-}
+    "license": "CC-BY-SA-3.0"}
