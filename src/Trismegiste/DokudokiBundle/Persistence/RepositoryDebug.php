@@ -97,4 +97,16 @@ class RepositoryDebug extends Decorator
         return $found;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function batchPersist(array $batch)
+    {
+        $stopwatch = \microtime(true);
+        parent::batchPersist($batch);
+        $delta = \microtime(true) - $stopwatch;
+
+        $this->logger->log('batch', ['count' => count($batch)], $delta);
+    }
+
 }

@@ -70,4 +70,15 @@ class RepositoryDebugTest extends \PHPUnit_Framework_TestCase
         $this->sut->persist($this->getMock('Trismegiste\Yuurei\Persistence\Persistable'));
     }
 
+    public function testLoggerBatchPersist()
+    {
+        $this->logger->expects($this->once())
+                ->method('log')
+                ->with($this->equalTo('batch'), $this->equalTo(['count' => 2]), $this->greaterThan(0));
+
+        $doc = $this->getMock('Trismegiste\Yuurei\Persistence\Persistable');
+
+        $this->sut->batchPersist([$doc, $doc]);
+    }
+
 }
