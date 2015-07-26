@@ -6,7 +6,7 @@
 
 namespace Trismegiste\DokudokiBundle\Migration;
 
-use Trismegiste\Yuurei\Transform\Mediator\Mediator;
+use Trismegiste\Alkahest\Transform\Mediator\Mediator;
 use Trismegiste\Yuurei\Persistence\RepositoryInterface;
 
 /**
@@ -33,7 +33,7 @@ abstract class StageMigration
 
     /**
      * Collect informations from entities in the collection with the mediator
-     * 
+     *
      * @return int number of analyzed root entities
      */
     public function analyse()
@@ -50,10 +50,10 @@ abstract class StageMigration
 
     /**
      * Do a migration from one stage to another
-     * 
+     *
      * @param RepositoryInterface $src
      * @param RepositoryInterface $dst
-     * 
+     *
      * @return int number of migrated root entities
      */
     public function migrate(RepositoryInterface $src, RepositoryInterface $dst)

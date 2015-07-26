@@ -14,3 +14,4 @@ if (!$loader = @include __DIR__ . '/../vendor/autoload.php') {
 $loader->add('tests\\DokudokiBundle\\', dirname(__DIR__));
 // to import fixtures and testcase classes of yuurei :
 $loader->add('tests\\Yuurei\\', dirname(__DIR__) . '/vendor/trismegiste/yuurei/');
+$loader->add('tests\\Alkahest\\', dirname(__DIR__) . '/vendor/trismegiste/alkahest/');

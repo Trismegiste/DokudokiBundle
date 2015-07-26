@@ -7,7 +7,7 @@
 namespace Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 
 use Trismegiste\DokudokiBundle\Magic\Document;
-use Trismegiste\Yuurei\Transform\Mediator\AbstractMapper;
+use Trismegiste\Alkahest\Transform\Mediator\AbstractMapper;
 
 /**
  * MapMagic is a mapper to and from a Magic Document

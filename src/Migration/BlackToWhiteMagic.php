@@ -6,9 +6,9 @@
 
 namespace Trismegiste\DokudokiBundle\Migration;
 
-use Trismegiste\Yuurei\Transform\Mediator\Colleague\MapArray;
+use Trismegiste\Alkahest\Transform\Mediator\Colleague\MapArray;
 use Trismegiste\DokudokiBundle\Migration\Analyser;
-use Trismegiste\Yuurei\Transform\Mediator\Mediator;
+use Trismegiste\Alkahest\Transform\Mediator\Mediator;
 
 /**
  * BlackToWhiteMagic is a service for migrating from BlackMagic or Hoodoo stages
@@ -45,12 +45,12 @@ class BlackToWhiteMagic extends StageMigration
 
     /**
      * Analyses and extract informations from the db
-     * 
+     *
      * If you are in Hoodoo, only a part of entities could be un-aliased.
      * If you want to complete your aliasing config, set $missingOnly to true
-     * 
+     *
      * @param bool $missingOnly to find only un-aliased entities
-     * 
+     *
      * @return array
      */
     public function filter($missingOnly = false)

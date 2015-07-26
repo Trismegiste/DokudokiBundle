@@ -161,7 +161,7 @@ class HoodooTest extends AbstractStageTest
     }
 
     /**
-     * @expectedException Trismegiste\Yuurei\Transform\MappingException
+     * @expectedException Trismegiste\Alkahest\Transform\MappingException
      * @expectedExceptionMessage persistence
      */
     public function testClassNotAliased()

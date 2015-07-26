@@ -10,9 +10,9 @@ use Trismegiste\DokudokiBundle\Transform\Delegation\Stage\WhiteMagic;
 use tests\Yuurei\Fixtures;
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapAlias;
 use tests\Yuurei\Transform\Delegation\Stage\AbstractStageTest;
+
 /**
  * test for Mediator created by WhiteMagic builder
- *
  */
 class WhiteMagicTest extends AbstractStageTest
 {
@@ -124,7 +124,7 @@ class WhiteMagicTest extends AbstractStageTest
     }
 
     /**
-     * @expectedException Trismegiste\Yuurei\Transform\MappingException
+     * @expectedException Trismegiste\Alkahest\Transform\MappingException
      * @expectedExceptionMessage persistence
      */
     public function testClassNotAliased()

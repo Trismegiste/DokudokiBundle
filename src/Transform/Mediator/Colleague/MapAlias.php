@@ -6,8 +6,8 @@
 
 namespace Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
 
-use Trismegiste\Yuurei\Transform\Mediator\TypeRegistry;
-use Trismegiste\Yuurei\Transform\Mediator\Colleague\ObjectMapperTemplate;
+use Trismegiste\Alkahest\Transform\Mediator\TypeRegistry;
+use Trismegiste\Alkahest\Transform\Mediator\Colleague\ObjectMapperTemplate;
 
 /**
  * MapAlias is a mapper for FQCN alias

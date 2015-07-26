@@ -7,7 +7,7 @@
 namespace tests\DokudokiBundle\Transform\Mediator\Colleague;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapAlias;
-use tests\Yuurei\Transform\Mediator\Colleague\MapperTestTemplate;
+use tests\Alkahest\Transform\Mediator\Colleague\MapperTestTemplate;
 
 /**
  * Test for MapAlias

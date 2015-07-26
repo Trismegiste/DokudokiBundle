@@ -7,9 +7,8 @@
 namespace tests\DokudokiBundle\Transform\Mediator\Colleague;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague\MapMagic;
-use Trismegiste\Yuurei\Transform\Mediator\Mediator;
 use Trismegiste\DokudokiBundle\Magic\Document;
-use tests\Yuurei\Transform\Mediator\Colleague\MapperTestTemplate;
+use tests\Alkahest\Transform\Mediator\Colleague\MapperTestTemplate;
 
 /**
  * Test for MapMagic

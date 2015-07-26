@@ -149,8 +149,8 @@ class RepositoryWhiteMagicTest extends RepositoryTestTemplate
     /**
      * Person is Persistable but non aliased, that's why persisting it throws
      * a mapping exception
-     * 
-     * @expectedException Trismegiste\Yuurei\Transform\MappingException
+     *
+     * @expectedException Trismegiste\Alkahest\Transform\MappingException
      * @expectedExceptionMessage persistence
      */
     public function testNonAliasedPersistable()

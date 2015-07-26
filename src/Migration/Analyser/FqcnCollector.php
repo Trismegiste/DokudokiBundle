@@ -6,7 +6,7 @@
 
 namespace Trismegiste\DokudokiBundle\Migration\Analyser;
 
-use Trismegiste\Yuurei\Transform\Mediator\Colleague\MapObject;
+use Trismegiste\Alkahest\Transform\Mediator\Colleague\MapObject;
 
 /**
  * FqcnCollector collects FQCN from objects stored with Invocation stage

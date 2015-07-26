@@ -6,7 +6,7 @@
 
 namespace Trismegiste\DokudokiBundle\Migration\Analyser;
 
-use Trismegiste\Yuurei\Transform\Mediator\AbstractMapper;
+use Trismegiste\Alkahest\Transform\Mediator\AbstractMapper;
 
 /**
  * BlackHole is responsible for everything and eats everything
@@ -27,7 +27,7 @@ class BlackHole extends AbstractMapper
      */
     public function mapToDb($var)
     {
-        
+
     }
 
     /**

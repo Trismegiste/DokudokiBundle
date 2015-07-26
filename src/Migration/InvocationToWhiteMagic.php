@@ -6,9 +6,9 @@
 
 namespace Trismegiste\DokudokiBundle\Migration;
 
-use Trismegiste\Yuurei\Transform\Mediator\Colleague\MapArray;
+use Trismegiste\Alkahest\Transform\Mediator\Colleague\MapArray;
 use Trismegiste\DokudokiBundle\Migration\Analyser;
-use Trismegiste\Yuurei\Transform\Mediator\Mediator;
+use Trismegiste\Alkahest\Transform\Mediator\Mediator;
 
 /**
  * InvocationToWhiteMagic is a service for migrating from Invocation stages

@@ -7,13 +7,13 @@
 namespace Trismegiste\DokudokiBundle\Transform\Delegation\Stage;
 
 use Trismegiste\DokudokiBundle\Transform\Mediator\Colleague;
-use Trismegiste\Yuurei\Transform\Mediator\TypeRegistry;
+use Trismegiste\Alkahest\Transform\Mediator\TypeRegistry;
 use Trismegiste\Yuurei\Transform\Delegation\Stage\AbstractStage;
 
 /**
  * Design Pattern : Builder
- * Component : Builder (concrete) 
- * 
+ * Component : Builder (concrete)
+ *
  * A builder for mapping full of Magic.
  * Zero configuration needed : Quick and dirty.
  * Use case : Form driven development without model
