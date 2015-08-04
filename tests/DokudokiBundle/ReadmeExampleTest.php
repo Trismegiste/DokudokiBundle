@@ -12,9 +12,7 @@ namespace tests\DokudokiBundle {
         Trismegiste\Yuurei\Transform\Delegation\Stage\Invocation;
 
     /**
-     * ReadmeExample is a ...
-     *
-     * @author florent
+     * ReadmeExample shows common uses of this lib
      */
     class ReadmeExampleTest extends \PHPUnit_Framework_TestCase
     {
