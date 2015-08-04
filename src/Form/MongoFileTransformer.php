@@ -18,10 +18,6 @@ class MongoFileTransformer implements DataTransformerInterface
 
     public function transform($bindata)
     {
-        if (null === $bindata) {
-            return null;
-        }
-
         return null;
     }
 

@@ -18,6 +18,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $container;
+    protected $fullConfig;
 
     protected function setUp()
     {
@@ -25,7 +26,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->container = new ContainerBuilder();
         $extension = new Extension();
-        $fullConfig = array(
+        $this->fullConfig = array(
             'stage' => 'blackmagic',
             'server' => $server,
             'database' => 'Test',
@@ -38,7 +39,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
                 'checkCall' => 'tests\Yuurei\Fixtures\VerifMethod',
             )
         );
-        $extension->load(array($fullConfig), $this->container);
+        $extension->load(array($this->fullConfig), $this->container);
         $this->container->compile();
     }
 
@@ -99,6 +100,20 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
                 'Trismegiste\DokudokiBundle\Migration\BlackToWhiteMagic'
                 , $this->container->get('dokudoki.migration.black2white')
+        );
+    }
+
+    public function testDecoratorDebugger()
+    {
+        $container = new ContainerBuilder();
+        $container->setParameter('kernel.debug', true);
+        $extension = new Extension();
+
+        $extension->load(array($this->fullConfig), $container);
+        $container->compile();
+
+        $this->assertInstanceOf(
+                'Trismegiste\DokudokiBundle\Persistence\RepositoryDebug', $container->get('dokudoki.repository')
         );
     }
 
