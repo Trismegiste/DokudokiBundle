@@ -109,4 +109,16 @@ class RepositoryDebug extends Decorator
         $this->logger->log('batch', ['count' => count($batch)], $delta);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function delete($id)
+    {
+        $stopwatch = \microtime(true);
+        parent::delete($id);
+        $delta = \microtime(true) - $stopwatch;
+
+        $this->logger->log('delete', ['_id' => $id], $delta);
+    }
+
 }

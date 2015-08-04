@@ -10,8 +10,8 @@ use Trismegiste\Yuurei\Persistence\Decorator;
 use Trismegiste\Yuurei\Persistence\RepositoryInterface;
 
 /**
- * OneClassDecorator is a concrete decorator for repository with a filter on 
- * one single class. Very convinient for service declaration.
+ * MultipleClassDecorator is a concrete decorator for repository with a filter on
+ * one multiple classes. Very convinient for service declaration.
  */
 class MultipleClassDecorator extends Decorator
 {

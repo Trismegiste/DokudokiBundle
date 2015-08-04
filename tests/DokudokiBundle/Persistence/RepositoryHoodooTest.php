@@ -10,8 +10,6 @@ use Trismegiste\DokudokiBundle\Magic\Document;
 
 /**
  * Test repository with Hoodoo stage
- *
- * @author flo
  */
 class RepositoryHoodooTest extends RepositoryWhiteMagicTest
 {

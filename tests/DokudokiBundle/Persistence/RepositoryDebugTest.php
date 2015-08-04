@@ -81,4 +81,13 @@ class RepositoryDebugTest extends \PHPUnit_Framework_TestCase
         $this->sut->batchPersist([$doc, $doc]);
     }
 
+    public function testLoggerDelete()
+    {
+        $this->logger->expects($this->once())
+                ->method('log')
+                ->with($this->equalTo('delete'), $this->anything(), $this->greaterThan(0));
+
+        $this->sut->delete(123);
+    }
+
 }
