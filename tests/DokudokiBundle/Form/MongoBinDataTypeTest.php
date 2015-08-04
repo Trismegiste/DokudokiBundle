@@ -54,4 +54,11 @@ class MongoBinDataTypeTest extends FunctionalTestForm
         $this->assertInstanceOf('MongoBinData', $form->getData());
     }
 
+    public function testNoFileThenNull()
+    {
+        $form = $this->formFactory->create(new MongoBinDataType());
+        $form->submit(null);
+        $this->assertNull($form->getData());
+    }
+
 }
